@@ -14,103 +14,148 @@ public class Character {
 	private int food;
 	private int gold;
 
+	private int page;
+	private boolean hasEaten;
+
 	private String[] inventory;
+	private int items;
 
 	public Character() {
 		Random random = new Random();
-		setSkill(random.nextInt(6) + 7);
-		setSkillInitial(getSkill());
-		setStamina(random.nextInt(6) + random.nextInt(6) + 14);
-		setStaminaInitial(getStamina());
-		setLuck(random.nextInt(6) + 7);
-		setLuckInitial(getLuck());
-		setFood(10);
-		setGold(0);
+		skill = random.nextInt(6) + 7;
+		skillInitial = skill;
+		stamina = random.nextInt(6) + random.nextInt(6) + 14;
+		staminaInitial = stamina;
+		luck = random.nextInt(6) + 7;
+		luckInitial = luck;
+		food = 10;
+		gold = 0;
+		page = 0;
+		hasEaten = false;
 		inventory = new String[100];
-		inventory[0] = "Sword";
-		inventory[1] = "Shield";
-		inventory[2] = "Leather Armour";
-		String[] possibleValues = { "Potion of Skill", "Potion of Strength", "Potion of Fortune" };
-		inventory[3] = (String) JOptionPane.showInputDialog(null,
-				"Down in the dark, twisting labyrinth of Fang, unknown horrors await\n"
-						+ "you.  Devised by the devilish mind of Barron Sukumvit,  the\n"
-						+ "labyrinth is riddled with fiendish traps and bloodthirsty monsters,\n"
-						+ "which will test your skills almost beyond the level of endurance.\n"
-						+ "Countless adventurers before you have taken up the challenge  of\n"
-						+ "the Trial of Champions and walked through the carved mouth  of the\n"
-						+ "labyrinth, never to be seen again. Do YOU dare enter?\n\n"
-						+ "There is only one true way through Deathtrap\n"
-						+ "Dungeon and it will probably take you several attempts to find it. Make\n"
-						+ "notes and draw a map as you explore - this map will be useful in future\n"
-						+ "adventures and help you to identify unexplored sections of the dungeon.\n"
-						+ "Not all areas contain treasure - many merely contain traps and creatures\n"
-						+ "which you will no doubt fall foul of. There are many ‘wild-goose-chase’\n"
-						+ "passages and while you may indeed progress through to your ultimate\n"
-						+ "destination, it is by no means certain that you will find what you are\n"
-						+ "searching for. The ‘one true way’ involves a minimum of risk and any\n"
-						+ "player, no matter how weak on initial dice rolls, should be able to get\n"
-						+ "through fairly easily. May the luck of the gods go with you on the\n"
-						+ "adventure ahead! \n\n" + "Your skill is " + getSkill() + ". Your stamina is " + getStamina()
-						+ ". Your luck is " + getLuck() + ". \n"
-						+ "You start the game with a sword, leather armour and a shield, "
-						+ "\n a backpack containing Provisions for the trip, " + "\n and a lantern to light your way. "
-						+ "\n But you will find lots more items as the adventure unfolds. "
-						+ "\n You may also take a magical potion which will aid you on your quest. "
-						+ "\n Each potion can only be used twice throughout an adventure. "
-						+ "\n Each potion, when drunk, restores a chosen score (i.e. Skill, Stamina, Luck) to its Initial level. "
-						+ "\n The Luck potion will also add one point to your Initial level."
-						+ "\n Which potion would you like?",
-				"Welcome to Deathtrap Dungeon", JOptionPane.INFORMATION_MESSAGE, null, possibleValues,
-				possibleValues[0]);
-		inventory[4] = inventory[3];
+		addToInventory("Sword");
+		addToInventory("Shield");
+		addToInventory("Leather Armour");
+	}
+
+	public void alter(String message, String title) {
+		if (stamina > 0) {
+			JOptionPane.showMessageDialog(Window.frame, message);
+		} else {
+			die(message);
+		}
+		Window.lblSkill.setText("Skill: " + Window.character.getSkill() + "/" + Window.character.getSkillInitial());
+		Window.lblStamina
+				.setText("Stamina: " + Window.character.getStamina() + "/" + Window.character.getStaminaInitial());
+		Window.lblLuck.setText("Luck: " + Window.character.getLuck() + "/" + Window.character.getLuckInitial());
+	}
+
+	public void die(String message) {
+		JOptionPane.showMessageDialog(Window.frame, message, "You died", JOptionPane.ERROR_MESSAGE);
+		System.exit(0);
 	}
 
 	public int getSkill() {
 		return skill;
 	}
 
-	public void setSkill(int skill) {
-		this.skill = skill;
+	public String changeSkill(int amount) {
+		skill = skill + amount;
+		String temp = "";
+		if (skill > skillInitial) {
+			temp = "However, your skill level cannot go above its Initial level, so your new skill is " + skillInitial
+					+ ". ";
+		}
+		String s = "";
+		if (amount == -1 || amount == 1) {
+			s = "s";
+		}
+		if (amount < 0) {
+			return "Your skill has been decreased by " + -amount + "point" + s + " to a score of " + skill + ". ";
+		} else {
+			if (skill > skillInitial) {
+				skill = skillInitial;
+			}
+			return "Your skill has been increased by " + amount + "point" + s + " to a score of " + skill + ". "
+					+ temp;
+		}
 	}
 
 	public int getSkillInitial() {
 		return skillInitial;
 	}
 
-	public void setSkillInitial(int skillInitial) {
-		this.skillInitial = skillInitial;
-	}
-
 	public int getStamina() {
 		return stamina;
 	}
 
-	public void setStamina(int stamina) {
-		this.stamina = stamina;
+	public String changeStamina(int amount) {
+		stamina = stamina + amount;
+		String temp = "";
+		if (stamina > staminaInitial) {
+			stamina = staminaInitial;
+			temp = "However, your stamina level cannot go above its Initial level, so your new stamina is "
+					+ stamina + ". ";
+		}
+		String s = "s";
+		if (amount == -1 || amount == 1) {
+			s = "";
+		}
+		if (amount < 0) {
+			return "Your stamina has been decreased by " + -amount + "point" + s + " to a score of " + stamina
+					+ ". ";
+		} else {
+			return "Your stamina has been increased by " + amount + "point" + s + " to a score of " + stamina
+					+ ". " + temp;
+		}
 	}
 
 	public int getStaminaInitial() {
 		return staminaInitial;
 	}
 
-	public void setStaminaInitial(int staminaInitial) {
-		this.staminaInitial = staminaInitial;
-	}
-
 	public int getLuck() {
 		return luck;
 	}
 
-	public void setLuck(int luck) {
-		this.luck = luck;
+	public String changeLuck(int amount) {
+		luck = luck + amount;
+		String temp = "";
+		if (luck > luckInitial) {
+			luck = luckInitial;
+			temp = "However, your luck level cannot go above its Initial level, so your new luck is " + luck
+					+ ". ";
+		}
+		String s = "";
+		if (amount == -1 || amount == 1) {
+			s = "s";
+		}
+		if (amount < 0) {
+			return "Your luck has been decreased by " + -amount + "point" + s + " to a score of " + luck + ". ";
+		} else {
+			return "Your luck has been increased by " + amount + "point" + s + " to a score of " + luck + ". "
+					+ temp;
+		}
 	}
 
 	public int getLuckInitial() {
 		return luckInitial;
 	}
 
-	public void setLuckInitial(int luckInitial) {
-		this.luckInitial = luckInitial;
+	public void drinkPotion() {
+		if (searchInventory("Potion of Skill", true) != -1) {
+			skill = skillInitial;
+			alter("Your skill has been restored to its Initial level of " + skillInitial + ".", "You drank a Potion");
+		} else if (searchInventory("Potion of Strength", true) != -1) {
+			stamina = staminaInitial;
+			alter("Your stamina has been restored to its Initial level of " + staminaInitial + ".",
+					"You drank a Potion");
+		} else if (searchInventory("Potion of Fortune", true) != -1) {
+			luckInitial++;
+			luck = luckInitial;
+			alter("Your luck has been restored to its Initial level of " + luckInitial
+					+ ", with an extra luck point bonus.", "You drank a Potion");
+		}
 	}
 
 	public int getFood() {
@@ -121,12 +166,96 @@ public class Character {
 		this.food = food;
 	}
 
+	public void eat() {
+		if (food <= 0) {
+			JOptionPane.showMessageDialog(Window.frame, "You may have eaten them all or you lost them somewhere.",
+					"You have no provisions left", JOptionPane.ERROR_MESSAGE);
+		} else if (hasEaten) {
+			JOptionPane.showMessageDialog(Window.frame, "You can only eat once per turn", "You are full",
+					JOptionPane.ERROR_MESSAGE);
+		} else {
+			stamina = stamina + 4;
+			food--;
+			hasEaten = true;
+			String temp = "";
+			if (stamina > staminaInitial) {
+				temp = "However, your stamina level cannot go above its Initial level, so your new stamina is "
+						+ staminaInitial + ". ";
+			}
+			JOptionPane
+					.showMessageDialog(Window.frame,
+							"Your stamina has been increased by 4 to " + stamina + ". You have " + food
+									+ " provisions left. " + temp,
+							"You ate some provisions", JOptionPane.PLAIN_MESSAGE);
+			if (stamina > staminaInitial) {
+				stamina = staminaInitial;
+			}
+			Window.lblStamina
+					.setText("Stamina: " + Window.character.getStamina() + "/" + Window.character.getStaminaInitial());
+			Window.mntmEatFood.setText("Eat food ( " + Window.character.getFood() + " left)");
+		}
+	}
+
+	public void hungry() {
+		hasEaten = false;
+	}
+
+	public int searchInventory(String equipment, boolean remove) {
+		int position = -1;
+		int count = 0;
+		for (int i = 0; i < items; i++) {
+			if (inventory[i].equals(equipment)) {
+				position = i;
+				count++;
+			}
+
+		}
+		if (remove && (position != -1)) {
+			for (int j = position; j < items - 1; j++) {
+				inventory[j] = inventory[j + 1];
+
+			}
+			inventory[items - 1] = "";
+			refreshList(-1);
+			count--;
+		}
+		if (equipment.startsWith("Potion") && count > 0) {
+			Window.mntmDrinkPotion.setText("Drink a " + equipment + ": " + count + " left.");
+			Window.mnCharacter.add(Window.mntmDrinkPotion);
+		} else if (equipment.startsWith("Potion") && count <= 0) {
+			Window.mnCharacter.remove(Window.mntmDrinkPotion);
+		}
+		return position;
+	}
+
+	public void addToInventory(String equipment) {
+		inventory[items] = equipment;
+		refreshList(1);
+	}
+
 	public int getGold() {
 		return gold;
 	}
 
 	public void setGold(int gold) {
 		this.gold = gold;
+	}
+
+	public int getPage() {
+		return page;
+	}
+
+	public void setPage(int page) {
+		this.page = page;
+	}
+
+	public void refreshList(int number) {
+		items = items + number;
+		Window.mnInventory.removeAll();
+		for (int i = 0; i < items; i++) {
+			Window.mntmItem[i].setText(inventory[i]);
+			Window.mnInventory.add(Window.mntmItem[i]);
+		}
 	}
 
 }
