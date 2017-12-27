@@ -1,3 +1,4 @@
+package com.camcamcamcamcam.deathtrapdungeon.procedures;
 public class Text {
 
 	public static String text(int whichPage) {
@@ -22,9 +23,9 @@ public class Text {
 					+ " destination, it is by no means certain that you will find what you are"
 					+ " searching for. The ‘one true way’ involves a minimum of risk and any"
 					+ " player, no matter how weak on initial dice rolls, should be able to get"
-					+ " through fairly easily. May the luck of the gods go with you on the" + "adventure ahead! \n\n"
+					+ " through fairly easily. May the luck of the gods go with you on the" + " adventure ahead! \n\n"
 					+ " Your skill is " + Window.character.getSkill() + ". Your stamina is "
-					+ Window.character.getStamina() + ". Your luck is " + Window.character.getLuck() + ". "
+					+ Window.character.getStamina() + ". Your luck is " + Window.character.getLuck() + ". \n\n"
 					+ "You start the game with a sword, leather armour and a shield, "
 					+ " a backpack containing Provisions for the trip, " + " and a lantern to light your way. "
 					+ " But you will find lots more items as the adventure unfolds. "

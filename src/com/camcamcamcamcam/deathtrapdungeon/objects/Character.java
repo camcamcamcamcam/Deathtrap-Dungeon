@@ -1,6 +1,11 @@
-import java.util.Random;
+package com.camcamcamcamcam.deathtrapdungeon.objects;
 
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+
+import com.camcamcamcamcam.deathtrapdungeon.procedures.Methods;
+import com.camcamcamcamcam.deathtrapdungeon.procedures.Text;
+import com.camcamcamcamcam.deathtrapdungeon.procedures.Window;
 
 public class Character {
 
@@ -16,26 +21,29 @@ public class Character {
 
 	private int page;
 	private boolean hasEaten;
-
-	private String[] inventory;
-	private int items;
+	
+	public Inventory equipment;
+	public Inventory gems;
+	
+	public States states;
 
 	public Character() {
-		Random random = new Random();
-		skill = random.nextInt(6) + 7;
+		skill = Methods.rollDice(1) + 6;
 		skillInitial = skill;
-		stamina = random.nextInt(6) + random.nextInt(6) + 14;
+		stamina = Methods.rollDice(2) + 12;
 		staminaInitial = stamina;
-		luck = random.nextInt(6) + 7;
+		luck = Methods.rollDice(2) + 6;
 		luckInitial = luck;
 		food = 10;
 		gold = 0;
 		page = 0;
 		hasEaten = false;
-		inventory = new String[100];
-		addToInventory("Sword");
-		addToInventory("Shield");
-		addToInventory("Leather Armour");
+		equipment = new Inventory(100);
+		gems = new Inventory(7);
+		equipment.add("Sword");
+		equipment.add("Shield");
+		equipment.add("Leather Armour");
+		states = new States();
 	}
 
 	public void alter(String message, String title) {
@@ -53,6 +61,10 @@ public class Character {
 	public void die(String message) {
 		JOptionPane.showMessageDialog(Window.frame, message, "You died", JOptionPane.ERROR_MESSAGE);
 		System.exit(0);
+	}
+	
+	public void die() {
+		die(Text.text(Window.character.getPage()));
 	}
 
 	public int getSkill() {
@@ -143,14 +155,14 @@ public class Character {
 	}
 
 	public void drinkPotion() {
-		if (searchInventory("Potion of Skill", true) != -1) {
+		if (equipment.search("Potion of Skill", true) != -1) {
 			skill = skillInitial;
 			alter("Your skill has been restored to its Initial level of " + skillInitial + ".", "You drank a Potion");
-		} else if (searchInventory("Potion of Strength", true) != -1) {
+		} else if (equipment.search("Potion of Strength", true) != -1) {
 			stamina = staminaInitial;
 			alter("Your stamina has been restored to its Initial level of " + staminaInitial + ".",
 					"You drank a Potion");
-		} else if (searchInventory("Potion of Fortune", true) != -1) {
+		} else if (equipment.search("Potion of Fortune", true) != -1) {
 			luckInitial++;
 			luck = luckInitial;
 			alter("Your luck has been restored to its Initial level of " + luckInitial
@@ -200,38 +212,7 @@ public class Character {
 		hasEaten = false;
 	}
 
-	public int searchInventory(String equipment, boolean remove) {
-		int position = -1;
-		int count = 0;
-		for (int i = 0; i < items; i++) {
-			if (inventory[i].equals(equipment)) {
-				position = i;
-				count++;
-			}
-
-		}
-		if (remove && (position != -1)) {
-			for (int j = position; j < items - 1; j++) {
-				inventory[j] = inventory[j + 1];
-
-			}
-			inventory[items - 1] = "";
-			refreshList(-1);
-			count--;
-		}
-		if (equipment.startsWith("Potion") && count > 0) {
-			Window.mntmDrinkPotion.setText("Drink a " + equipment + ": " + count + " left.");
-			Window.mnCharacter.add(Window.mntmDrinkPotion);
-		} else if (equipment.startsWith("Potion") && count <= 0) {
-			Window.mnCharacter.remove(Window.mntmDrinkPotion);
-		}
-		return position;
-	}
-
-	public void addToInventory(String equipment) {
-		inventory[items] = equipment;
-		refreshList(1);
-	}
+	
 
 	public int getGold() {
 		return gold;
@@ -249,13 +230,6 @@ public class Character {
 		this.page = page;
 	}
 
-	public void refreshList(int number) {
-		items = items + number;
-		Window.mnInventory.removeAll();
-		for (int i = 0; i < items; i++) {
-			Window.mntmItem[i].setText(inventory[i]);
-			Window.mnInventory.add(Window.mntmItem[i]);
-		}
-	}
+	
 
 }

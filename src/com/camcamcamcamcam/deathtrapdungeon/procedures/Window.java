@@ -1,3 +1,4 @@
+package com.camcamcamcamcam.deathtrapdungeon.procedures;
 import java.awt.EventQueue;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -13,6 +14,9 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JRadioButton;
 import javax.swing.JTextArea;
+
+import com.camcamcamcamcam.deathtrapdungeon.objects.Character;
+
 import javax.swing.JSeparator;
 import javax.swing.JMenuItem;
 
@@ -26,8 +30,8 @@ public class Window {
 	public static GridBagConstraints[] gbc_choices;
 	public static JTextArea textArea;
 	public static JButton btnConfirm;
-	public static JMenu mnInventory, mnCharacter;
-	public static JMenuItem[] mntmItem = new JMenuItem[100];
+	public static JMenu mnInventory, mnCharacter, mnGems;
+	public static JMenuItem[] mntmEquipment, mntmGems;
 	public static JMenuItem mntmDrinkPotion, mntmEatFood;
 	public static JLabel lblSkill, lblStamina, lblLuck;
 
@@ -72,13 +76,22 @@ public class Window {
 
 		mnInventory = new JMenu("Inventory");
 		menuBar.add(mnInventory);
-
+		
+		mnGems = new JMenu("Gems");
+		menuBar.add(mnGems);
+		
+		Window.mntmEquipment = new JMenuItem[100];
+		Window.mntmGems = new JMenuItem[7];
+		
 		for (int i = 0; i < 100; i++) {
-			mntmItem[i] = new JMenuItem();
-			mnInventory.add(mntmItem[i]);
+			mntmEquipment[i] = new JMenuItem();
+			mnInventory.add(mntmEquipment[i]);
 		}
-
-		character = new Character();
+		
+		for (int i = 0; i < 7; i++) {
+			mntmGems[i] = new JMenuItem();
+			mnGems.add(mntmGems[i]);
+		}character = new Character();		
 
 		lblSkill = new JLabel("Skill: " + character.getSkill() + "/" + character.getSkillInitial());
 		mnCharacter.add(lblSkill);
@@ -139,7 +152,7 @@ public class Window {
 		gbc_choices[2].insets = new Insets(0, 0, 0, 5);
 		gbc_choices[2].gridx = 2;
 		gbc_choices[2].gridy = 1;
-		
+
 		gbc_choices[3].insets = new Insets(0, 0, 0, 5);
 		gbc_choices[3].gridx = 3;
 		gbc_choices[3].gridy = 1;
@@ -169,8 +182,8 @@ public class Window {
 				for (int i = 0; i < choices.length; i++) {
 					if (choices[i].isSelected()) {
 						if (!started) {
-							character.addToInventory(choices[i].getText());
-							character.addToInventory(choices[i].getText());
+							character.equipment.add(choices[i].getText());
+							character.equipment.add(choices[i].getText());
 							mntmDrinkPotion.setText("Drink a " + choices[i].getText() + ": 2 left.");
 							mnCharacter.add(mntmDrinkPotion);
 						} else {
@@ -181,7 +194,6 @@ public class Window {
 					}
 				}
 				started = true;
-				textArea.setText(Text.text(character.getPage()));
 				Deathtrap.pageMethods();
 				if (character.getStamina() <= 0) {
 					character.die(Window.textArea.getText());
@@ -190,7 +202,7 @@ public class Window {
 
 		});
 		textArea.setText(Text.text(-1));
-		Methods.choosePath(new String[] { "Potion of Skill", "Potion of Strength", "Potion of Fortune" });
+		Methods.choosePath(0, 0, 0, "Potion of Skill", "Potion of Strength", "Potion of Fortune");
 
 	}
 }
