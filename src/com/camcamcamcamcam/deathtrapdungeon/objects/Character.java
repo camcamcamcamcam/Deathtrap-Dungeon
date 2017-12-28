@@ -1,6 +1,5 @@
 package com.camcamcamcamcam.deathtrapdungeon.objects;
 
-import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 
 import com.camcamcamcamcam.deathtrapdungeon.procedures.Methods;
@@ -21,10 +20,10 @@ public class Character {
 
 	private int page;
 	private boolean hasEaten;
-	
+
 	public Inventory equipment;
 	public Inventory gems;
-	
+
 	public States states;
 
 	public Character() {
@@ -38,8 +37,8 @@ public class Character {
 		gold = 0;
 		page = 0;
 		hasEaten = false;
-		equipment = new Inventory(100);
-		gems = new Inventory(7);
+		equipment = new Inventory("Equipment", 100);
+		gems = new Inventory("Gems", 7);
 		equipment.add("Sword");
 		equipment.add("Shield");
 		equipment.add("Leather Armour");
@@ -52,19 +51,15 @@ public class Character {
 		} else {
 			die(message);
 		}
-		Window.lblSkill.setText("Skill: " + Window.character.getSkill() + "/" + Window.character.getSkillInitial());
-		Window.lblStamina
-				.setText("Stamina: " + Window.character.getStamina() + "/" + Window.character.getStaminaInitial());
-		Window.lblLuck.setText("Luck: " + Window.character.getLuck() + "/" + Window.character.getLuckInitial());
 	}
 
 	public void die(String message) {
 		JOptionPane.showMessageDialog(Window.frame, message, "You died", JOptionPane.ERROR_MESSAGE);
 		System.exit(0);
 	}
-	
+
 	public void die() {
-		die(Text.text(Window.character.getPage()));
+		die(Text.text(getPage()));
 	}
 
 	public int getSkill() {
@@ -79,17 +74,17 @@ public class Character {
 					+ ". ";
 		}
 		String s = "";
-		if (amount == -1 || amount == 1) {
+		if (amount != -1 || amount != 1) {
 			s = "s";
 		}
+		Window.mntmSkill.setText("Skill: " + getSkill() + "/" + getSkillInitial());
 		if (amount < 0) {
-			return "Your skill has been decreased by " + -amount + "point" + s + " to a score of " + skill + ". ";
+			return "Your skill has been decreased by " + -amount + " point" + s + " to a score of " + skill + ". ";
 		} else {
 			if (skill > skillInitial) {
 				skill = skillInitial;
 			}
-			return "Your skill has been increased by " + amount + "point" + s + " to a score of " + skill + ". "
-					+ temp;
+			return "Your skill has been increased by " + amount + " point" + s + " to a score of " + skill + ". " + temp;
 		}
 	}
 
@@ -106,19 +101,20 @@ public class Character {
 		String temp = "";
 		if (stamina > staminaInitial) {
 			stamina = staminaInitial;
-			temp = "However, your stamina level cannot go above its Initial level, so your new stamina is "
-					+ stamina + ". ";
+			temp = "However, your stamina level cannot go above its Initial level, so your new stamina is " + stamina
+					+ ". ";
 		}
 		String s = "s";
-		if (amount == -1 || amount == 1) {
+		if (amount != -1 || amount != 1) {
 			s = "";
 		}
+		Window.mntmStamina
+		.setText("Stamina: " + getStamina() + "/" + getStaminaInitial());
 		if (amount < 0) {
-			return "Your stamina has been decreased by " + -amount + "point" + s + " to a score of " + stamina
-					+ ". ";
+			return "Your stamina has been decreased by " + -amount + " point" + s + " to a score of " + stamina + ". ";
 		} else {
-			return "Your stamina has been increased by " + amount + "point" + s + " to a score of " + stamina
-					+ ". " + temp;
+			return "Your stamina has been increased by " + amount + " point" + s + " to a score of " + stamina + ". "
+					+ temp;
 		}
 	}
 
@@ -135,18 +131,17 @@ public class Character {
 		String temp = "";
 		if (luck > luckInitial) {
 			luck = luckInitial;
-			temp = "However, your luck level cannot go above its Initial level, so your new luck is " + luck
-					+ ". ";
+			temp = "However, your luck level cannot go above its Initial level, so your new luck is " + luck + ". ";
 		}
 		String s = "";
-		if (amount == -1 || amount == 1) {
+		if (amount != -1 || amount != 1) {
 			s = "s";
 		}
+		Window.mntmLuck.setText("Luck: " + getLuck() + "/" + getLuckInitial());
 		if (amount < 0) {
-			return "Your luck has been decreased by " + -amount + "point" + s + " to a score of " + luck + ". ";
+			return "Your luck has been decreased by " + -amount + " point" + s + " to a score of " + luck + ". ";
 		} else {
-			return "Your luck has been increased by " + amount + "point" + s + " to a score of " + luck + ". "
-					+ temp;
+			return "Your luck has been increased by " + amount + " point" + s + " to a score of " + luck + ". " + temp;
 		}
 	}
 
@@ -174,8 +169,10 @@ public class Character {
 		return food;
 	}
 
-	public void setFood(int food) {
-		this.food = food;
+	public String setFood(int amount) {
+		food = amount;
+		Window.mntmEatFood.setText("Eat food ( " + getFood() + " left)");
+		return "";
 	}
 
 	public void eat() {
@@ -202,9 +199,9 @@ public class Character {
 			if (stamina > staminaInitial) {
 				stamina = staminaInitial;
 			}
-			Window.lblStamina
-					.setText("Stamina: " + Window.character.getStamina() + "/" + Window.character.getStaminaInitial());
-			Window.mntmEatFood.setText("Eat food ( " + Window.character.getFood() + " left)");
+			Window.mntmStamina
+					.setText("Stamina: " + getStamina() + "/" + getStaminaInitial());
+			Window.mntmEatFood.setText("Eat food ( " + getFood() + " left)");
 		}
 	}
 
@@ -212,14 +209,22 @@ public class Character {
 		hasEaten = false;
 	}
 
-	
-
 	public int getGold() {
 		return gold;
 	}
 
-	public void setGold(int gold) {
-		this.gold = gold;
+	public String changeGold(int amount) {
+		gold = gold + amount;
+		String s = "";
+		if (amount != -1 || amount != 1) {
+			s = "s";
+		}
+		Window.mntmGold.setText("Luck: " + getGold());
+		if (amount < 0) {
+			return "You lost " + -amount + " piece" + s + " of gold. You now have " + gold + " gold left. ";
+		} else {
+			return "You gained " + amount + " piece" + s + " of gold. You now have " + gold + " gold. ";
+		}
 	}
 
 	public int getPage() {
@@ -229,7 +234,5 @@ public class Character {
 	public void setPage(int page) {
 		this.page = page;
 	}
-
-	
 
 }

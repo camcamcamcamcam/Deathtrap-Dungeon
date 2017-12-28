@@ -23,7 +23,8 @@ public class Deathtrap {
 		case 5:
 			Methods.testLuck(185, 395);
 			break;
-		case 6: // TODO Methods.fight(11, 11, 364, "MANTICORE", 0);
+		case 6:
+			Methods.fight(11, 11, "MANTICORE", 364);
 			break;
 		case 7:
 			Window.character.die();
@@ -73,8 +74,8 @@ public class Deathtrap {
 		case 20:
 			Methods.choosePath(279, "Continue");
 			break;
-		case 21: // TODO Methods.fight(12, 2, Methods.testLuck(97, 116), //
-					// "BLOODBEAST", 0);
+		case 21:
+			Methods.fight(12, 2, "BLOODBEAST", Methods.testLuck(97, 116));
 			break;
 		case 22:
 			Methods.choosePath(63, 184, 311, "Accept the Barbarian's offer",
@@ -138,9 +139,11 @@ public class Deathtrap {
 		case 38:
 			Methods.choosePath(109, "Continue");
 			break;
-		case 39: // TODO Methods.fight(7, 8, 111, "GIANT FLY", 267);
+		case 39:
+			Methods.fight(7, 8, "GIANT FLY", 111, 267);
 			break;
-		case 40: // TODO Methods.fight(9, 9, 163, "MINOTAUR", 0);
+		case 40:
+			Methods.fight(9, 9, "MINOTAUR", 163, 0);
 			break;
 		case 41:
 			if (Window.character.states.isExaminedBarbarian()) {
@@ -182,7 +185,8 @@ public class Deathtrap {
 		case 50:
 			Methods.choosePath(221, "Continue");
 			break;
-		case 51: // TODO Methods.fight(6, 5, 9, "HOBGOBLIN", 0);
+		case 51:
+			Methods.fight(6, 5, "HOBGOBLIN", 9);
 			break;
 		case 52:
 			Window.character.states.setBloodbeastKnowledge(true);
@@ -349,13 +353,11 @@ public class Deathtrap {
 			}
 			break;
 		case 91:
-			Window.character.changeSkill(-4); // TODO Methods.fight(5, 5, 257,
-												// "FIRST ORC", 0); // TODO
-												// Methods.fight(6, 4, 257,
-												// "SECOND ORC", 0);
-												// Window.character.changeSkill(4);
-												// Methods.choosePath(257,
-												// "Continue");
+			Window.character.changeSkill(-4);
+			Methods.fight(5, 5, "FIRST ORC", 257);
+			Methods.fight(6, 4, "SECOND ORC", 257);
+			Window.character.changeSkill(4);
+			Methods.choosePath(257, "Continue");
 			break;
 		case 92:
 			Methods.choosePath(122, "Continue");
@@ -381,7 +383,7 @@ public class Deathtrap {
 			break;
 		case 99:
 			Methods.choosePath(266, 305, "Search her room",
-					"Leave by the door in the east wall, where you find yourself standing at the end of a tunnel");// TODO
+					"Leave by the door in the east wall, where you find yourself standing at the end of a tunnel");
 			break;
 		case 100:
 			Methods.choosePath(87, 217, "Open the door", "Keep walking north.");
@@ -468,8 +470,8 @@ public class Deathtrap {
 		case 123:
 			Methods.choosePath(282, "Continue");
 			break;
-		case 124: // TODO Methods.doubleFight(5, 4, 5, 5, "First GOBLIN",
-					// "Second // GOBLIN", 81);
+		case 124:
+			Methods.fight(5, 4, "First GOBLIN", 5, 5, "Second GOBLIN", 81);
 			break;
 		case 125:
 			Methods.testLuck(69, 139);
@@ -498,8 +500,9 @@ public class Deathtrap {
 						"Try to hook the PIT FIEND with the grappling iron while sitting on top of the wall");
 			}
 			break;
-		case 130: // TODO Methods.fight(7, 5, 9, "First HOBGOBLIN", 0); // TODO
-					// Methods.fight(6, 5, 9, "Second HOBGOBLIN", 0);
+		case 130:
+			Methods.fight(7, 5, "First HOBGOBLIN", 9);
+			Methods.fight(6, 5, "Second HOBGOBLIN", 9);
 			break;
 		case 131:
 			Methods.choosePath(74, "Continue");
@@ -535,7 +538,8 @@ public class Deathtrap {
 						"Open the red book", "Leave the bottle and book and continue north with Throm");
 			}
 			break;
-		case 139: // TODO Methods.fight(9, 9, 201, "IVY", 0);
+		case 139:
+			Methods.fight(9, 9, "IVY", 201);
 			break;
 		case 140:
 			Window.character.die();
@@ -546,13 +550,14 @@ public class Deathtrap {
 		case 142:
 			Methods.choosePath(338, "Continue");
 			break;
-		case 143: // TODO Methods.doubleFight(10, 10, 10, 10, "LEFT PINCER",
-					// "RIGHT // PINCER", 163);
+		case 143:
+			Methods.fight(10, 10, "LEFT PINCER", 10, 10, "RIGHT PINCER", 163);
 			break;
 		case 144:
 			Methods.choosePath(85, "Continue");
 			break;
-		case 145: // TODO Methods.fight(8, 6, 28, "DWARF", 0);
+		case 145:
+			Methods.fight(8, 6, "DWARF", 28);
 			break;
 		case 146:
 			if (Window.character.equipment.search("Iron Key", false) != -1) {
@@ -565,8 +570,9 @@ public class Deathtrap {
 			Window.character.states.setDrunkPotionOfHeatResistance(true);
 			Methods.choosePath(182, "Continue");
 			break;
-		case 148: // TODO Methods.fight(7, 7, 175, "First GUARD DOG", 0); //
-					// TODO Methods.fight(7, 8, 175, "Second GUARD DOG", 315);
+		case 148:
+			Methods.fight(7, 7, "First GUARD DOG", 175);
+			Methods.fight(7, 8, "Second GUARD DOG", 175, 315);
 			break;
 		case 149:
 			Methods.testLuck(70, 353);
@@ -577,10 +583,12 @@ public class Deathtrap {
 			Window.character.equipment.add("Brass Bell");
 			Methods.choosePath(292, "Continue");
 			break;
-		case 151: // TODO Methods.fight(7, 8, 240, "First FLYING GUARDIAN", 0);
-					// // TODO Methods.fight(8, 8, 240, "Second FLYING
-					// GUARDIAN", 0); Window.character.changeSkill(2);
-					// Methods.choosePath(240, "Continue");
+		case 151:
+			Window.character.changeSkill(-2);
+			Methods.fight(7, 8, "First FLYING GUARDIAN", 240);
+			Methods.fight(8, 8, "Second FLYING GUARDIAN", 240);
+			Window.character.changeSkill(2);
+			Methods.choosePath(240, "Continue");
 			break;
 		case 152:
 			Methods.testSkill(55, 202);
@@ -609,10 +617,12 @@ public class Deathtrap {
 		case 158:
 			Methods.choosePath(275, "Continue");
 			break;
-		case 159: // TODO Works for all daggers? if
-					// (Window.character.equipment.search("Dagger", false) !=
-					// -1) { Methods.choosePath(294, "Continue"); } else {
-					// Methods.choosePath(334, "Continue"); }
+		case 159: // TODO Works for all daggers?
+			if (Window.character.equipment.search("Dagger", false) != -1) {
+				Methods.choosePath(294, "Continue");
+			} else {
+				Methods.choosePath(334, "Continue");
+			}
 			break;
 		case 160:
 			Methods.choosePath(237, "Continue");
@@ -635,10 +645,12 @@ public class Deathtrap {
 			Window.character.equipment.add("Stilts");
 			Methods.choosePath(234, "Continue");
 			break;
-		case 166: // TODO Methods.fight(7, 8, 11, "First FLYING GUARDIAN", 0);
-					// // TODO Methods.fight(8, 8, 11, "Second FLYING GUARDIAN",
-					// 0); Window.character.changeSkill(3);
-					// Methods.choosePath(11, "Continue");
+		case 166:
+			Window.character.changeSkill(-3);
+			Methods.fight(7, 8, "First FLYING GUARDIAN", 11);
+			Methods.fight(8, 8, "Second FLYING GUARDIAN", 11);
+			Window.character.changeSkill(3);
+			Methods.choosePath(11, "Continue");
 			break;
 		case 167:
 			Methods.choosePath(203, "Continue");
@@ -658,7 +670,8 @@ public class Deathtrap {
 			Window.character.equipment.add("Rope");
 			Methods.choosePath(326, "Continue");
 			break;
-		case 172: // TODO Methods.fight(12, 4, 278, "BLOODBEAST", 0);
+		case 172:
+			Methods.fight(12, 4, "BLOODBEAST", 278);
 			break;
 		case 173:
 			if (Window.character.states.isDrunkFromHagFountain()) {
@@ -723,8 +736,9 @@ public class Deathtrap {
 				Methods.choosePath(224, "Continue");
 			}
 			break;
-		case 189: // TODO Methods.fight(5, 5, 257, "First ORC", 0); // TODO
-					// Methods.fight(6, 4, 257, "Second ORC", 0);
+		case 189:
+			Methods.fight(5, 5, "First ORC", 257);
+			Methods.fight(6, 4, "Second ORC", 257);
 			break;
 		case 190:
 			Methods.choosePath(50, "Continue");
@@ -749,7 +763,8 @@ public class Deathtrap {
 		case 195:
 			Methods.choosePath(382, "Continue");
 			break;
-		case 196: // TODO Methods.fight(11, 11, 364, "MANTICORE", 0);
+		case 196:
+			Methods.fight(11, 11, "MANTICORE", 364);
 			break;
 		case 197:
 			Methods.choosePath(171, 156, 326, "Try to open the door", "Slide the iron plate",
@@ -771,7 +786,8 @@ public class Deathtrap {
 		case 202:
 			Methods.testLuck(18, 42);
 			break;
-		case 203: // TODO Methods.fight(12, 15, 258, "PIT FIEND", 0);
+		case 203:
+			Methods.fight(12, 15, "PIT FIEND", 258);
 			break;
 		case 204:
 			Methods.testLuck(131, 199);
@@ -790,12 +806,14 @@ public class Deathtrap {
 			Methods.choosePath(326, "Continue");
 			break;
 		case 209: // TODO Add a way to list equipment, including gems and
-					// potions. Methods.choosePath(356, "Continue");
+					// potions.
+			Methods.choosePath(356, "Continue");
 			break;
 		case 210:
 			Methods.choosePath(27, 78, "Cut him free from his chains", "Leave the room to head north.");
 			break;
-		case 211: // TODO Methods.fight(9, 9, 201, "IVY", 201);
+		case 211:
+			Methods.fight(9, 9, "IVY", 201, 201);
 			break;
 		case 212:
 			Methods.choosePath(285, "Continue");
@@ -843,8 +861,8 @@ public class Deathtrap {
 		case 224:
 			Methods.choosePath(43, "Continue");
 			break;
-		case 225: // TODO Methods.fight(12, 2, Methods.testLuck(97, 21),
-					// "BLOODBEAST", // 0);
+		case 225:
+			Methods.fight(12, 2, "BLOODBEAST", Methods.testLuck(97, 21));
 			break;
 		case 226:
 			if (Window.character.states.isExaminedAlcove()) {
@@ -894,7 +912,8 @@ public class Deathtrap {
 		case 235:
 			Methods.choosePath(73, "Continue");
 			break;
-		case 236: // TODO Methods.fight(9, 2, 314, "IMITATOR", 0);
+		case 236:
+			Methods.fight(9, 2, "IMITATOR", 314);
 			break;
 		case 237:
 			Methods.choosePath(12, 100, "Open the door", "Keep going north");
@@ -922,12 +941,14 @@ public class Deathtrap {
 			Window.character.states.setDopplegangerPotionKnowledge(true);
 			Methods.choosePath(109, "Continue");
 			break;
-		case 245: // TODO Methods.fight(12, 15, 258, "PIT FIEND", 0);
+		case 245:
+			Methods.fight(12, 15, "PIT FIEND", 258);
 			break;
 		case 246:
 			Methods.choosePath(313, "Continue");
 			break;
-		case 247: // TODO Methods.fight(11, 11, 364, "MANTICORE", 0);
+		case 247:
+			Methods.fight(11, 11, "MANTICORE", 364);
 			break;
 		case 248:
 			Methods.choosePath(214, "Continue");
@@ -948,7 +969,8 @@ public class Deathtrap {
 		case 253:
 			Methods.choosePath(315, "Continue");
 			break;
-		case 254: // TODO Methods.fight(7, 11, 76, "ROCK GRUB", 0);
+		case 254:
+			Methods.fight(7, 11, "ROCK GRUB", 76, 117);
 			break;
 		case 255:
 			Window.character.die();
@@ -1096,8 +1118,8 @@ public class Deathtrap {
 			Methods.choosePath(137, 387, "Continue west, following the two sets of footprints",
 					"Head north, following the third set of footprints");
 			break;
-		case 294: // TODO Methods.fight(12, 2, Methods.testLuck(97, 21),
-					// "BLOODBEAST", // 0);
+		case 294:
+			Methods.fight(12, 2, "BLOODBEAST", Methods.testLuck(97, 21));
 			break;
 		case 295:
 			Methods.choosePath(206, "Continue");
@@ -1123,7 +1145,8 @@ public class Deathtrap {
 			Methods.choosePath(162, 4, "Crawl back out of the pipe and examine your find",
 					"Press on further down the pipe, taking the box with you to examine further");
 			break;
-		case 302: // TODO Methods.fight(10, 12, 379, "THROM", 0);
+		case 302:
+			Methods.fight(10, 12, "THROM", 379);
 			break;
 		case 303:
 			Methods.choosePath(262, "Continue");
@@ -1161,7 +1184,8 @@ public class Deathtrap {
 		case 311:
 			Methods.choosePath(325, "Continue");
 			break;
-		case 312: // TODO Methods.fight(11, 9, 232, "NINJA", 0);
+		case 312:
+			Methods.fight(11, 9, "NINJA", 232);
 			break;
 		case 313:
 			Methods.choosePath(32, "Continue");
@@ -1231,7 +1255,8 @@ public class Deathtrap {
 				Methods.choosePath(380, "Continue");
 			}
 			break;
-		case 327: // TODO Methods.fight(10, 10, 92, "MIRROR DEMON", 0);
+		case 327:
+			Methods.fight(10, 10, "MIRROR DEMON", 92);
 			break;
 		case 328:
 			Methods.choosePath(125, 99, "Slip out of the chamber through the door in the east wall",
@@ -1249,7 +1274,8 @@ public class Deathtrap {
 						"Leave the hall, taking just the diamond with you");
 			}
 			break;
-		case 331: // TODO Methods.fight(8, 6, 71, "SKELETON WARRIOR", 0);
+		case 331:
+			Methods.fight(8, 6, "SKELETON WARRIOR", 71);
 			break;
 		case 332:
 			Methods.testLuck(53, 272);
@@ -1320,7 +1346,8 @@ public class Deathtrap {
 		case 348:
 			Methods.testSkill(225, 159);
 			break;
-		case 349: // TODO Methods.fight(12, 15, 258, "PIT FIEND", 0);
+		case 349:
+			Methods.fight(12, 15, "PIT FIEND", 258);
 			break;
 		case 350:
 			Methods.choosePath(39, "Continue");
@@ -1363,9 +1390,8 @@ public class Deathtrap {
 			Window.character.die();
 			break;
 		case 360: // TODO Make algorithm for listing equipment
-					// Methods.choosePath(297, 328, 211, "Offer her something
-					// from your backpack", "Try to talk your way out of giving
-					// her anything", "Attack her with your sword");
+			Methods.choosePath(297, 328, 211, "Offer her something from your backpack",
+					"Try to talk your way out of giving her anything", "Attack her with your sword");
 			break;
 		case 361:
 			Methods.testLuck(82, 377);
@@ -1396,7 +1422,8 @@ public class Deathtrap {
 		case 368:
 			Methods.choosePath(165, 234, "Buy the stilts", "Keep walking north");
 			break;
-		case 369: // TODO Methods.fight(10, 11, 288, "CAVE TROLL", 0);
+		case 369:
+			Methods.fight(10, 11, "CAVE TROLL", 288);
 			break;
 		case 370:
 			Methods.testSkill(104, 342);
@@ -1433,8 +1460,9 @@ public class Deathtrap {
 		case 379:
 			Methods.choosePath(213, 145, "Walk straight into the tunnel", "Take a punch at the Dwarf");
 			break;
-		case 380: // TODO Methods.fight(5, 5, 257, "First ORC", 0); // TODO
-					// Methods.fight(6, 4, 257, "Second ORC", 0);
+		case 380:
+			Methods.fight(5, 5, "First ORC", 257);
+			Methods.fight(6, 4, "Second ORC", 257);
 			break;
 		case 381:
 			Methods.choosePath(331, 128, "Take the parchment from the skeleton", "Walk over to the alcove");
@@ -1454,7 +1482,8 @@ public class Deathtrap {
 		case 386:
 			Methods.choosePath(218, "Continue");
 			break;
-		case 387: // TODO Methods.fight(7, 7, 114, "CAVEMAN", 0);
+		case 387:
+			Methods.fight(7, 7, "CAVEMAN", 114);
 			break;
 		case 388:
 			Methods.choosePath(23, 154, "Pull it off the wall to see whether there is a message written on it",

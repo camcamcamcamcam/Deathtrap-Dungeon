@@ -1,4 +1,5 @@
 package com.camcamcamcamcam.deathtrapdungeon.procedures;
+
 import java.awt.EventQueue;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -12,13 +13,12 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JRadioButton;
+import javax.swing.JSeparator;
 import javax.swing.JTextArea;
 
 import com.camcamcamcamcam.deathtrapdungeon.objects.Character;
-
-import javax.swing.JSeparator;
-import javax.swing.JMenuItem;
 
 public class Window {
 
@@ -30,10 +30,8 @@ public class Window {
 	public static GridBagConstraints[] gbc_choices;
 	public static JTextArea textArea;
 	public static JButton btnConfirm;
-	public static JMenu mnInventory, mnCharacter, mnGems;
-	public static JMenuItem[] mntmEquipment, mntmGems;
-	public static JMenuItem mntmDrinkPotion, mntmEatFood;
-	public static JLabel lblSkill, lblStamina, lblLuck;
+	public static JMenuItem mntmDrinkPotion, mntmEatFood, mntmSkill, mntmStamina, mntmLuck, mntmGold;
+	public static JMenuBar menuBar;
 
 	public static boolean started = false;
 
@@ -46,6 +44,7 @@ public class Window {
 				try {
 					Window window = new Window();
 					window.frame.setVisible(true);
+					window.frame.setTitle("Deathtrap Dungeon");
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -68,42 +67,22 @@ public class Window {
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		JMenuBar menuBar = new JMenuBar();
+		menuBar = new JMenuBar();
 		frame.setJMenuBar(menuBar);
 
-		mnCharacter = new JMenu("Character");
-		menuBar.add(mnCharacter);
+		character = new Character();
 
-		mnInventory = new JMenu("Inventory");
-		menuBar.add(mnInventory);
-		
-		mnGems = new JMenu("Gems");
-		menuBar.add(mnGems);
-		
-		Window.mntmEquipment = new JMenuItem[100];
-		Window.mntmGems = new JMenuItem[7];
-		
-		for (int i = 0; i < 100; i++) {
-			mntmEquipment[i] = new JMenuItem();
-			mnInventory.add(mntmEquipment[i]);
-		}
-		
-		for (int i = 0; i < 7; i++) {
-			mntmGems[i] = new JMenuItem();
-			mnGems.add(mntmGems[i]);
-		}character = new Character();		
+		mntmSkill = new JMenuItem("Skill: " + character.getSkill() + "/" + character.getSkillInitial());
+		menuBar.add(mntmSkill);
 
-		lblSkill = new JLabel("Skill: " + character.getSkill() + "/" + character.getSkillInitial());
-		mnCharacter.add(lblSkill);
+		mntmStamina = new JMenuItem("Stamina: " + character.getStamina() + "/" + character.getStaminaInitial());
+		menuBar.add(mntmStamina);
 
-		lblStamina = new JLabel("Stamina: " + character.getStamina() + "/" + character.getStaminaInitial());
-		mnCharacter.add(lblStamina);
+		mntmLuck = new JMenuItem("Luck: " + character.getLuck() + "/" + character.getLuckInitial());
+		menuBar.add(mntmLuck);
 
-		lblLuck = new JLabel("Luck: " + character.getLuck() + "/" + character.getLuckInitial());
-		mnCharacter.add(lblLuck);
-
-		JSeparator separator = new JSeparator();
-		mnCharacter.add(separator);
+		mntmGold = new JMenuItem("Gold: " + character.getGold());
+		menuBar.add(mntmGold);
 
 		mntmEatFood = new JMenuItem("Eat food ( " + character.getFood() + " left)");
 		mntmEatFood.addActionListener(new ActionListener() {
@@ -114,7 +93,7 @@ public class Window {
 			}
 
 		});
-		mnCharacter.add(mntmEatFood);
+		menuBar.add(mntmEatFood);
 
 		mntmDrinkPotion = new JMenuItem();
 		mntmDrinkPotion.addActionListener(new ActionListener() {
@@ -185,15 +164,18 @@ public class Window {
 							character.equipment.add(choices[i].getText());
 							character.equipment.add(choices[i].getText());
 							mntmDrinkPotion.setText("Drink a " + choices[i].getText() + ": 2 left.");
-							mnCharacter.add(mntmDrinkPotion);
+							menuBar.add(mntmDrinkPotion);
+
 						} else {
 							character.setPage(Methods.pages[i]);
+
 							character.hungry();
 							break;
 						}
 					}
 				}
 				started = true;
+				textArea.setText(Text.text(character.getPage()));
 				Deathtrap.pageMethods();
 				if (character.getStamina() <= 0) {
 					character.die(Window.textArea.getText());

@@ -2,7 +2,150 @@ package com.camcamcamcamcam.deathtrapdungeon.procedures;
 
 import java.util.Random;
 
+import javax.swing.JOptionPane;
+
+import com.camcamcamcamcam.deathtrapdungeon.objects.Creature;
+
 public class Methods {
+
+	// TODO gemSlot();
+
+	public static String label(Creature[] creature) {
+		String label = creature[0].getName() + ": SKILL " + creature[0].getSkill() + ", STAMINA "
+				+ creature[0].getStamina();
+		if (creature.length > 1) {
+			for (int i = 1; i < creature.length; i++) {
+				label = label + "\n" + creature[i].getName() + ": SKILL " + creature[i].getSkill() + ", STAMINA "
+						+ creature[i].getStamina();
+			}
+		}
+		return label;
+	}
+
+	public static void fight(int creatureSkill, int creatureStamina, String creatureName, int winPage, int escapePage) {
+		fight(new Creature[] { new Creature(creatureName, creatureSkill, creatureStamina) }, winPage, escapePage);
+	}
+
+	public static void fight(int creatureSkill, int creatureStamina, String creatureName, int winPage) {
+		fight(new Creature[] { new Creature(creatureName, creatureSkill, creatureStamina) }, winPage, -1);
+	}
+
+	public static void fight(int creatureSkill1, int creatureStamina1, String creatureName1, int creatureSkill2,
+			int creatureStamina2, String creatureName2, int winPage) {
+		fight(new Creature[] { new Creature(creatureName1, creatureSkill1, creatureStamina1),
+				new Creature(creatureName2, creatureSkill2, creatureStamina2) }, winPage, -1);
+	}
+
+	public static void fight(Creature[] creature, int winPage, int escapePage) {
+		boolean stillAlive = true;
+		int optionChosen;
+		int numberOfRounds = 0;
+		int whoIsWounded = 0;
+		int debuff = 0;
+		if (creature[0].getName().equals("DWARF")){
+			debuff = -2;
+		}
+		String title = "Fighting " + creature[0].getName();
+		String label = label(creature);
+		if (creature.length > 1) {
+			for (int i = 1; i < creature.length; i++) {
+				title = title + " and " + creature[i].getName();
+			}
+		}
+		if (escapePage != -1 && !(numberOfRounds < 2 && creature[0].getName().equals("ROCK GRUB"))) {
+			optionChosen = JOptionPane.showOptionDialog(Window.frame, label, title, JOptionPane.YES_NO_CANCEL_OPTION,
+					JOptionPane.QUESTION_MESSAGE, null, new String[] { "Escape", "Fight" }, "Fight");
+			if (optionChosen == 0) {
+				JOptionPane.showMessageDialog(Window.frame,
+						"The creature attacked you while you escaped" + Window.character.changeStamina(-2),
+						"You escaped from the battle", JOptionPane.PLAIN_MESSAGE);
+				Window.character.setPage(escapePage);
+				return;
+
+			} else {
+				optionChosen--;
+			}
+		} else {
+			optionChosen = 1;
+			JOptionPane.showMessageDialog(Window.frame, label, title, JOptionPane.PLAIN_MESSAGE);
+		}
+		while (stillAlive) {
+			int creatureFought = -1;
+			boolean hasDamaged = false;
+			for (int i = 0; i < creature.length; i++) {
+				int rollDice = Methods.rollDice(2);
+				if (Window.character.getSkill() + rollDice - debuff > creature[i].getSkill() + Methods.rollDice(2)) {
+					if (!hasDamaged) {
+						creature[i].changeStamina(-2);
+						hasDamaged = true;
+						label = "You successfully wounded the " + creature[i].getName() + "!\n" + label;
+						whoIsWounded = 1;
+						creatureFought = i;
+					} else {
+						label = "You defended yourself against the " + creature[i].getName() + "'s blow.\n" + label;
+					}
+				} else if (Window.character.getSkill() + rollDice - debuff > creature[i].getSkill()
+						+ Methods.rollDice(2)) {
+					label = "The " + creature[i].getName() + " wounded you!\n" + label;
+					whoIsWounded = -1;
+				} else {
+					label = "Both of you missed.\n" + label;
+					whoIsWounded = 0;
+				}
+			}
+			if (escapePage != -1 && !(numberOfRounds < 2 && creature[0].getName().equals("ROCK GRUB"))) {
+				optionChosen = JOptionPane.showOptionDialog(Window.frame, label, title,
+						JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null,
+						new String[] { "Escape", "Use Luck", "Fight" }, "Fight");
+				if (optionChosen == 0) {
+					JOptionPane.showMessageDialog(Window.frame,
+							"The creature attacked you while you escaped" + Window.character.changeStamina(-2),
+							"You escaped from the battle", JOptionPane.PLAIN_MESSAGE);
+					Window.character.setPage(escapePage);
+					return;
+
+				} else {
+					optionChosen--;
+				}
+			} else if (whoIsWounded != 0) {
+				optionChosen = JOptionPane.showOptionDialog(Window.frame, label, title, JOptionPane.YES_NO_OPTION,
+						JOptionPane.QUESTION_MESSAGE, null, new String[] { "Use Luck", "Fight" }, "Fight");
+			} else {
+				JOptionPane.showMessageDialog(Window.frame, label, title, JOptionPane.PLAIN_MESSAGE);
+			}
+			if (optionChosen == 0) {
+				String message = "";
+				boolean lucky = Window.character.getLuck() < rollDice(2);
+				if (lucky && whoIsWounded == 1) {
+					creature[creatureFought].changeStamina(-2);
+					creatureFought = -1;
+					message = "You were lucky! The " + creature[creatureFought].getName()
+							+ " loses 2 extra stamina points.";
+				}
+				if (lucky && whoIsWounded == -1) {
+					Window.character.changeStamina(1);
+					message = "You were lucky! You only lose 1 stamina point.";
+				}
+				if (!lucky && whoIsWounded == 1) {
+					creature[creatureFought].changeStamina(-2);
+					creatureFought = -1;
+					message = "You were unlucky. The " + creature[creatureFought].getName()
+							+ "only lost 1 stamina point.";
+				}
+				if (!lucky && whoIsWounded == -1) {
+					Window.character.changeStamina(-1);
+					message = "You were unlucky! You lose 1 extra stamina point.";
+				}
+				Window.character.changeLuck(-1);
+				JOptionPane.showMessageDialog(Window.frame, message + "\nYou lost 1 luck point due to using your luck",
+						"You used luck on the wound", JOptionPane.PLAIN_MESSAGE);
+			}
+			for (int i = 0; i < creature.length; i++) {
+				stillAlive = stillAlive || (creature[i].getStamina() > 0);
+			}
+			numberOfRounds++;
+		}
+	}
 
 	public static int[] pages;
 
@@ -37,21 +180,29 @@ public class Methods {
 		}
 	}
 
-	public static void testSkill(int skillful, int unskillful) {
+	public static int testSkill(int skillful, int unskillful) {
+		int page;
 		if (Window.character.getLuck() < rollDice(2)) {
 			choosePath(unskillful, "You were not skilled enough. Click confirm to find out the consequences.");
+			page = unskillful;
 		} else {
 			choosePath(skillful, "Your skill was enough. Click confirm to continue.");
+			page = skillful;
 		}
+		return page;
 	}
 
-	public static void testLuck(int lucky, int unlucky) {
+	public static int testLuck(int lucky, int unlucky) {
+		int page;
 		if (Window.character.getLuck() < rollDice(2)) {
 			choosePath(unlucky, "You were unlucky. Click confirm to find out the consequences.");
+			page = unlucky;
 		} else {
 			choosePath(lucky, "You were lucky. Click confirm to continue.");
+			page = lucky;
 		}
 		Window.character.alter(Window.character.changeLuck(-1), "You tested your luck");
+		return page;
 	}
 
 	public static int rollDice(int quantity) {

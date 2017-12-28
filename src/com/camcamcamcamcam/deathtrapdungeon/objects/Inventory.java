@@ -1,14 +1,29 @@
 package com.camcamcamcamcam.deathtrapdungeon.objects;
+
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
+
 import com.camcamcamcamcam.deathtrapdungeon.procedures.Window;
 
 public class Inventory {
 	
 	// TODO Check all algorithms to see if all items are searched for correctly
 	
+	public JMenu mnInventory;
+	public JMenuItem mntmInventory[];
+	
 	private String[] items;
 	private int numberOfItems;
-	public Inventory(int capacity) {
+	
+	public Inventory(String name, int capacity) {
+		mnInventory = new JMenu(name);
+		Window.menuBar.add(mnInventory);
+		mntmInventory = new JMenuItem[capacity];
 		items = new String[capacity];
+		for (int i = 0; i < capacity; i++) {
+			mntmInventory[i] = new JMenuItem();
+			mnInventory.add(mntmInventory[i]);
+		}
 	}
 	
 	public int getNumberOfItems() {
@@ -36,9 +51,9 @@ public class Inventory {
 		}
 		if (equipment.startsWith("Potion") && count > 0) {
 			Window.mntmDrinkPotion.setText("Drink a " + equipment + ": " + count + " left.");
-			Window.mnCharacter.add(Window.mntmDrinkPotion);
+			Window.menuBar.add(Window.mntmDrinkPotion);
 		} else if (equipment.startsWith("Potion") && count <= 0) {
-			Window.mnCharacter.remove(Window.mntmDrinkPotion);
+			Window.menuBar.remove(Window.mntmDrinkPotion);
 		}
 		return position;
 	}
@@ -50,11 +65,10 @@ public class Inventory {
 	
 	public void refresh(int number) {
 		numberOfItems = numberOfItems + number;
-		Window.mnInventory.removeAll();
-		Window.mnGems.removeAll(); // TODO Add gems window too
+		mnInventory.removeAll();
 		for (int i = 0; i < numberOfItems; i++) {
-			Window.mntmEquipment[i].setText(items[i]);
-			Window.mnInventory.add(Window.mntmEquipment[i]);
+			mntmInventory[i].setText(items[i]);
+			mnInventory.add(mntmInventory[i]);
 		}
 	}
 	
