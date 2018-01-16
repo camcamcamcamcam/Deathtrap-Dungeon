@@ -7,8 +7,47 @@ import javax.swing.JOptionPane;
 import com.camcamcamcamcam.deathtrapdungeon.objects.Creature;
 
 public class Methods {
+	
+	public static void listEquipment() {
+		String equipmentChosen = (String) JOptionPane.showInputDialog(Window.frame,
+				"Select item", "Equipment", JOptionPane.PLAIN_MESSAGE,
+				null,
+				new String[] { "1. Emerald Diamond Sapphire ", "2. Diamond Sapphire Emerald ",
+						"3. Sapphire Emerald Diamond ", "4. Emerald Sapphire Diamond ", "5. Diamond Emerald Sapphire ",
+						"6. Sapphire Diamond Emerald " },
+				"1. Emerald Diamond Sapphire");
+		Window.character.equipment.search(equipmentChosen, true);
+	}
 
-	// TODO gemSlot();
+	public static void gemSlot() {
+		String gemSlot = (String) JOptionPane.showInputDialog(Window.frame,
+				"Choose your arrangement", "Arrange the gems", JOptionPane.PLAIN_MESSAGE,
+				null,
+				new String[] { "1. Emerald Diamond Sapphire ", "2. Diamond Sapphire Emerald ",
+						"3. Sapphire Emerald Diamond ", "4. Emerald Sapphire Diamond ", "5. Diamond Emerald Sapphire ",
+						"6. Sapphire Diamond Emerald " },
+				"1. Emerald Diamond Sapphire");
+		String message = "Click confirm to see if you entered the right combination.";
+		switch (Integer.parseInt("" + gemSlot.charAt(0))) {
+		case 1:
+			choosePath(16, message);
+			break;
+		case 2:
+			choosePath(392, message);
+			break;
+		case 3:
+			choosePath(177, message);
+			break;
+		case 4:
+			choosePath(287, message);
+			break;
+		case 5:
+			choosePath(132, message);
+			break;
+		case 6:
+			choosePath(249, message);
+		}
+	}
 
 	public static String label(Creature[] creature) {
 		String label = creature[0].getName() + ": SKILL " + creature[0].getSkill() + ", STAMINA "
@@ -38,11 +77,12 @@ public class Methods {
 
 	public static void fight(Creature[] creature, int winPage, int escapePage) {
 		boolean stillAlive = true;
+		boolean allDead = false;
 		int optionChosen;
 		int numberOfRounds = 0;
 		int whoIsWounded = 0;
 		int debuff = 0;
-		if (creature[0].getName().equals("DWARF")){
+		if (creature[0].getName().equals("DWARF")) {
 			debuff = -2;
 		}
 		String title = "Fighting " + creature[0].getName();
@@ -70,6 +110,7 @@ public class Methods {
 			JOptionPane.showMessageDialog(Window.frame, label, title, JOptionPane.PLAIN_MESSAGE);
 		}
 		while (stillAlive) {
+			label = label(creature);
 			int creatureFought = -1;
 			boolean hasDamaged = false;
 			for (int i = 0; i < creature.length; i++) {
@@ -81,6 +122,12 @@ public class Methods {
 						label = "You successfully wounded the " + creature[i].getName() + "!\n" + label;
 						whoIsWounded = 1;
 						creatureFought = i;
+						for (int j = 0; j < creature.length; j++) {
+							allDead = allDead || creature[j].getStamina() <= 0;
+						}
+						if (allDead) {
+							choosePath(winPage, "You won.");
+						}
 					} else {
 						label = "You defended yourself against the " + creature[i].getName() + "'s blow.\n" + label;
 					}
@@ -114,6 +161,7 @@ public class Methods {
 				JOptionPane.showMessageDialog(Window.frame, label, title, JOptionPane.PLAIN_MESSAGE);
 			}
 			if (optionChosen == 0) {
+				// TODO luck variables aren't being reset. Check how dialog box works
 				String message = "";
 				boolean lucky = Window.character.getLuck() < rollDice(2);
 				if (lucky && whoIsWounded == 1) {
@@ -121,6 +169,12 @@ public class Methods {
 					creatureFought = -1;
 					message = "You were lucky! The " + creature[creatureFought].getName()
 							+ " loses 2 extra stamina points.";
+					for (int j = 0; j < creature.length; j++) {
+						allDead = allDead || creature[j].getStamina() > 0;
+					}
+					if (allDead) {
+						choosePath(winPage, "You won.");
+					}
 				}
 				if (lucky && whoIsWounded == -1) {
 					Window.character.changeStamina(1);
@@ -131,6 +185,7 @@ public class Methods {
 					creatureFought = -1;
 					message = "You were unlucky. The " + creature[creatureFought].getName()
 							+ "only lost 1 stamina point.";
+					// TODO ArrayIndexOutOfBoundsException
 				}
 				if (!lucky && whoIsWounded == -1) {
 					Window.character.changeStamina(-1);

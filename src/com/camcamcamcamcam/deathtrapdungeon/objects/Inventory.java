@@ -26,6 +26,10 @@ public class Inventory {
 		}
 	}
 	
+	public String[] toArray() {
+		return items;
+	}
+	
 	public int getNumberOfItems() {
 		return numberOfItems;
 	}
@@ -34,7 +38,7 @@ public class Inventory {
 		int position = -1;
 		int count = 0;
 		for (int i = 0; i < numberOfItems; i++) {
-			if (items[i].equals(equipment)) {
+			if (items[i].contains(equipment)) {
 				position = i;
 				count++;
 			}

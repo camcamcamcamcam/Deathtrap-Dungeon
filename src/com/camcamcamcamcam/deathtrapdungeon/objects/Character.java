@@ -84,7 +84,8 @@ public class Character {
 			if (skill > skillInitial) {
 				skill = skillInitial;
 			}
-			return "Your skill has been increased by " + amount + " point" + s + " to a score of " + skill + ". " + temp;
+			return "Your skill has been increased by " + amount + " point" + s + " to a score of " + skill + ". "
+					+ temp;
 		}
 	}
 
@@ -108,8 +109,7 @@ public class Character {
 		if (amount != -1 || amount != 1) {
 			s = "";
 		}
-		Window.mntmStamina
-		.setText("Stamina: " + getStamina() + "/" + getStaminaInitial());
+		Window.mntmStamina.setText("Stamina: " + getStamina() + "/" + getStaminaInitial());
 		if (amount < 0) {
 			return "Your stamina has been decreased by " + -amount + " point" + s + " to a score of " + stamina + ". ";
 		} else {
@@ -182,6 +182,10 @@ public class Character {
 		} else if (hasEaten) {
 			JOptionPane.showMessageDialog(Window.frame, "You can only eat once per turn", "You are full",
 					JOptionPane.ERROR_MESSAGE);
+		} else if (stamina == staminaInitial) {
+			JOptionPane.showMessageDialog(Window.frame,
+					"There's no point eating now - you won't gain any stamina points.", "You are at maximum stamina",
+					JOptionPane.ERROR_MESSAGE);
 		} else {
 			stamina = stamina + 4;
 			food--;
@@ -199,8 +203,7 @@ public class Character {
 			if (stamina > staminaInitial) {
 				stamina = staminaInitial;
 			}
-			Window.mntmStamina
-					.setText("Stamina: " + getStamina() + "/" + getStaminaInitial());
+			Window.mntmStamina.setText("Stamina: " + getStamina() + "/" + getStaminaInitial());
 			Window.mntmEatFood.setText("Eat food ( " + getFood() + " left)");
 		}
 	}
@@ -219,7 +222,7 @@ public class Character {
 		if (amount != -1 || amount != 1) {
 			s = "s";
 		}
-		Window.mntmGold.setText("Luck: " + getGold());
+		Window.mntmGold.setText("Gold: " + getGold());
 		if (amount < 0) {
 			return "You lost " + -amount + " piece" + s + " of gold. You now have " + gold + " gold left. ";
 		} else {

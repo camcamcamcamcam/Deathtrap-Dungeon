@@ -60,7 +60,8 @@ public class Deathtrap {
 		case 15:
 			Methods.choosePath(74, "Continue");
 			break;
-		case 16: // TODO Methods.gemSlot();
+		case 16:
+			Methods.gemSlot();
 			break;
 		case 17:
 			Window.character.die();
@@ -141,11 +142,13 @@ public class Deathtrap {
 			break;
 		case 39:
 			Methods.fight(7, 8, "GIANT FLY", 111, 267);
+			Window.character.equipment.add("Opal Dagger");
 			break;
 		case 40:
 			Methods.fight(9, 9, "MINOTAUR", 163, 0);
 			break;
 		case 41:
+			Window.character.states.setExaminedAlcove(true);
 			if (Window.character.states.isExaminedBarbarian()) {
 				Methods.choosePath(98, 83, "Drink the liquid", "Leave the chamber to continue west");
 			} else {
@@ -237,7 +240,8 @@ public class Deathtrap {
 		case 61:
 			Window.character.die();
 			break;
-		case 62: // TODO Methods.gemSlot();
+		case 62:
+			Methods.gemSlot();
 			break;
 		case 63:
 			Methods.choosePath(194, "Continue");
@@ -507,7 +511,8 @@ public class Deathtrap {
 		case 131:
 			Methods.choosePath(74, "Continue");
 			break;
-		case 132: // TODO Methods.gemSlot();
+		case 132:
+			Methods.gemSlot();
 			break;
 		case 133:
 			Methods.testSkill(178, 17);
@@ -617,7 +622,7 @@ public class Deathtrap {
 		case 158:
 			Methods.choosePath(275, "Continue");
 			break;
-		case 159: // TODO Works for all daggers?
+		case 159:
 			if (Window.character.equipment.search("Dagger", false) != -1) {
 				Methods.choosePath(294, "Continue");
 			} else {
@@ -805,8 +810,8 @@ public class Deathtrap {
 			Window.character.equipment.add("Rope");
 			Methods.choosePath(326, "Continue");
 			break;
-		case 209: // TODO Add a way to list equipment, including gems and
-					// potions.
+		case 209:
+			Methods.listEquipment();
 			Methods.choosePath(356, "Continue");
 			break;
 		case 210:
@@ -953,7 +958,8 @@ public class Deathtrap {
 		case 248:
 			Methods.choosePath(214, "Continue");
 			break;
-		case 249: // TODO Methods.gemSlot();
+		case 249:
+			Methods.gemSlot();
 			break;
 		case 250:
 			Methods.choosePath(44, 195, 382, "Keep on running", "Turn to attack him with your sword",
@@ -1003,7 +1009,7 @@ public class Deathtrap {
 			Methods.choosePath(153, 73, "Open the door", "Continue west");
 			break;
 		case 264:
-			Methods.choosePath(130, 31, 355, "Try to talk to them", "Attack them with your sword",
+			Methods.choosePath(130, 51, 355, "Try to talk to them", "Attack them with your sword",
 					"Slip by them unnoticed");
 			break;
 		case 265:
@@ -1093,7 +1099,8 @@ public class Deathtrap {
 			Window.character.equipment.add("Long Knife");
 			Methods.choosePath(320, "Continue");
 			break;
-		case 287: // TODO Methods.gemSlot();
+		case 287:
+			Methods.gemSlot();
 			break;
 		case 288:
 			Methods.choosePath(64, 221, "Put the ring on", "Continue east with Throm");
@@ -1135,8 +1142,12 @@ public class Deathtrap {
 			Methods.choosePath(304, 279, "Look inside the backpack", "Continue north");
 			break;
 		case 299:
-			Methods.choosePath(126, 41, 83, "Walk over to search the Barbarian", "Walk towards the alcove",
-					"Close the door and continue west");
+			if (Window.character.states.isExaminedBarbarian()) {
+				Methods.choosePath(41, 83, "Walk towards the alcove", "Close the door and continue west");
+			} else {
+				Methods.choosePath(126, 41, 83, "Walk over to search the Barbarian", "Walk towards the alcove",
+						"Close the door and continue west");
+			}
 			break;
 		case 300:
 			Methods.choosePath(141, 327, "Try and smash the mirror again", "Attack the Mirror Demon instead");
@@ -1389,7 +1400,8 @@ public class Deathtrap {
 		case 359:
 			Window.character.die();
 			break;
-		case 360: // TODO Make algorithm for listing equipment
+		case 360:
+			Methods.listEquipment();
 			Methods.choosePath(297, 328, 211, "Offer her something from your backpack",
 					"Try to talk your way out of giving her anything", "Attack her with your sword");
 			break;
@@ -1501,7 +1513,8 @@ public class Deathtrap {
 		case 391:
 			Methods.choosePath(100, "Continue");
 			break;
-		case 392: // TODO Methods.gemSlot();
+		case 392:
+			Methods.gemSlot();
 			break;
 		case 393:
 			Methods.choosePath(274, 291, "Walk across the tightrope to reach the helmet",
@@ -1529,8 +1542,6 @@ public class Deathtrap {
 			break;
 		case 399:
 			Methods.choosePath(192, "Continue");
-			break;
-		case 400: // TODO Completed!
 		}
 	}
 }

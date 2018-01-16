@@ -162,8 +162,7 @@ public class Window {
 					if (choices[i].isSelected()) {
 						if (!started) {
 							character.equipment.add(choices[i].getText());
-							character.equipment.add(choices[i].getText());
-							mntmDrinkPotion.setText("Drink a " + choices[i].getText() + ": 2 left.");
+							mntmDrinkPotion.setText("Drink the " + choices[i].getText());
 							menuBar.add(mntmDrinkPotion);
 
 						} else {
