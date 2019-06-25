@@ -481,6 +481,7 @@ public class Deathtrap {
 			Methods.testLuck(69, 139);
 			break;
 		case 126:
+			Window.character.states.setExaminedBarbarian(true);
 			if (Window.character.states.isExaminedAlcove()) {
 				Methods.choosePath(226, 83, "Eat the dried meat", "Leave the chamber and head west");
 			} else {

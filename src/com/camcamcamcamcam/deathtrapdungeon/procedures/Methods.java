@@ -7,11 +7,10 @@ import javax.swing.JOptionPane;
 import com.camcamcamcamcam.deathtrapdungeon.objects.Creature;
 
 public class Methods {
-	
+
 	public static void listEquipment() {
-		String equipmentChosen = (String) JOptionPane.showInputDialog(Window.frame,
-				"Select item", "Equipment", JOptionPane.PLAIN_MESSAGE,
-				null,
+		String equipmentChosen = (String) JOptionPane.showInputDialog(Window.frame, "Select item", "Equipment",
+				JOptionPane.PLAIN_MESSAGE, null,
 				new String[] { "1. Emerald Diamond Sapphire ", "2. Diamond Sapphire Emerald ",
 						"3. Sapphire Emerald Diamond ", "4. Emerald Sapphire Diamond ", "5. Diamond Emerald Sapphire ",
 						"6. Sapphire Diamond Emerald " },
@@ -20,9 +19,8 @@ public class Methods {
 	}
 
 	public static void gemSlot() {
-		String gemSlot = (String) JOptionPane.showInputDialog(Window.frame,
-				"Choose your arrangement", "Arrange the gems", JOptionPane.PLAIN_MESSAGE,
-				null,
+		String gemSlot = (String) JOptionPane.showInputDialog(Window.frame, "Choose your arrangement",
+				"Arrange the gems", JOptionPane.PLAIN_MESSAGE, null,
 				new String[] { "1. Emerald Diamond Sapphire ", "2. Diamond Sapphire Emerald ",
 						"3. Sapphire Emerald Diamond ", "4. Emerald Sapphire Diamond ", "5. Diamond Emerald Sapphire ",
 						"6. Sapphire Diamond Emerald " },
@@ -76,15 +74,19 @@ public class Methods {
 	}
 
 	public static void fight(Creature[] creature, int winPage, int escapePage) {
-		boolean stillAlive = true;
-		boolean allDead = false;
-		int optionChosen;
-		int numberOfRounds = 0;
-		int whoIsWounded = 0;
-		int debuff = 0;
+
+		// initialising values
+		boolean allDead; // whether all the creatures have been killed
+		int optionChosen; // whether the player has chosen to escape or fight
+		int numberOfRounds = 0; // how many rounds of fighting the player has done
+		int whoIsWounded = 0; // whether the player is wounded or the creature is for that round
+		int debuff = 0; // if the player is fighting the dwarf, their attack strength is reduced by 2
+						// for the duration of the fight.
 		if (creature[0].getName().equals("DWARF")) {
 			debuff = -2;
 		}
+
+		// setting up dialogue box showing creature names and stats
 		String title = "Fighting " + creature[0].getName();
 		String label = label(creature);
 		if (creature.length > 1) {
@@ -92,47 +94,67 @@ public class Methods {
 				title = title + " and " + creature[i].getName();
 			}
 		}
-		if (escapePage != -1 && !(numberOfRounds < 2 && creature[0].getName().equals("ROCK GRUB"))) {
-			optionChosen = JOptionPane.showOptionDialog(Window.frame, label, title, JOptionPane.YES_NO_CANCEL_OPTION,
-					JOptionPane.QUESTION_MESSAGE, null, new String[] { "Escape", "Fight" }, "Fight");
-			if (optionChosen == 0) {
-				JOptionPane.showMessageDialog(Window.frame,
-						"The creature attacked you while you escaped" + Window.character.changeStamina(-2),
-						"You escaped from the battle", JOptionPane.PLAIN_MESSAGE);
-				Window.character.setPage(escapePage);
-				return;
 
+		do {
+			
+			// assumes all creatures are dead and checks later
+			allDead = true;
+
+			// if you have the option to escape, it will be displayed. Special case for the
+			// rock grub, where the player may escape after 2 rounds.
+			if (escapePage != -1 && !(numberOfRounds < 2 && creature[0].getName().equals("ROCK GRUB"))) {
+				optionChosen = JOptionPane.showOptionDialog(Window.frame, label, title,
+						JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null,
+						new String[] { "Escape", "Fight" }, "Fight");
+				if (optionChosen == 0) {
+					JOptionPane.showMessageDialog(Window.frame,
+							"The creature attacked you while you escaped" + Window.character.changeStamina(-2),
+							"You escaped from the battle", JOptionPane.PLAIN_MESSAGE);
+					choosePath(escapePage, "You escaped from the battle.");
+					return;
+
+				} else {
+					optionChosen--;
+				}
 			} else {
-				optionChosen--;
+				optionChosen = 1;
+				JOptionPane.showMessageDialog(Window.frame, label, title, JOptionPane.PLAIN_MESSAGE);
 			}
-		} else {
-			optionChosen = 1;
-			JOptionPane.showMessageDialog(Window.frame, label, title, JOptionPane.PLAIN_MESSAGE);
-		}
-		while (stillAlive) {
+
+			// creature stats are updated and round is refreshed
+			// TODO update player stats as well
 			label = label(creature);
 			int creatureFought = -1;
 			boolean hasDamaged = false;
+
+			// fight is initiated for each creature
 			for (int i = 0; i < creature.length; i++) {
-				int rollDice = Methods.rollDice(2);
-				if (Window.character.getSkill() + rollDice - debuff > creature[i].getSkill() + Methods.rollDice(2)) {
+				int[] rollDice = {Methods.rollDice(2), Methods.rollDice(2) };
+				if (Window.character.getSkill() + rollDice[0] - debuff > creature[i].getSkill() + rollDice[1]) {
+
+					// if you win rounds against more than one creature, you only inflict damage on
+					// the first.
 					if (!hasDamaged) {
 						creature[i].changeStamina(-2);
 						hasDamaged = true;
 						label = "You successfully wounded the " + creature[i].getName() + "!\n" + label;
 						whoIsWounded = 1;
 						creatureFought = i;
+
+						// if all creatures are dead, you win.
 						for (int j = 0; j < creature.length; j++) {
-							allDead = allDead || creature[j].getStamina() <= 0;
+							System.out.println(creature[j].getStamina());
+							allDead = allDead && creature[j].getStamina() <= 0;
 						}
-						if (allDead) {
-							choosePath(winPage, "You won.");
-						}
+
 					} else {
 						label = "You defended yourself against the " + creature[i].getName() + "'s blow.\n" + label;
 					}
-				} else if (Window.character.getSkill() + rollDice - debuff > creature[i].getSkill()
-						+ Methods.rollDice(2)) {
+
+					// cases for if you are wounded or if you both miss
+				} else if (Window.character.getSkill() + rollDice[0] - debuff > creature[i].getSkill()
+						+ rollDice[1]) {
+					Window.character.changeStamina(-2);
 					label = "The " + creature[i].getName() + " wounded you!\n" + label;
 					whoIsWounded = -1;
 				} else {
@@ -140,26 +162,8 @@ public class Methods {
 					whoIsWounded = 0;
 				}
 			}
-			if (escapePage != -1 && !(numberOfRounds < 2 && creature[0].getName().equals("ROCK GRUB"))) {
-				optionChosen = JOptionPane.showOptionDialog(Window.frame, label, title,
-						JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null,
-						new String[] { "Escape", "Use Luck", "Fight" }, "Fight");
-				if (optionChosen == 0) {
-					JOptionPane.showMessageDialog(Window.frame,
-							"The creature attacked you while you escaped" + Window.character.changeStamina(-2),
-							"You escaped from the battle", JOptionPane.PLAIN_MESSAGE);
-					Window.character.setPage(escapePage);
-					return;
-
-				} else {
-					optionChosen--;
-				}
-			} else if (whoIsWounded != 0) {
-				optionChosen = JOptionPane.showOptionDialog(Window.frame, label, title, JOptionPane.YES_NO_OPTION,
-						JOptionPane.QUESTION_MESSAGE, null, new String[] { "Use Luck", "Fight" }, "Fight");
-			} else {
-				JOptionPane.showMessageDialog(Window.frame, label, title, JOptionPane.PLAIN_MESSAGE);
-			}
+			
+			// TODO fix this code never being executed for some reason, and fights are over immediately
 			if (optionChosen == 0) {
 				// TODO luck variables aren't being reset. Check how dialog box works
 				String message = "";
@@ -171,9 +175,6 @@ public class Methods {
 							+ " loses 2 extra stamina points.";
 					for (int j = 0; j < creature.length; j++) {
 						allDead = allDead || creature[j].getStamina() > 0;
-					}
-					if (allDead) {
-						choosePath(winPage, "You won.");
 					}
 				}
 				if (lucky && whoIsWounded == -1) {
@@ -195,11 +196,10 @@ public class Methods {
 				JOptionPane.showMessageDialog(Window.frame, message + "\nYou lost 1 luck point due to using your luck",
 						"You used luck on the wound", JOptionPane.PLAIN_MESSAGE);
 			}
-			for (int i = 0; i < creature.length; i++) {
-				stillAlive = stillAlive || (creature[i].getStamina() > 0);
-			}
 			numberOfRounds++;
-		}
+			System.out.println(Window.character.getStamina() + ", " + allDead);
+		} while (Window.character.getStamina() > 0 && !allDead);
+		choosePath(winPage, "You won.");
 	}
 
 	public static int[] pages;
