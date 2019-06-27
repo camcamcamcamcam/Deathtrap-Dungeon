@@ -3,7 +3,6 @@ package com.camcamcamcamcam.deathtrapdungeon.objects;
 import javax.swing.JOptionPane;
 
 import com.camcamcamcamcam.deathtrapdungeon.procedures.Methods;
-import com.camcamcamcamcam.deathtrapdungeon.procedures.Text;
 import com.camcamcamcamcam.deathtrapdungeon.procedures.Window;
 
 public class Character {
@@ -64,7 +63,7 @@ public class Character {
 	}
 
 	public void die() {
-		die(Text.text(getPage()));
+		die(Window.textArea.getText());
 	}
 
 	public int getSkill() {

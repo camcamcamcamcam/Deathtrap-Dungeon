@@ -4,7 +4,6 @@ import java.util.Random;
 
 import javax.swing.JOptionPane;
 
-import com.camcamcamcamcam.deathtrapdungeon.objects.Character;
 import com.camcamcamcamcam.deathtrapdungeon.objects.Creature;
 
 public class Methods {

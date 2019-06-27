@@ -6,19 +6,20 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JRadioButton;
-import javax.swing.JSeparator;
 import javax.swing.JTextArea;
 
 import com.camcamcamcamcam.deathtrapdungeon.objects.Character;
+import com.camcamcamcamcam.deathtrapdungeon.objects.States;
 
 public class Window {
 
@@ -172,7 +173,7 @@ public class Window {
 					}
 				}
 				started = true;
-				textArea.setText(Text.text(Deathtrap.character.getPage()));
+				textArea.setText(text());
 				Deathtrap.pageMethods();
 				if (Deathtrap.character.getStamina() <= 0) {
 					Deathtrap.character.die(Window.textArea.getText());
@@ -180,8 +181,22 @@ public class Window {
 			}
 
 		});
-		textArea.setText(Text.text(-1));
+		textArea.setText(text());
 		Methods.choosePath(0, 0, 0, "Potion of Skill", "Potion of Strength", "Potion of Fortune");
 
+	}
+	
+	public static String text() {
+		String text = "";
+		File file = new File("Text.txt");
+		try {
+			Scanner input = new Scanner(file);
+			for (int i = 0; i <= Deathtrap.character.getPage(); i++) {
+				text = input.nextLine() + States.setScores(Deathtrap.character.getPage()) + input.nextLine();
+			}
+		} catch (FileNotFoundException e1) {
+			text = "";
+		}
+		return text;
 	}
 }

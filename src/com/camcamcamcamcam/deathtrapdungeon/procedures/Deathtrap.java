@@ -362,7 +362,6 @@ public class Deathtrap {
 			}
 			break;
 		case 91:
-			character.changeSkill(-4);
 			Methods.fight(5, 5, "FIRST ORC", 257);
 			Methods.fight(6, 4, "SECOND ORC", 257);
 			character.changeSkill(4);
