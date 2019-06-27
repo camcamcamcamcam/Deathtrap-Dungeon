@@ -22,8 +22,6 @@ import com.camcamcamcamcam.deathtrapdungeon.objects.Character;
 
 public class Window {
 
-	public static Character character;
-
 	public static JFrame frame;
 	public static JRadioButton[] choices;
 	public static ButtonGroup choiceGroup;
@@ -70,26 +68,26 @@ public class Window {
 		menuBar = new JMenuBar();
 		frame.setJMenuBar(menuBar);
 
-		character = new Character();
+		Deathtrap.character = new Character();
 
-		mntmSkill = new JMenuItem("Skill: " + character.getSkill() + "/" + character.getSkillInitial());
+		mntmSkill = new JMenuItem("Skill: " + Deathtrap.character.getSkill() + "/" + Deathtrap.character.getSkillInitial());
 		menuBar.add(mntmSkill);
 
-		mntmStamina = new JMenuItem("Stamina: " + character.getStamina() + "/" + character.getStaminaInitial());
+		mntmStamina = new JMenuItem("Stamina: " + Deathtrap.character.getStamina() + "/" + Deathtrap.character.getStaminaInitial());
 		menuBar.add(mntmStamina);
 
-		mntmLuck = new JMenuItem("Luck: " + character.getLuck() + "/" + character.getLuckInitial());
+		mntmLuck = new JMenuItem("Luck: " + Deathtrap.character.getLuck() + "/" + Deathtrap.character.getLuckInitial());
 		menuBar.add(mntmLuck);
 
-		mntmGold = new JMenuItem("Gold: " + character.getGold());
+		mntmGold = new JMenuItem("Gold: " + Deathtrap.character.getGold());
 		menuBar.add(mntmGold);
 
-		mntmEatFood = new JMenuItem("Eat food ( " + character.getFood() + " left)");
+		mntmEatFood = new JMenuItem("Eat food ( " + Deathtrap.character.getFood() + " left)");
 		mntmEatFood.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				character.eat();
+				Deathtrap.character.eat();
 			}
 
 		});
@@ -100,7 +98,7 @@ public class Window {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				character.drinkPotion();
+				Deathtrap.character.drinkPotion();
 			}
 
 		});
@@ -161,23 +159,23 @@ public class Window {
 				for (int i = 0; i < choices.length; i++) {
 					if (choices[i].isSelected()) {
 						if (!started) {
-							character.equipment.add(choices[i].getText());
+							Deathtrap.character.equipment.add(choices[i].getText());
 							mntmDrinkPotion.setText("Drink the " + choices[i].getText());
 							menuBar.add(mntmDrinkPotion);
 
 						} else {
-							character.setPage(Methods.pages[i]);
+							Deathtrap.character.setPage(Methods.pages[i]);
 
-							character.hungry();
+							Deathtrap.character.hungry();
 							break;
 						}
 					}
 				}
 				started = true;
-				textArea.setText(Text.text(character.getPage()));
+				textArea.setText(Text.text(Deathtrap.character.getPage()));
 				Deathtrap.pageMethods();
-				if (character.getStamina() <= 0) {
-					character.die(Window.textArea.getText());
+				if (Deathtrap.character.getStamina() <= 0) {
+					Deathtrap.character.die(Window.textArea.getText());
 				}
 			}
 

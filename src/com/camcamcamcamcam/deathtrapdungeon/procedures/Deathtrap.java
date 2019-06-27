@@ -2,9 +2,14 @@ package com.camcamcamcamcam.deathtrapdungeon.procedures;
 
 import javax.swing.JOptionPane;
 
+import com.camcamcamcamcam.deathtrapdungeon.objects.Character;
+
 public class Deathtrap {
+	
+	public static Character character;
+	
 	public static void pageMethods() {
-		switch (Window.character.getPage()) {
+		switch (character.getPage()) {
 		case 0:
 			Methods.choosePath(1, "Enter Deathtrap Dungeon");
 			break;
@@ -12,13 +17,13 @@ public class Deathtrap {
 			Methods.choosePath(270, 66, "Open the box", "Continue walking north");
 			break;
 		case 2:
-			Window.character.die();
+			character.die();
 			break;
 		case 3:
-			Window.character.die();
+			character.die();
 			break;
 		case 4:
-			Window.character.die();
+			character.die();
 			break;
 		case 5:
 			Methods.testLuck(185, 395);
@@ -27,24 +32,24 @@ public class Deathtrap {
 			Methods.fight(11, 11, "MANTICORE", 364);
 			break;
 		case 7:
-			Window.character.die();
+			character.die();
 			break;
 		case 8:
-			Window.character.die();
+			character.die();
 			break;
 		case 9:
 			Methods.choosePath(158, 375, "Drink it", "Dip a piece of cloth in it");
 			break;
 		case 10:
-			Window.character.setFood(0);
-			if (Window.character.equipment.search("Iron Key", false) != -1) {
+			character.setFood(0);
+			if (character.equipment.search("Iron Key", false) != -1) {
 				Methods.choosePath(86, "Use your iron key to open the door.");
 			} else {
 				Methods.choosePath(276, "Continue");
 			}
 			break;
 		case 11:
-			Window.character.gems.add("Emerald");
+			character.gems.add("Emerald");
 			Methods.choosePath(140, 46, "Prise out the right eye", "Climb down the idol");
 			break;
 		case 12:
@@ -64,13 +69,13 @@ public class Deathtrap {
 			Methods.gemSlot();
 			break;
 		case 17:
-			Window.character.die();
+			character.die();
 			break;
 		case 18:
 			Methods.testSkill(55, 202);
 			break;
 		case 19:
-			Window.character.die();
+			character.die();
 			break;
 		case 20:
 			Methods.choosePath(279, "Continue");
@@ -99,7 +104,7 @@ public class Deathtrap {
 			Methods.choosePath(78, "Continue");
 			break;
 		case 28:
-			Window.character.equipment.add("Dwarf Armour");
+			character.equipment.add("Dwarf Armour");
 			Methods.choosePath(213, "Continue");
 			break;
 		case 29:
@@ -109,7 +114,7 @@ public class Deathtrap {
 			Methods.testLuck(160, 319);
 			break;
 		case 31:
-			if (Window.character.gems.search("Sapphire", false) != -1) {
+			if (character.gems.search("Sapphire", false) != -1) {
 				Methods.choosePath(376, "Continue");
 			} else {
 				Methods.choosePath(3, "Continue");
@@ -119,13 +124,13 @@ public class Deathtrap {
 			Methods.choosePath(37, "Continue");
 			break;
 		case 33:
-			Window.character.equipment.add("Grappling Iron");
-			Window.character.equipment.add("Leather Pouch");
-			Window.character.equipment.add("Brass Bell");
+			character.equipment.add("Grappling Iron");
+			character.equipment.add("Leather Pouch");
+			character.equipment.add("Brass Bell");
 			Methods.choosePath(292, "Continue");
 			break;
 		case 34:
-			Window.character.die();
+			character.die();
 			break;
 		case 35:
 			Methods.choosePath(333, 124, "Knock on the trapdoor", "Burst through the trapdoor with your sword drawn");
@@ -142,14 +147,14 @@ public class Deathtrap {
 			break;
 		case 39:
 			Methods.fight(7, 8, "GIANT FLY", 111, 267);
-			Window.character.equipment.add("Opal Dagger");
+			character.equipment.add("Opal Dagger");
 			break;
 		case 40:
 			Methods.fight(9, 9, "MINOTAUR", 163, 0);
 			break;
 		case 41:
-			Window.character.states.setExaminedAlcove(true);
-			if (Window.character.states.isExaminedBarbarian()) {
+			character.states.setExaminedAlcove(true);
+			if (character.states.isExaminedBarbarian()) {
 				Methods.choosePath(98, 83, "Drink the liquid", "Leave the chamber to continue west");
 			} else {
 				Methods.choosePath(98, 126, 83, "Drink the red liquid",
@@ -164,7 +169,7 @@ public class Deathtrap {
 			Methods.choosePath(200, 316, "Open the door", "Continue north.");
 			break;
 		case 44:
-			Window.character.die();
+			character.die();
 			break;
 		case 45:
 			Methods.choosePath(312, "Continue");
@@ -173,7 +178,7 @@ public class Deathtrap {
 			Methods.choosePath(239, "Continue");
 			break;
 		case 47:
-			if (Window.character.equipment.search("Hollow Wooden Tube", false) != -1) {
+			if (character.equipment.search("Hollow Wooden Tube", false) != -1) {
 				Methods.choosePath(10, "Continue");
 			} else {
 				Methods.choosePath(335, "Continue");
@@ -192,8 +197,8 @@ public class Deathtrap {
 			Methods.fight(6, 5, "HOBGOBLIN", 9);
 			break;
 		case 52:
-			Window.character.states.setBloodbeastKnowledge(true);
-			if (Window.character.states.isOpenedBlackBook()) {
+			character.states.setBloodbeastKnowledge(true);
+			if (character.states.isOpenedBlackBook()) {
 				Methods.choosePath(369, "Walk back to the last junction to continue north.");
 			} else {
 				Methods.choosePath(138, 369, "Open the black book", "Walk back to the last junction to head north.");
@@ -204,7 +209,7 @@ public class Deathtrap {
 					"Attack the Bloodbeast with your sword.");
 			break;
 		case 54:
-			Window.character.equipment.add("Rope");
+			character.equipment.add("Rope");
 			Methods.choosePath(239, "Continue");
 			break;
 		case 55:
@@ -238,7 +243,7 @@ public class Deathtrap {
 					"Persuade Throm to go through with the Dwarf's test.");
 			break;
 		case 61:
-			Window.character.die();
+			character.die();
 			break;
 		case 62:
 			Methods.gemSlot();
@@ -250,7 +255,7 @@ public class Deathtrap {
 			Methods.testSkill(115, 190);
 			break;
 		case 65:
-			if (Window.character.states.isDrunkPotionOfTrapDetection()) {
+			if (character.states.isDrunkPotionOfTrapDetection()) {
 				Methods.choosePath(345, "Continue");
 			} else {
 				Methods.choosePath(372, "Continue");
@@ -271,17 +276,17 @@ public class Deathtrap {
 			Methods.choosePath(305, "Continue");
 			break;
 		case 70:
-			Window.character.die();
+			character.die();
 			break;
 		case 71:
-			Window.character.states.setManticoreKnowledge(true);
+			character.states.setManticoreKnowledge(true);
 			Methods.choosePath(128, "Continue");
 			break;
 		case 72:
 			Methods.choosePath(122, "Continue");
 			break;
 		case 73:
-			if (Window.character.states.isExaminedBarbarian()) {
+			if (character.states.isExaminedBarbarian()) {
 				Methods.choosePath(83, "Leave the chamber to continue west.");
 			} else {
 				Methods.choosePath(126, 83, "Walk back to examine the Barbarian",
@@ -289,7 +294,7 @@ public class Deathtrap {
 			}
 			break;
 		case 74:
-			if (Window.character.equipment.search("Ring of Wishes", true) != -1) {
+			if (character.equipment.search("Ring of Wishes", true) != -1) {
 				Methods.choosePath(265, 300, 327, "Make a wish", "Try to smash the mirrors",
 						"Attack the Mirror Demon with you sword.");
 			} else {
@@ -297,7 +302,7 @@ public class Deathtrap {
 			}
 			break;
 		case 75:
-			if (Window.character.states.isOpenedRedBook()) {
+			if (character.states.isOpenedRedBook()) {
 				Methods.choosePath(369, "Continue north with Throm");
 			} else {
 				Methods.choosePath(52, 369, "Open the red book", "Continue north with Throm.");
@@ -335,7 +340,7 @@ public class Deathtrap {
 			}
 			break;
 		case 85:
-			Window.character.die();
+			character.die();
 			break;
 		case 86:
 			Methods.choosePath(187, "Continue");
@@ -350,17 +355,17 @@ public class Deathtrap {
 			Methods.testLuck(54, 261);
 			break;
 		case 90:
-			if (Window.character.states.isBloodbeastKnowledge()) {
+			if (character.states.isBloodbeastKnowledge()) {
 				Methods.choosePath(172, "Continue");
 			} else {
 				Methods.choosePath(357, "Continue");
 			}
 			break;
 		case 91:
-			Window.character.changeSkill(-4);
+			character.changeSkill(-4);
 			Methods.fight(5, 5, "FIRST ORC", 257);
 			Methods.fight(6, 4, "SECOND ORC", 257);
-			Window.character.changeSkill(4);
+			character.changeSkill(4);
 			Methods.choosePath(257, "Continue");
 			break;
 		case 92:
@@ -373,11 +378,11 @@ public class Deathtrap {
 			Methods.choosePath(174, "Continue");
 			break;
 		case 95:
-			Window.character.equipment.add("Iron Shield");
+			character.equipment.add("Iron Shield");
 			Methods.choosePath(248, "Continue");
 			break;
 		case 96:
-			Window.character.die();
+			character.die();
 			break;
 		case 97:
 			Methods.choosePath(134, "Continue");
@@ -393,7 +398,7 @@ public class Deathtrap {
 			Methods.choosePath(87, 217, "Open the door", "Keep walking north.");
 			break;
 		case 101:
-			Window.character.die();
+			character.die();
 			break;
 		case 102:
 			Methods.choosePath(133, 251, "Shout: Hail, Sukumvit", "Shout: Sukumvit is a worm?");
@@ -405,14 +410,14 @@ public class Deathtrap {
 			Methods.choosePath(134, "Continue");
 			break;
 		case 105:
-			if (Window.character.states.isExaminedBarbarian()) {
+			if (character.states.isExaminedBarbarian()) {
 				Methods.choosePath(83, "Leave the chamber to continue west");
 			} else {
 				Methods.choosePath(126, "Continue");
 			}
 			break;
 		case 106:
-			Window.character.equipment.add("Doppelganger Potion");
+			character.equipment.add("Doppelganger Potion");
 			Methods.choosePath(188, "Continue");
 			break;
 		case 107:
@@ -435,7 +440,7 @@ public class Deathtrap {
 			Methods.choosePath(356, "Continue");
 			break;
 		case 113:
-			if (Window.character.equipment.search("Wooden Ball", true) != -1) {
+			if (character.equipment.search("Wooden Ball", true) != -1) {
 				Methods.choosePath(372, 74, "Try again with the other ball",
 						"Close the door and continue west along the tunnel");
 			} else {
@@ -450,7 +455,7 @@ public class Deathtrap {
 			Methods.choosePath(221, "Continue");
 			break;
 		case 116:
-			Window.character.die();
+			character.die();
 			break;
 		case 117:
 			Methods.choosePath(329, 135, "Take a closer look in the mirror",
@@ -481,8 +486,8 @@ public class Deathtrap {
 			Methods.testLuck(69, 139);
 			break;
 		case 126:
-			Window.character.states.setExaminedBarbarian(true);
-			if (Window.character.states.isExaminedAlcove()) {
+			character.states.setExaminedBarbarian(true);
+			if (character.states.isExaminedAlcove()) {
 				Methods.choosePath(226, 83, "Eat the dried meat", "Leave the chamber and head west");
 			} else {
 				Methods.choosePath(226, 41, 83, "Eat the dried meat", "Leave the meat and walk over to the alcove",
@@ -496,7 +501,7 @@ public class Deathtrap {
 			Methods.choosePath(35, 233, "Step through the archway", "Stop to eat some of the mushrooms");
 			break;
 		case 129:
-			if (Window.character.equipment.search("Bone Monkey Charm", true) != -1) {
+			if (character.equipment.search("Bone Monkey Charm", true) != -1) {
 				Methods.choosePath(349, 361, 167, "Lower yourself down on the rope to fight the PIT FIEND",
 						"Throw your bone monkey charm into the pit",
 						"Try to hook the PIT FIEND with the grappling iron while sitting on top of the wall");
@@ -519,7 +524,7 @@ public class Deathtrap {
 			Methods.testSkill(178, 17);
 			break;
 		case 134:
-			if (Window.character.states.isManticoreKnowledge()) {
+			if (character.states.isManticoreKnowledge()) {
 				Methods.choosePath(222, "Continue");
 			} else {
 				Methods.choosePath(247, "Continue");
@@ -535,8 +540,8 @@ public class Deathtrap {
 			Methods.choosePath(220, 362, "Ring the bell", "Walk around it and continue west");
 			break;
 		case 138:
-			Window.character.states.setOpenedBlackBook(true);
-			if (Window.character.states.isOpenedRedBook()) {
+			character.states.setOpenedBlackBook(true);
+			if (character.states.isOpenedRedBook()) {
 				Methods.choosePath(397, 75, 369, "Drink the liquid", "Rub the liquid into your wounds",
 						"Leave the bottle and book and continue north with Throm");
 			} else {
@@ -548,7 +553,7 @@ public class Deathtrap {
 			Methods.fight(9, 9, "IVY", 201);
 			break;
 		case 140:
-			Window.character.die();
+			character.die();
 			break;
 		case 141:
 			Methods.testSkill(72, 96);
@@ -566,14 +571,14 @@ public class Deathtrap {
 			Methods.fight(8, 6, "DWARF", 28);
 			break;
 		case 146:
-			if (Window.character.equipment.search("Iron Key", false) != -1) {
+			if (character.equipment.search("Iron Key", false) != -1) {
 				Methods.choosePath(86, "Continue");
 			} else {
 				Methods.choosePath(276, "Continue");
 			}
 			break;
 		case 147:
-			Window.character.states.setDrunkPotionOfHeatResistance(true);
+			character.states.setDrunkPotionOfHeatResistance(true);
 			Methods.choosePath(182, "Continue");
 			break;
 		case 148:
@@ -584,24 +589,24 @@ public class Deathtrap {
 			Methods.testLuck(70, 353);
 			break;
 		case 150:
-			Window.character.equipment.add("Grappling Iron");
-			Window.character.equipment.add("Leather Pouch");
-			Window.character.equipment.add("Brass Bell");
+			character.equipment.add("Grappling Iron");
+			character.equipment.add("Leather Pouch");
+			character.equipment.add("Brass Bell");
 			Methods.choosePath(292, "Continue");
 			break;
 		case 151:
-			Window.character.changeSkill(-2);
+			character.changeSkill(-2);
 			Methods.fight(7, 8, "First FLYING GUARDIAN", 240);
 			Methods.fight(8, 8, "Second FLYING GUARDIAN", 240);
-			Window.character.changeSkill(2);
+			character.changeSkill(2);
 			Methods.choosePath(240, "Continue");
 			break;
 		case 152:
 			Methods.testSkill(55, 202);
 			break;
 		case 153:
-			Window.character.equipment.add("Wooden Ball");
-			Window.character.equipment.add("Wooden Ball");
+			character.equipment.add("Wooden Ball");
+			character.equipment.add("Wooden Ball");
 			Methods.choosePath(390, 371, 74, "Walk into the room and pick up the skull",
 					"Throw a wooden ball at the skull from the doorway",
 					"Close the door and continue west, taking the wooden balls with you");
@@ -617,14 +622,14 @@ public class Deathtrap {
 					"Continue north along the tunnel");
 			break;
 		case 157:
-			Window.character.gems.add("Pearl");
+			character.gems.add("Pearl");
 			Methods.choosePath(310, "Continue");
 			break;
 		case 158:
 			Methods.choosePath(275, "Continue");
 			break;
 		case 159:
-			if (Window.character.equipment.search("Dagger", false) != -1) {
+			if (character.equipment.search("Dagger", false) != -1) {
 				Methods.choosePath(294, "Continue");
 			} else {
 				Methods.choosePath(334, "Continue");
@@ -634,11 +639,11 @@ public class Deathtrap {
 			Methods.choosePath(237, "Continue");
 			break;
 		case 161:
-			Window.character.gems.clearAll();
+			character.gems.clearAll();
 			Methods.choosePath(29, "Continue");
 			break;
 		case 162:
-			Window.character.gems.add("Sapphire");
+			character.gems.add("Sapphire");
 			Methods.choosePath(142, "Continue");
 			break;
 		case 163:
@@ -648,14 +653,14 @@ public class Deathtrap {
 			Methods.choosePath(299, 83, "Open the door", "Keep going west");
 			break;
 		case 165:
-			Window.character.equipment.add("Stilts");
+			character.equipment.add("Stilts");
 			Methods.choosePath(234, "Continue");
 			break;
 		case 166:
-			Window.character.changeSkill(-3);
+			character.changeSkill(-3);
 			Methods.fight(7, 8, "First FLYING GUARDIAN", 11);
 			Methods.fight(8, 8, "Second FLYING GUARDIAN", 11);
-			Window.character.changeSkill(3);
+			character.changeSkill(3);
 			Methods.choosePath(11, "Continue");
 			break;
 		case 167:
@@ -665,7 +670,7 @@ public class Deathtrap {
 			Methods.choosePath(94, 267, "Reach for the dagger", "Back away in disgust and leave the cavern");
 			break;
 		case 169:
-			Window.character.states.setDopplegangerPotionKnowledge(true);
+			character.states.setDopplegangerPotionKnowledge(true);
 			Methods.choosePath(109, "Continue");
 			break;
 		case 170:
@@ -673,14 +678,14 @@ public class Deathtrap {
 					"Leave her to defend herself and walk back to the tunnel to head north");
 			break;
 		case 171:
-			Window.character.equipment.add("Rope");
+			character.equipment.add("Rope");
 			Methods.choosePath(326, "Continue");
 			break;
 		case 172:
 			Methods.fight(12, 4, "BLOODBEAST", 278);
 			break;
 		case 173:
-			if (Window.character.states.isDrunkFromHagFountain()) {
+			if (character.states.isDrunkFromHagFountain()) {
 				Methods.choosePath(368, "Continue north");
 			} else {
 				Methods.choosePath(368, 337, "Continue north", "Drink from the other fountain");
@@ -712,7 +717,7 @@ public class Deathtrap {
 			Methods.testLuck(312, 45);
 			break;
 		case 182:
-			if (Window.character.states.isDrunkPotionOfHeatResistance()) {
+			if (character.states.isDrunkPotionOfHeatResistance()) {
 				Methods.choosePath(25, "Continue");
 			} else {
 				Methods.choosePath(242, "Continue");
@@ -736,7 +741,7 @@ public class Deathtrap {
 					"Walk past him down the tunnel");
 			break;
 		case 188:
-			if (Window.character.states.isSpiritGirlKnowledge()) {
+			if (character.states.isSpiritGirlKnowledge()) {
 				Methods.choosePath(155, "Continue");
 			} else {
 				Methods.choosePath(224, "Continue");
@@ -760,7 +765,7 @@ public class Deathtrap {
 			Methods.choosePath(120, 292, "Stop and lift it up", "Keep walking");
 			break;
 		case 193:
-			Window.character.die();
+			character.die();
 			break;
 		case 194:
 			Methods.choosePath(52, 138, 369, "Open the red leather book", "Open the black leather book",
@@ -786,7 +791,7 @@ public class Deathtrap {
 			Methods.choosePath(321, 316, "Pull the drape up", "Leave the room and continue north along the tunnel");
 			break;
 		case 201:
-			Window.character.equipment.add("Bone");
+			character.equipment.add("Bone");
 			Methods.choosePath(305, "Continue");
 			break;
 		case 202:
@@ -808,7 +813,7 @@ public class Deathtrap {
 			Methods.choosePath(386, 218, "Go west", "Continue north");
 			break;
 		case 208:
-			Window.character.equipment.add("Rope");
+			character.equipment.add("Rope");
 			Methods.choosePath(326, "Continue");
 			break;
 		case 209:
@@ -839,14 +844,14 @@ public class Deathtrap {
 					"Retreat out of the room with your eyes closed to continue north");
 			break;
 		case 217:
-			Window.character.equipment.search("Shield", true);
+			character.equipment.search("Shield", true);
 			Methods.choosePath(36, "Continue");
 			break;
 		case 218:
 			Methods.choosePath(65, 252, "Enter the room and take the jewel", "Continue north");
 			break;
 		case 219:
-			Window.character.die();
+			character.die();
 			break;
 		case 220:
 			Methods.choosePath(61, 346, "Scream as loud as you can", "Try to deaden the bell with your boot");
@@ -855,7 +860,7 @@ public class Deathtrap {
 			Methods.choosePath(374, 60, "Search the chamber", "Head straight for the archway");
 			break;
 		case 222:
-			if (Window.character.equipment.search("Shield", false) != -1) {
+			if (character.equipment.search("Shield", false) != -1) {
 				Methods.choosePath(196, "Continue");
 			} else {
 				Methods.choosePath(6, "Continue");
@@ -871,7 +876,7 @@ public class Deathtrap {
 			Methods.fight(12, 2, "BLOODBEAST", Methods.testLuck(97, 21));
 			break;
 		case 226:
-			if (Window.character.states.isExaminedAlcove()) {
+			if (character.states.isExaminedAlcove()) {
 				Methods.choosePath(83, "Leave the chamber to continue west");
 			} else {
 				Methods.choosePath(41, 83, "Walk over to the alcove", "Leave the chamber to continue west");
@@ -884,11 +889,11 @@ public class Deathtrap {
 			Methods.testLuck(150, 33);
 			break;
 		case 229:
-			Window.character.states.setSpiritGirlKnowledge(true);
+			character.states.setSpiritGirlKnowledge(true);
 			Methods.choosePath(107, "Continue");
 			break;
 		case 230:
-			if (Window.character.equipment.search("Doppelganger Potion", true) != -1) {
+			if (character.equipment.search("Doppelganger Potion", true) != -1) {
 				Methods.choosePath(88, 5, 385, "Walk up to them", "Try to creep past them",
 						"Drink a Doppelganger Potion");
 			} else {
@@ -899,17 +904,17 @@ public class Deathtrap {
 			Methods.choosePath(110, "Continue");
 			break;
 		case 232:
-			if (Window.character.equipment.search("Sword", false) != -1) {
+			if (character.equipment.search("Sword", false) != -1) {
 				Methods.choosePath(320, "Continue");
 			} else {
 				Methods.choosePath(286, "Continue");
 			}
 			break;
 		case 233:
-			Window.character.die();
+			character.die();
 			break;
 		case 234:
-			if (Window.character.equipment.search("Stilts", true) != -1) {
+			if (character.equipment.search("Stilts", true) != -1) {
 				Methods.choosePath(183, "Continue");
 			} else {
 				Methods.choosePath(207, "Continue");
@@ -925,7 +930,7 @@ public class Deathtrap {
 			Methods.choosePath(12, 100, "Open the door", "Keep going north");
 			break;
 		case 238:
-			Window.character.equipment.add("Iron Helmet");
+			character.equipment.add("Iron Helmet");
 			Methods.choosePath(291, "Continue");
 			break;
 		case 239:
@@ -944,7 +949,7 @@ public class Deathtrap {
 			Methods.choosePath(400, "Continue");
 			break;
 		case 244:
-			Window.character.states.setDopplegangerPotionKnowledge(true);
+			character.states.setDopplegangerPotionKnowledge(true);
 			Methods.choosePath(109, "Continue");
 			break;
 		case 245:
@@ -967,7 +972,7 @@ public class Deathtrap {
 					"Tell him you will answer his question");
 			break;
 		case 251:
-			Window.character.equipment.add("Ring of Wishes");
+			character.equipment.add("Ring of Wishes");
 			Methods.choosePath(344, "Continue");
 			break;
 		case 252:
@@ -980,14 +985,14 @@ public class Deathtrap {
 			Methods.fight(7, 11, "ROCK GRUB", 76, 117);
 			break;
 		case 255:
-			Window.character.die();
+			character.die();
 			break;
 		case 256:
-			Window.character.equipment.add("Doppelganger Potion");
+			character.equipment.add("Doppelganger Potion");
 			Methods.choosePath(188, "Continue");
 			break;
 		case 257:
-			Window.character.equipment.add("Hollow Wooden Tube");
+			character.equipment.add("Hollow Wooden Tube");
 			Methods.choosePath(164, "Continue");
 			break;
 		case 258:
@@ -1017,18 +1022,18 @@ public class Deathtrap {
 			Methods.choosePath(122, "Continue");
 			break;
 		case 266:
-			Window.character.equipment.add("Bone");
+			character.equipment.add("Bone");
 			Methods.choosePath(305, "Continue");
 			break;
 		case 267:
 			Methods.choosePath(352, 68, "Head west", "Head east.");
 			break;
 		case 268:
-			Window.character.die();
+			character.die();
 			break;
 		case 269:
-			Window.character.gems.add("Diamond");
-			if (Window.character.states.isEatenRice()) {
+			character.gems.add("Diamond");
+			if (character.states.isEatenRice()) {
 				Methods.choosePath(127, "Leave the the hall, taking just the diamond with you");
 			} else {
 				Methods.choosePath(127, 330, "Leave the the hall, taking just the diamond with you",
@@ -1039,14 +1044,14 @@ public class Deathtrap {
 			Methods.choosePath(66, "Continue");
 			break;
 		case 271:
-			Window.character.equipment.search("Shield", true);
+			character.equipment.search("Shield", true);
 			Methods.choosePath(237, "Continue");
 			break;
 		case 272:
-			Window.character.die();
+			character.die();
 			break;
 		case 273:
-			Window.character.gems.add("Topaz");
+			character.gems.add("Topaz");
 			Methods.choosePath(15, 204, "Get down on all fours and crawl out of the room holding the skull",
 					"Replace the skull on the plinth before leaving the room.");
 			break;
@@ -1057,7 +1062,7 @@ public class Deathtrap {
 			Methods.testLuck(231, 309);
 			break;
 		case 276:
-			Window.character.die();
+			character.die();
 			break;
 		case 277:
 			Methods.choosePath(338, "Continue");
@@ -1072,9 +1077,9 @@ public class Deathtrap {
 			Methods.choosePath(218, "Continue");
 			break;
 		case 281:
-			Window.character.equipment.add("Monkey Bone Charm");
-			Window.character.equipment.add("Mirror");
-			Window.character.equipment.add("Dagger");
+			character.equipment.add("Monkey Bone Charm");
+			character.equipment.add("Mirror");
+			character.equipment.add("Dagger");
 			Methods.choosePath(399, 192, "Eat the bread",
 					"Just take the mirror and charm and return to the tunnel to head north");
 			break;
@@ -1085,19 +1090,19 @@ public class Deathtrap {
 			Methods.choosePath(109, "Continue");
 			break;
 		case 284:
-			if (Window.character.states.isDrunkPotionOfTrapDetection()) {
+			if (character.states.isDrunkPotionOfTrapDetection()) {
 				Methods.choosePath(398, "Continue");
 			} else {
 				Methods.choosePath(57, "Continue");
 			}
 			break;
 		case 285:
-			Window.character.gems.add("Ruby");
+			character.gems.add("Ruby");
 			Methods.choosePath(237, "Continue");
 			break;
 		case 286:
-			Window.character.equipment.add("Sword");
-			Window.character.equipment.add("Long Knife");
+			character.equipment.add("Sword");
+			character.equipment.add("Long Knife");
 			Methods.choosePath(320, "Continue");
 			break;
 		case 287:
@@ -1143,7 +1148,7 @@ public class Deathtrap {
 			Methods.choosePath(304, 279, "Look inside the backpack", "Continue north");
 			break;
 		case 299:
-			if (Window.character.states.isExaminedBarbarian()) {
+			if (character.states.isExaminedBarbarian()) {
 				Methods.choosePath(41, 83, "Walk towards the alcove", "Close the door and continue west");
 			} else {
 				Methods.choosePath(126, 41, 83, "Walk over to search the Barbarian", "Walk towards the alcove",
@@ -1167,24 +1172,24 @@ public class Deathtrap {
 			Methods.choosePath(20, "Continue");
 			break;
 		case 305:
-			if (Window.character.equipment.search("Old Bone", true) != -1) {
+			if (character.equipment.search("Old Bone", true) != -1) {
 				Methods.choosePath(253, "Continue");
 			} else {
 				Methods.choosePath(148, "Continue");
 			}
 			break;
 		case 306:
-			Window.character.equipment.clearAll();
-			Window.character.gems.clearAll();
+			character.equipment.clearAll();
+			character.gems.clearAll();
 			Methods.choosePath(29, "Continue");
 			break;
 		case 307:
-			Window.character.equipment.add("Wooden Mallet");
-			Window.character.equipment.add("Iron Spikes");
+			character.equipment.add("Wooden Mallet");
+			character.equipment.add("Iron Spikes");
 			Methods.choosePath(263, 136, "Open the west door", "Open the north door");
 			break;
 		case 308:
-			Window.character.gems.add("Garnet");
+			character.gems.add("Garnet");
 			Methods.choosePath(316, "Continue");
 			break;
 		case 309:
@@ -1206,8 +1211,8 @@ public class Deathtrap {
 			Methods.choosePath(262, "Continue");
 			break;
 		case 315:
-			if ((Window.character.equipment.search("Rope", true) != -1)
-					&& (Window.character.equipment.search("Grappling Iron", true) != -1)) {
+			if ((character.equipment.search("Rope", true) != -1)
+					&& (character.equipment.search("Grappling Iron", true) != -1)) {
 				Methods.choosePath(129, "Continue");
 			} else {
 				Methods.choosePath(245, "Continue");
@@ -1217,10 +1222,10 @@ public class Deathtrap {
 			Methods.choosePath(296, 241, "Head west into the new tunnel", "Continue north");
 			break;
 		case 317:
-			Window.character.die();
+			character.die();
 			break;
 		case 318:
-			if (Window.character.equipment.search("Iron Key", true) != -1) {
+			if (character.equipment.search("Iron Key", true) != -1) {
 				Methods.choosePath(86, "Continue");
 			} else {
 				Methods.choosePath(276, "Continue");
@@ -1243,14 +1248,14 @@ public class Deathtrap {
 			Methods.choosePath(194, "Continue");
 			break;
 		case 324:
-			if (Window.character.states.isDopplegangerPotionKnowledge()) {
+			if (character.states.isDopplegangerPotionKnowledge()) {
 				Methods.choosePath(256, "Continue");
 			} else {
 				Methods.choosePath(79, "Continue");
 			}
 			break;
 		case 325:
-			Window.character.die();
+			character.die();
 			break;
 		case 326:
 			switch (Methods.rollDice(1)) {
@@ -1275,11 +1280,11 @@ public class Deathtrap {
 					"Continue the conversation");
 			break;
 		case 329:
-			Window.character.die();
+			character.die();
 			break;
 		case 330:
-			Window.character.states.setEatenRice(true);
-			if (Window.character.states.isRubbedOintment()) {
+			character.states.setEatenRice(true);
+			if (character.states.isRubbedOintment()) {
 				Methods.choosePath(127, "Leave the hall, taking just the diamond with you.");
 			} else {
 				Methods.choosePath(269, 127, "Rub some of the ointment into your wounds",
@@ -1293,10 +1298,10 @@ public class Deathtrap {
 			Methods.testLuck(53, 272);
 			break;
 		case 333:
-			Window.character.die();
+			character.die();
 			break;
 		case 334:
-			Window.character.die();
+			character.die();
 			break;
 		case 335:
 			Methods.testLuck(67, 101);
@@ -1305,8 +1310,8 @@ public class Deathtrap {
 			Methods.choosePath(298, "Continue");
 			break;
 		case 337:
-			Window.character.states.setDrunkFromHagFountain(true);
-			if (Window.character.states.isDrunkFromFairyFountain()) {
+			character.states.setDrunkFromHagFountain(true);
+			if (character.states.isDrunkFromFairyFountain()) {
 				Methods.choosePath(368, "Continue north");
 			} else {
 				Methods.choosePath(173, 368, "Drink from the other fountain", "Continue north");
@@ -1316,7 +1321,7 @@ public class Deathtrap {
 			Methods.choosePath(123, 282, "Wear the necklace yourself", "Set off north without the necklace");
 			break;
 		case 339:
-			if (Window.character.equipment.search("Jug of Acid", true) != -1) {
+			if (character.equipment.search("Jug of Acid", true) != -1) {
 				Methods.choosePath(303, "Continue");
 			} else {
 				Methods.choosePath(236, "Continue");
@@ -1326,7 +1331,7 @@ public class Deathtrap {
 			Methods.choosePath(381, "Continue");
 			break;
 		case 341:
-			if (Window.character.getFood() > 0) {
+			if (character.getFood() > 0) {
 				Methods.choosePath(367, 38, 169, "Talk to him", "Take the bread and water off his tray",
 						"Offer him some of your provisions");
 			} else {
@@ -1334,7 +1339,7 @@ public class Deathtrap {
 			}
 			break;
 		case 342:
-			if (Window.character.equipment.search("Dagger", false) != -1) {
+			if (character.equipment.search("Dagger", false) != -1) {
 				Methods.choosePath(294, "Continue");
 			} else {
 				Methods.choosePath(334, "Continue");
@@ -1353,7 +1358,7 @@ public class Deathtrap {
 			Methods.choosePath(362, "Continue");
 			break;
 		case 347:
-			Window.character.die();
+			character.die();
 			break;
 		case 348:
 			Methods.testSkill(225, 159);
@@ -1365,7 +1370,7 @@ public class Deathtrap {
 			Methods.choosePath(39, "Continue");
 			break;
 		case 351:
-			if (Window.character.equipment.search("Rope", true) != -1) {
+			if (character.equipment.search("Rope", true) != -1) {
 				Methods.choosePath(396, "Continue");
 			} else {
 				Methods.choosePath(186, "Continue");
@@ -1387,7 +1392,7 @@ public class Deathtrap {
 			Methods.choosePath(170, 192, "Enter the cavern and investigate", "Continue north along the tunnel");
 			break;
 		case 357:
-			if (Window.character.gems.getNumberOfItems() > 0) {
+			if (character.gems.getNumberOfItems() > 0) {
 				Methods.choosePath(255, 332, 180, "Run round the side of its pool towards the tunnel",
 						"Throw a gem into its pool", "Attack it with your sword");
 			} else {
@@ -1399,7 +1404,7 @@ public class Deathtrap {
 			Methods.choosePath(239, "Continue");
 			break;
 		case 359:
-			Window.character.die();
+			character.die();
 			break;
 		case 360:
 			Methods.listEquipment();
@@ -1416,7 +1421,7 @@ public class Deathtrap {
 			Methods.choosePath(302, "Continue");
 			break;
 		case 364:
-			if (Window.character.gems.search("Emerald", true) != -1) {
+			if (character.gems.search("Emerald", true) != -1) {
 				Methods.choosePath(31, "Continue");
 			} else {
 				Methods.choosePath(3, "Continue");
@@ -1427,7 +1432,7 @@ public class Deathtrap {
 					"Guess that it will total less than eight", "Guess that it will total more than eight");
 			break;
 		case 366:
-			Window.character.die();
+			character.die();
 			break;
 		case 367:
 			Methods.choosePath(244, 109, "Pay for the old man's advice", "Wish him well and continue west");
@@ -1445,7 +1450,7 @@ public class Deathtrap {
 			Methods.testSkill(273, 113);
 			break;
 		case 372:
-			Window.character.die();
+			character.die();
 			break;
 		case 373:
 			Methods.choosePath(13, "Continue");
@@ -1454,11 +1459,11 @@ public class Deathtrap {
 			Methods.testLuck(118, 295);
 			break;
 		case 375:
-			Window.character.equipment.add("Jug of Acid");
+			character.equipment.add("Jug of Acid");
 			Methods.choosePath(110, "Continue");
 			break;
 		case 376:
-			if (Window.character.gems.search("Diamond", true) != -1) {
+			if (character.gems.search("Diamond", true) != -1) {
 				Methods.choosePath(62, "Continue");
 			} else {
 				Methods.choosePath(3, "Continue");
@@ -1503,11 +1508,11 @@ public class Deathtrap {
 					"Hurry back the tunnel to join the Barbarian");
 			break;
 		case 389:
-			Window.character.equipment.search("Sword", true);
+			character.equipment.search("Sword", true);
 			Methods.choosePath(181, "Continue");
 			break;
 		case 390:
-			Window.character.gems.add("Topaz");
+			character.gems.add("Topaz");
 			Methods.choosePath(15, 204, "Crawl out of the room holding the skull",
 					"Replace the skull on the plinth before leaving the room");
 			break;
@@ -1531,8 +1536,8 @@ public class Deathtrap {
 			Methods.choosePath(151, 34, "Prise out the left eye", "Prise out the right eye");
 			break;
 		case 397:
-			Window.character.states.setDrunkPotionOfTrapDetection(true);
-			if (Window.character.states.isOpenedRedBook()) {
+			character.states.setDrunkPotionOfTrapDetection(true);
+			if (character.states.isOpenedRedBook()) {
 				Methods.choosePath(369, "Continue north with Throm");
 			} else {
 				Methods.choosePath(52, 369, "Open the red book", "Continue north with Throm");

@@ -25,8 +25,8 @@ public class Text {
 					+ " searching for. The ‘one true way’ involves a minimum of risk and any"
 					+ " player, no matter how weak on initial dice rolls, should be able to get"
 					+ " through fairly easily. May the luck of the gods go with you on the" + " adventure ahead! \n\n"
-					+ " Your skill is " + Window.character.getSkill() + ". Your stamina is "
-					+ Window.character.getStamina() + ". Your luck is " + Window.character.getLuck() + ". \n\n"
+					+ " Your skill is " + Deathtrap.character.getSkill() + ". Your stamina is "
+					+ Deathtrap.character.getStamina() + ". Your luck is " + Deathtrap.character.getLuck() + ". \n\n"
 					+ "You start the game with a sword, leather armour and a shield, "
 					+ " a backpack containing Provisions for the trip, " + " and a lantern to light your way. "
 					+ " But you will find lots more items as the adventure unfolds. "
@@ -187,7 +187,7 @@ public class Text {
 
 		case 6:
 			String temp = "";
-			if (Window.character.getStamina() - 2 <= 0) {
+			if (Deathtrap.character.getStamina() - 2 <= 0) {
 				temp = "You waste no time and attack the Manticore with your sword before it has time to  "
 						+ "unleash more of its deadly spikes.  ";
 			}
@@ -226,7 +226,7 @@ public class Text {
 					+ "Trologdytes have gone, you rise to the surface and look around. There "
 					+ "is nobody to be seen, so you climb out of the river and cross the "
 					+ "bridge to the northern bank. Your Provisions are now sodden and " + "inedible. "
-					+ Window.character.setFood(0) + "You continue to walk through the vast cavern until at last "
+					+ Deathtrap.character.setFood(0) + "You continue to walk through the vast cavern until at last "
 					+ "you see a tunnnel in the far wall. You walk down it until you come to "
 					+ "a heavy wooden door, which is locked.  ";
 
@@ -274,7 +274,7 @@ public class Text {
 		case 16:
 			return "You just have time to hear the Gnome say, 'Three skulls' "
 					+ "before a white bolt of energy shoots out from the lock into your "
-					+ "chest, knocking you unconscious." + Window.character.changeStamina(-(Methods.rollDice(1) + 1))
+					+ "chest, knocking you unconscious." + Deathtrap.character.changeStamina(-(Methods.rollDice(1) + 1))
 					+ "You come to and are told by the Gnome to try again. You chose the "
 					+ "wrong gems last time, so you won't try that combination again. ";
 
@@ -298,8 +298,8 @@ public class Text {
 		case 20:
 			return "Only your incredible strength could withstand the "
 					+ "poisonous spider's bite. However, you are weakened and you notice "
-					+ "your hand trembling as you pocket the gold piece. " + Window.character.changeGold(1)
-					+ Window.character.changeSkill(-1)
+					+ "your hand trembling as you pocket the gold piece. " + Deathtrap.character.changeGold(1)
+					+ Deathtrap.character.changeSkill(-1)
 					+ "You curse the person who dropped the backpack and set off north " + "again.  ";
 
 		case 21:
@@ -330,7 +330,7 @@ public class Text {
 					+ "could normally tolerate, the liquid in the bamboo keeps you alive.  ";
 
 		case 26:
-			return "The pill makes you feel dull and lethargic. " + Window.character.changeSkill(-2)
+			return "The pill makes you feel dull and lethargic. " + Deathtrap.character.changeSkill(-2)
 					+ "The Dwarf tells you that you can now progress to the second stage "
 					+ "of the test. He reaches for a wicker basket and tells you that there "
 					+ "is a snake inside it. He tips up the basket and the snake drops onto "
@@ -361,7 +361,7 @@ public class Text {
 		case 28:
 			return "The dwarf's chainmail coat is of finest-quality iron, "
 					+ "obviously made by a master armourer. You strip it from his body and "
-					+ "place it over your head." + Window.character.changeSkill(1)
+					+ "place it over your head." + Deathtrap.character.changeSkill(1)
 					+ "There is nothing else of use to you in the chamber, so you decide "
 					+ "to investigate the new tunnel.  ";
 
@@ -386,7 +386,7 @@ public class Text {
 		case 33:
 			return "It was a mistake to reach into the hole with your sword "
 					+ "arm. It is covered with round sucker marks and feels like it has been " + "crushed."
-					+ Window.character.changeSkill(-3) + "You peer into the hole and see the bleeding tentacle stump "
+					+ Deathtrap.character.changeSkill(-3) + "You peer into the hole and see the bleeding tentacle stump "
 					+ "hanging limply. You carefully pull out the grappling iron and leather "
 					+ "pouch, in which you find a tiny brass bell. "
 					+ "You pack away your new possessions and head north.  ";
@@ -419,7 +419,7 @@ public class Text {
 		case 38:
 			return "The man stands by silently while you gulp the water and "
 					+ "wolf down the bread. A sharp pain grips your stomach and you fall to " + "your knees."
-					+ Window.character.changeStamina(-3)
+					+ Deathtrap.character.changeStamina(-3)
 					+ "The old man looks at you scornfully and says, 'Well, if you will "
 					+ "eat poisoned food, what do you expect?' He shuffles off, leaving you "
 					+ "writhing in pain on the floor.  ";
@@ -443,7 +443,7 @@ public class Text {
 
 		case 42:
 			return "The cobra's fangs sink deep into your wrist and you feel "
-					+ "its poison starting to creep through your body." + Window.character.changeStamina(-5)
+					+ "its poison starting to creep through your body." + Deathtrap.character.changeStamina(-5)
 					+ "The Dwarf has no mercy but to tell you to try again.";
 
 		case 43:
@@ -459,7 +459,7 @@ public class Text {
 
 		case 45:
 			return "The razor-sharp disc thuds into your back with terrible " + "effect."
-					+ Window.character.changeStamina(-4) + Window.character.changeSkill(-1)
+					+ Deathtrap.character.changeStamina(-4) + Deathtrap.character.changeSkill(-1)
 					+ "You struggle to pull the disc from your back as the Ninja throws yet another one at you.";
 
 		case 46:
@@ -552,7 +552,7 @@ public class Text {
 					+ "lid, an iron ball hanging on a cord swings back, shattering the glass "
 					+ "capsule fixed inside the lid. A cloud of poisonous gas is instantly "
 					+ "released into the air and you stagger back coughing and spluttering."
-					+ Window.character.changeStamina(-4);
+					+ Deathtrap.character.changeStamina(-4);
 
 		case 58:
 			return "You step slowly between the poles, taking care not to " + "touch any of them.  ";
@@ -683,7 +683,7 @@ public class Text {
 					+ "cracks appear all over them. Then they too shatter and fall to the "
 					+ "floor in a pile of broken glass. Unfortunately, you cut your sword "
 					+ "arm badly while smashing the mirror. Although your strength is "
-					+ "unaffected, your weapon skill is diminished." + Window.character.changeSkill(-2);
+					+ "unaffected, your weapon skill is diminished." + Deathtrap.character.changeSkill(-2);
 
 		case 73:
 			return "  ";
@@ -822,7 +822,7 @@ public class Text {
 			return "The iron ring is attached to a small trapdoor. It lifts "
 					+ "up easily, and inside a small compartment you find a finely crafted "
 					+ "shield made of the purest iron. Marvelling at its splendour, you " + "strap it onto your arm."
-					+ Window.character.changeSkill(1) + "You walk towards the double " + "doors and push them open.  ";
+					+ Deathtrap.character.changeSkill(1) + "You walk towards the double " + "doors and push them open.  ";
 
 		case 96:
 			return "Your second blow also fails to smash the mirror. The "
@@ -873,7 +873,7 @@ public class Text {
 					+ "the ingenious killer labyrinth of my master. I trust you will pay "
 					+ "your respects to my master by shouting out his name?'";
 		case 103:
-			return "You breathe in the poisonous gas and start to choke." + Window.character.changeStamina(-3);
+			return "You breathe in the poisonous gas and start to choke." + Deathtrap.character.changeStamina(-3);
 		case 104:
 			return "Reacting quickly, you manage to jump over the outstretched tongue "
 					+ "and run into the tunnel, leaving the Bloodbeast wallowing in its "
@@ -914,7 +914,7 @@ public class Text {
 		case 112:
 			return "Apart from two portions of your Provisions which were saturated "
 					+ "and are now inedible, all your other possessions remain intact. "
-					+ Window.character.setFood(Window.character.getFood() - 2)
+					+ Deathtrap.character.setFood(Deathtrap.character.getFood() - 2)
 					+ "You repack them carefully inside your backpack and set off north " + "again.";
 		case 113:
 			return "The wooden ball whistles past the skull, hitting the far wall " + "with a loud 'crack'.";
@@ -925,7 +925,7 @@ public class Text {
 					+ "are about to pass out. But your strength is great, and you manage "
 					+ "to withstand the tremendous shock to your system. Finally you "
 					+ "calm down and begin to feel the ring's beneficial powers working " + "on you."
-					+ Window.character.changeStamina(3)
+					+ Deathtrap.character.changeStamina(3)
 					+ "You see Throm looking at you anxiously, so you reassure him that you "
 					+ "are fully recovered. He strides off east and you follow him eagerly.";
 		case 116:
@@ -961,8 +961,8 @@ public class Text {
 		case 122:
 			return "In front of you are two flights of stone steps separated by a " + "banister of rats skulls.";
 		case 123:
-			return "The necklace is an amulet of strength." + Window.character.changeSkill(1)
-					+ Window.character.changeStamina(1) + "You continue your quest north.";
+			return "The necklace is an amulet of strength." + Deathtrap.character.changeSkill(1)
+					+ Deathtrap.character.changeStamina(1) + "You continue your quest north.";
 		case 124:
 			return "You throw the trapdoor open and run up the steps into a bright, "
 					+ "lantern-lit room. Two GOBLINS are sharpening their short swords "
@@ -1009,7 +1009,7 @@ public class Text {
 			return "You just have time to hear the Gnome say, 'One crown and two "
 					+ "skulls', before a white bolt of energy shoots out from the lock "
 					+ "into your chest and locks you unconscious."
-					+ Window.character.changeStamina(-(Methods.rollDice(1) + 1))
+					+ Deathtrap.character.changeStamina(-(Methods.rollDice(1) + 1))
 					+ "You come to and are told by the Gnome to try again. You know that you "
 					+ "placed one gem in the correct slot, but which one? You sigh and "
 					+ "tentatively try a new combination.";
@@ -1046,7 +1046,7 @@ public class Text {
 					+ "anywhere near him with it; his distrust of anything unknown is " + "strongly evident.";
 		case 139:
 			return "As you try to escape, Ivy whirls around and picks up a broken "
-					+ "stool. She is angry and attacks you ferociously." + Window.character.changeStamina(-2)
+					+ "stool. She is angry and attacks you ferociously." + Deathtrap.character.changeStamina(-2)
 					+ "You manage to draw your sword and fight back.";
 		case 140:
 			return "You try to force your sword under the emerald eye. Much to your "
@@ -1078,74 +1078,74 @@ public class Text {
 					+ "you think only of vengeance.";
 		case 146:
 			// TODO Complete this
-			return Window.character.setFood(0);
+			return Deathtrap.character.setFood(0);
 		case 147:
-			return Window.character.changeStamina(1);
+			return Deathtrap.character.changeStamina(1);
 		case 150:
-			return Window.character.changeSkill(-1);
+			return Deathtrap.character.changeSkill(-1);
 		case 157:
-			return Window.character.changeLuck(1);
+			return Deathtrap.character.changeLuck(1);
 		case 158:
-			return Window.character.changeSkill(-1) + Window.character.changeStamina(-4);
+			return Deathtrap.character.changeSkill(-1) + Deathtrap.character.changeStamina(-4);
 		case 162:
-			return Window.character.changeLuck(1);
+			return Deathtrap.character.changeLuck(1);
 		case 165:
-			return Window.character.changeGold(-1);
+			return Deathtrap.character.changeGold(-1);
 		case 167:
-			return Window.character.changeStamina(-4);
+			return Deathtrap.character.changeStamina(-4);
 		case 169:
-			return Window.character.setFood(Window.character.getFood() - 1);
+			return Deathtrap.character.setFood(Deathtrap.character.getFood() - 1);
 		case 171:
-			return Window.character.changeStamina(-4);
+			return Deathtrap.character.changeStamina(-4);
 		case 173:
-			return Window.character.changeStamina(1) + Window.character.changeSkill(2);
+			return Deathtrap.character.changeStamina(1) + Deathtrap.character.changeSkill(2);
 		case 175:
-			return Window.character.changeLuck(2);
+			return Deathtrap.character.changeLuck(2);
 		case 179:
-			return Window.character.changeStamina(-2);
+			return Deathtrap.character.changeStamina(-2);
 		case 189:
-			return Window.character.changeStamina(-3);
+			return Deathtrap.character.changeStamina(-3);
 		case 190:
-			return Window.character.changeStamina(-3);
+			return Deathtrap.character.changeStamina(-3);
 		case 195:
-			return Window.character.changeStamina(-1);
+			return Deathtrap.character.changeStamina(-1);
 		case 199:
-			return Window.character.changeStamina(-2 * Methods.rollDice(1)) + Window.character.changeLuck(-1);
+			return Deathtrap.character.changeStamina(-2 * Methods.rollDice(1)) + Deathtrap.character.changeLuck(-1);
 		case 206:
-			return Window.character.setFood(Window.character.getFood() - 2) + Window.character.changeStamina(4);
+			return Deathtrap.character.setFood(Deathtrap.character.getFood() - 2) + Deathtrap.character.changeStamina(4);
 		case 207:
-			return Window.character.changeStamina(-3);
+			return Deathtrap.character.changeStamina(-3);
 		case 215:
-			return Window.character.changeStamina(-2);
+			return Deathtrap.character.changeStamina(-2);
 		case 217:
-			return Window.character.changeSkill(-1);
+			return Deathtrap.character.changeSkill(-1);
 		case 220:
-			return Window.character.changeSkill(-2) + Window.character.changeStamina(-2);
+			return Deathtrap.character.changeSkill(-2) + Deathtrap.character.changeStamina(-2);
 		case 223:
-			return Window.character.changeLuck(-2) + Window.character.changeStamina(-(Methods.rollDice(2)));
+			return Deathtrap.character.changeLuck(-2) + Deathtrap.character.changeStamina(-(Methods.rollDice(2)));
 		case 226:
-			return Window.character.changeStamina(3);
+			return Deathtrap.character.changeStamina(3);
 		case 235:
-			return Window.character.changeStamina(-2);
+			return Deathtrap.character.changeStamina(-2);
 		case 238:
-			return Window.character.changeSkill(1);
+			return Deathtrap.character.changeSkill(1);
 		case 244:
-			return Window.character.changeGold(-1);
+			return Deathtrap.character.changeGold(-1);
 		case 246:
-			return Window.character.changeLuck(-2) + Window.character.changeStamina(-(Methods.rollDice(2)));
+			return Deathtrap.character.changeLuck(-2) + Deathtrap.character.changeStamina(-(Methods.rollDice(2)));
 		case 247:
-			return Window.character.changeStamina(-2 * (Methods.rollDice(1)));
+			return Deathtrap.character.changeStamina(-2 * (Methods.rollDice(1)));
 		case 249:
-			return Window.character.changeStamina(-(Methods.rollDice(1) + 1));
+			return Deathtrap.character.changeStamina(-(Methods.rollDice(1) + 1));
 		case 257:
-			return Window.character.changeGold(1);
+			return Deathtrap.character.changeGold(1);
 		case 269:
-			return Window.character.changeStamina(3);
+			return Deathtrap.character.changeStamina(3);
 
 		case 270:
 			return "The lid of the box lifts off easily. Inside you find two "
 					+ "Gold Pieces and a note written on a small piece of parchment " + "addressed to you. "
-					+ Window.character.changeGold(2)
+					+ Deathtrap.character.changeGold(2)
 					+ "After placing the gold in your pocket, you read the message, which "
 					+ "says, 'Well done. At least you have the sense to stop and take "
 					+ "advantage of the token aid given to you. Now I can advise you that "
@@ -1155,65 +1155,65 @@ public class Text {
 					+ "and continue north along the tunnel.  ";
 
 		case 271:
-			return Window.character.changeSkill(-1);
+			return Deathtrap.character.changeSkill(-1);
 		case 285:
-			return Window.character.changeSkill(-1) + Window.character.changeStamina(-2);
+			return Deathtrap.character.changeSkill(-1) + Deathtrap.character.changeStamina(-2);
 		case 286:
-			return Window.character.changeSkill(4);
+			return Deathtrap.character.changeSkill(4);
 		case 287:
-			return Window.character.changeStamina(-(Methods.rollDice(1) + 1));
+			return Deathtrap.character.changeStamina(-(Methods.rollDice(1) + 1));
 		case 294:
-			return Window.character.changeSkill(-2);
+			return Deathtrap.character.changeSkill(-2);
 		case 295:
-			return Window.character.changeStamina(-5);
+			return Deathtrap.character.changeStamina(-5);
 		case 297:
-			return Window.character.changeLuck(-1);
+			return Deathtrap.character.changeLuck(-1);
 		case 304:
-			return Window.character.changeStamina(-6);
+			return Deathtrap.character.changeStamina(-6);
 		case 306:
-			return Window.character.changeLuck(-2);
+			return Deathtrap.character.changeLuck(-2);
 		case 309:
-			return Window.character.changeStamina(-3);
+			return Deathtrap.character.changeStamina(-3);
 		case 330:
-			return Window.character.changeStamina(1);
+			return Deathtrap.character.changeStamina(1);
 		case 336:
-			return Window.character.changeSkill(-4);
+			return Deathtrap.character.changeSkill(-4);
 		case 337:
-			return Window.character.changeStamina(1) + Window.character.changeLuck(-2);
+			return Deathtrap.character.changeStamina(1) + Deathtrap.character.changeLuck(-2);
 		case 339:
-			return Window.character.changeStamina(-1);
+			return Deathtrap.character.changeStamina(-1);
 		case 343:
-			return Window.character.changeStamina(-1);
+			return Deathtrap.character.changeStamina(-1);
 		case 350:
-			return Window.character.changeStamina(-(Methods.rollDice(1)));
+			return Deathtrap.character.changeStamina(-(Methods.rollDice(1)));
 		case 353:
-			return Window.character.changeSkill(-1) + Window.character.changeStamina(-4);
+			return Deathtrap.character.changeSkill(-1) + Deathtrap.character.changeStamina(-4);
 		case 354:
-			return Window.character.changeLuck(-2);
+			return Deathtrap.character.changeLuck(-2);
 		case 358:
-			return Window.character.changeStamina(-2);
+			return Deathtrap.character.changeStamina(-2);
 		case 363:
-			return Window.character.changeStamina(2);
+			return Deathtrap.character.changeStamina(2);
 		case 377:
-			return Window.character.changeStamina(-5);
+			return Deathtrap.character.changeStamina(-5);
 		case 384:
-			return Window.character.changeStamina(-2);
+			return Deathtrap.character.changeStamina(-2);
 		case 386:
-			return Window.character.changeStamina(-1);
+			return Deathtrap.character.changeStamina(-1);
 		case 389:
-			return Window.character.changeSkill(-4);
+			return Deathtrap.character.changeSkill(-4);
 		case 390:
-			return Window.character.changeLuck(1);
+			return Deathtrap.character.changeLuck(1);
 		case 391:
-			return Window.character.changeSkill(1) + Window.character.changeStamina(1) + Window.character.changeLuck(1);
+			return Deathtrap.character.changeSkill(1) + Deathtrap.character.changeStamina(1) + Deathtrap.character.changeLuck(1);
 		case 394:
-			return Window.character.changeStamina(-(Methods.rollDice(1) + 2));
+			return Deathtrap.character.changeStamina(-(Methods.rollDice(1) + 2));
 		case 395:
-			return Window.character.changeStamina(-3);
+			return Deathtrap.character.changeStamina(-3);
 		case 397:
-			return Window.character.changeLuck(2);
+			return Deathtrap.character.changeLuck(2);
 		case 399:
-			return Window.character.changeStamina(3);
+			return Deathtrap.character.changeStamina(3);
 		}
 	}
 }

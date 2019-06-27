@@ -42,6 +42,8 @@ public class Character {
 		equipment.add("Sword");
 		equipment.add("Shield");
 		equipment.add("Leather Armour");
+		gems.add("Emerald");
+		gems.search("Emerald", true);
 		states = new States();
 	}
 

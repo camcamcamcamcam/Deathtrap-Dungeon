@@ -4,9 +4,11 @@ import java.util.Random;
 
 import javax.swing.JOptionPane;
 
+import com.camcamcamcamcam.deathtrapdungeon.objects.Character;
 import com.camcamcamcamcam.deathtrapdungeon.objects.Creature;
 
 public class Methods {
+	
 
 	public static void listEquipment() {
 		String equipmentChosen = (String) JOptionPane.showInputDialog(Window.frame, "Select item", "Equipment",
@@ -15,7 +17,7 @@ public class Methods {
 						"3. Sapphire Emerald Diamond ", "4. Emerald Sapphire Diamond ", "5. Diamond Emerald Sapphire ",
 						"6. Sapphire Diamond Emerald " },
 				"1. Emerald Diamond Sapphire");
-		Window.character.equipment.search(equipmentChosen, true);
+		Deathtrap.character.equipment.search(equipmentChosen, true);
 	}
 
 	public static void gemSlot() {
@@ -108,7 +110,7 @@ public class Methods {
 						new String[] { "Escape", "Fight" }, "Fight");
 				if (optionChosen == 0) {
 					JOptionPane.showMessageDialog(Window.frame,
-							"The creature attacked you while you escaped" + Window.character.changeStamina(-2),
+							"The creature attacked you while you escaped" + Deathtrap.character.changeStamina(-2),
 							"You escaped from the battle", JOptionPane.PLAIN_MESSAGE);
 					choosePath(escapePage, "You escaped from the battle.");
 					return;
@@ -122,7 +124,6 @@ public class Methods {
 			}
 
 			// creature stats are updated and round is refreshed
-			// TODO update player stats as well
 			label = label(creature);
 			int creatureFought = -1;
 			boolean hasDamaged = false;
@@ -130,7 +131,7 @@ public class Methods {
 			// fight is initiated for each creature
 			for (int i = 0; i < creature.length; i++) {
 				int[] rollDice = {Methods.rollDice(2), Methods.rollDice(2) };
-				if (Window.character.getSkill() + rollDice[0] - debuff > creature[i].getSkill() + rollDice[1]) {
+				if (Deathtrap.character.getSkill() + rollDice[0] - debuff > creature[i].getSkill() + rollDice[1]) {
 
 					// if you win rounds against more than one creature, you only inflict damage on
 					// the first.
@@ -152,9 +153,9 @@ public class Methods {
 					}
 
 					// cases for if you are wounded or if you both miss
-				} else if (Window.character.getSkill() + rollDice[0] - debuff > creature[i].getSkill()
+				} else if (Deathtrap.character.getSkill() + rollDice[0] - debuff > creature[i].getSkill()
 						+ rollDice[1]) {
-					Window.character.changeStamina(-2);
+					Deathtrap.character.changeStamina(-2);
 					label = "The " + creature[i].getName() + " wounded you!\n" + label;
 					whoIsWounded = -1;
 				} else {
@@ -163,11 +164,10 @@ public class Methods {
 				}
 			}
 			
-			// TODO fix this code never being executed for some reason, and fights are over immediately
 			if (optionChosen == 0) {
 				// TODO luck variables aren't being reset. Check how dialog box works
 				String message = "";
-				boolean lucky = Window.character.getLuck() < rollDice(2);
+				boolean lucky = Deathtrap.character.getLuck() < rollDice(2);
 				if (lucky && whoIsWounded == 1) {
 					creature[creatureFought].changeStamina(-2);
 					creatureFought = -1;
@@ -178,7 +178,7 @@ public class Methods {
 					}
 				}
 				if (lucky && whoIsWounded == -1) {
-					Window.character.changeStamina(1);
+					Deathtrap.character.changeStamina(1);
 					message = "You were lucky! You only lose 1 stamina point.";
 				}
 				if (!lucky && whoIsWounded == 1) {
@@ -189,16 +189,16 @@ public class Methods {
 					// TODO ArrayIndexOutOfBoundsException
 				}
 				if (!lucky && whoIsWounded == -1) {
-					Window.character.changeStamina(-1);
+					Deathtrap.character.changeStamina(-1);
 					message = "You were unlucky! You lose 1 extra stamina point.";
 				}
-				Window.character.changeLuck(-1);
+				Deathtrap.character.changeLuck(-1);
 				JOptionPane.showMessageDialog(Window.frame, message + "\nYou lost 1 luck point due to using your luck",
 						"You used luck on the wound", JOptionPane.PLAIN_MESSAGE);
 			}
 			numberOfRounds++;
-			System.out.println(Window.character.getStamina() + ", " + allDead);
-		} while (Window.character.getStamina() > 0 && !allDead);
+			System.out.println(Deathtrap.character.getStamina() + ", " + allDead);
+		} while (Deathtrap.character.getStamina() > 0 && !allDead);
 		choosePath(winPage, "You won.");
 	}
 
@@ -237,7 +237,7 @@ public class Methods {
 
 	public static int testSkill(int skillful, int unskillful) {
 		int page;
-		if (Window.character.getLuck() < rollDice(2)) {
+		if (Deathtrap.character.getLuck() < rollDice(2)) {
 			choosePath(unskillful, "You were not skilled enough. Click confirm to find out the consequences.");
 			page = unskillful;
 		} else {
@@ -249,14 +249,14 @@ public class Methods {
 
 	public static int testLuck(int lucky, int unlucky) {
 		int page;
-		if (Window.character.getLuck() < rollDice(2)) {
+		if (Deathtrap.character.getLuck() < rollDice(2)) {
 			choosePath(unlucky, "You were unlucky. Click confirm to find out the consequences.");
 			page = unlucky;
 		} else {
 			choosePath(lucky, "You were lucky. Click confirm to continue.");
 			page = lucky;
 		}
-		Window.character.alter(Window.character.changeLuck(-1), "You tested your luck");
+		Deathtrap.character.alter(Deathtrap.character.changeLuck(-1), "You tested your luck");
 		return page;
 	}
 
