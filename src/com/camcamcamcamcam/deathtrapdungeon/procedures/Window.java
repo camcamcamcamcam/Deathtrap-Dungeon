@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 import javax.swing.ButtonGroup;
@@ -71,10 +72,12 @@ public class Window {
 
 		Deathtrap.character = new Character();
 
-		mntmSkill = new JMenuItem("Skill: " + Deathtrap.character.getSkill() + "/" + Deathtrap.character.getSkillInitial());
+		mntmSkill = new JMenuItem(
+				"Skill: " + Deathtrap.character.getSkill() + "/" + Deathtrap.character.getSkillInitial());
 		menuBar.add(mntmSkill);
 
-		mntmStamina = new JMenuItem("Stamina: " + Deathtrap.character.getStamina() + "/" + Deathtrap.character.getStaminaInitial());
+		mntmStamina = new JMenuItem(
+				"Stamina: " + Deathtrap.character.getStamina() + "/" + Deathtrap.character.getStaminaInitial());
 		menuBar.add(mntmStamina);
 
 		mntmLuck = new JMenuItem("Luck: " + Deathtrap.character.getLuck() + "/" + Deathtrap.character.getLuckInitial());
@@ -157,6 +160,7 @@ public class Window {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				
 				for (int i = 0; i < choices.length; i++) {
 					if (choices[i].isSelected()) {
 						if (!started) {
@@ -185,18 +189,21 @@ public class Window {
 		Methods.choosePath(0, 0, 0, "Potion of Skill", "Potion of Strength", "Potion of Fortune");
 
 	}
-	
+
 	public static String text() {
-		String text = "";
-		File file = new File("Text.txt");
+		String text1 = "";
+		String text2 = "";
 		try {
+			File file = new File("Text.txt");
 			Scanner input = new Scanner(file);
 			for (int i = 0; i <= Deathtrap.character.getPage(); i++) {
-				text = input.nextLine() + States.setScores(Deathtrap.character.getPage()) + input.nextLine();
+				text1 = input.nextLine();
+				text2 = input.nextLine();
 			}
-		} catch (FileNotFoundException e1) {
-			text = "";
+			input.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
 		}
-		return text;
+		return text1 + "\n\n" + Deathtrap.character.states.setScores() + "\n\n" + text2;
 	}
 }

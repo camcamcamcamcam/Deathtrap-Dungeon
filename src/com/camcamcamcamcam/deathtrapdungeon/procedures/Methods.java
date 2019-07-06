@@ -7,7 +7,6 @@ import javax.swing.JOptionPane;
 import com.camcamcamcamcam.deathtrapdungeon.objects.Creature;
 
 public class Methods {
-	
 
 	public static void listEquipment() {
 		String equipmentChosen = (String) JOptionPane.showInputDialog(Window.frame, "Select item", "Equipment",
@@ -97,7 +96,7 @@ public class Methods {
 		}
 
 		do {
-			
+
 			// assumes all creatures are dead and checks later
 			allDead = true;
 
@@ -129,7 +128,7 @@ public class Methods {
 
 			// fight is initiated for each creature
 			for (int i = 0; i < creature.length; i++) {
-				int[] rollDice = {Methods.rollDice(2), Methods.rollDice(2) };
+				int[] rollDice = { Methods.rollDice(2), Methods.rollDice(2) };
 				if (Deathtrap.character.getSkill() + rollDice[0] - debuff > creature[i].getSkill() + rollDice[1]) {
 
 					// if you win rounds against more than one creature, you only inflict damage on
@@ -162,7 +161,7 @@ public class Methods {
 					whoIsWounded = 0;
 				}
 			}
-			
+
 			if (optionChosen == 0) {
 				// TODO luck variables aren't being reset. Check how dialog box works
 				String message = "";
@@ -196,7 +195,7 @@ public class Methods {
 						"You used luck on the wound", JOptionPane.PLAIN_MESSAGE);
 			}
 			numberOfRounds++;
-			System.out.println(Deathtrap.character.getStamina() + ", " + allDead);
+			System.out.println(Deathtrap.character.getStamina() + ", " + optionChosen);
 		} while (Deathtrap.character.getStamina() > 0 && !allDead);
 		choosePath(winPage, "You won.");
 	}

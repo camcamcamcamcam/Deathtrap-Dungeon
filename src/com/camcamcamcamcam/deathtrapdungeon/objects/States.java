@@ -150,13 +150,13 @@ public class States {
 		this.spiritGirlKnowledge = spiritGirlKnowledge;
 	}
 
-	public static String setScores(int whichPage) {
-		switch (whichPage) {
+	public String setScores() {
+		switch (Deathtrap.character.getPage()) {
 		default:
-			return null;
+			return "";
 		case 0:
 			return "Your skill is " + Deathtrap.character.getSkill() + ". Your stamina is "
-					+ Deathtrap.character.getStamina() + ". Your luck is " + Deathtrap.character.getLuck() + ". \n\n";
+					+ Deathtrap.character.getStamina() + ". Your luck is " + Deathtrap.character.getLuck() + ". ";
 		case 6:
 			return Deathtrap.character.changeStamina(-2);
 		case 10:

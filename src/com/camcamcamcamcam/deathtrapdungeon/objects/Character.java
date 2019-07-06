@@ -81,7 +81,7 @@ public class Character {
 		if (amount != -1 || amount != 1) {
 			s = "s";
 		}
-		Window.mntmSkill.setText("Skill: " + getSkill() + "/" + getSkillInitial());
+		Window.mntmSkill.setText("Skill: " + skill + "/" + skillInitial);
 		if (amount < 0) {
 			return "Your skill has been decreased by " + -amount + " point" + s + " to a score of " + skill + ". ";
 		} else {
@@ -113,7 +113,7 @@ public class Character {
 		if (amount != -1 || amount != 1) {
 			s = "";
 		}
-		Window.mntmStamina.setText("Stamina: " + getStamina() + "/" + getStaminaInitial());
+		Window.mntmStamina.setText("Stamina: " + stamina + "/" + staminaInitial);
 		if (amount < 0) {
 			return "Your stamina has been decreased by " + -amount + " point" + s + " to a score of " + stamina + ". ";
 		} else {
@@ -141,7 +141,7 @@ public class Character {
 		if (amount != -1 || amount != 1) {
 			s = "s";
 		}
-		Window.mntmLuck.setText("Luck: " + getLuck() + "/" + getLuckInitial());
+		Window.mntmLuck.setText("Luck: " + luck + "/" + luckInitial);
 		if (amount < 0) {
 			return "Your luck has been decreased by " + -amount + " point" + s + " to a score of " + luck + ". ";
 		} else {
@@ -175,7 +175,7 @@ public class Character {
 
 	public String setFood(int amount) {
 		food = amount;
-		Window.mntmEatFood.setText("Eat food ( " + getFood() + " left)");
+		Window.mntmEatFood.setText("Eat food ( " + food + " left)");
 		return "";
 	}
 
@@ -207,8 +207,8 @@ public class Character {
 			if (stamina > staminaInitial) {
 				stamina = staminaInitial;
 			}
-			Window.mntmStamina.setText("Stamina: " + getStamina() + "/" + getStaminaInitial());
-			Window.mntmEatFood.setText("Eat food ( " + getFood() + " left)");
+			Window.mntmStamina.setText("Stamina: " + stamina + "/" + staminaInitial);
+			Window.mntmEatFood.setText("Eat food ( " + food + " left)");
 		}
 	}
 
@@ -226,7 +226,7 @@ public class Character {
 		if (amount != -1 || amount != 1) {
 			s = "s";
 		}
-		Window.mntmGold.setText("Gold: " + getGold());
+		Window.mntmGold.setText("Gold: " + gold);
 		if (amount < 0) {
 			return "You lost " + -amount + " piece" + s + " of gold. You now have " + gold + " gold left. ";
 		} else {
