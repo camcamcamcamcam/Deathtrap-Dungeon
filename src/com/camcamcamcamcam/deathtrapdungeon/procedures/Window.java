@@ -160,7 +160,7 @@ public class Window {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+
 				for (int i = 0; i < choices.length; i++) {
 					if (choices[i].isSelected()) {
 						if (!started) {
@@ -182,6 +182,7 @@ public class Window {
 				if (Deathtrap.character.getStamina() <= 0) {
 					Deathtrap.character.die(Window.textArea.getText());
 				}
+				choiceGroup.clearSelection();
 			}
 
 		});

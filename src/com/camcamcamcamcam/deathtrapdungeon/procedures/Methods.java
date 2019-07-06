@@ -116,6 +116,9 @@ public class Methods {
 				} else {
 					optionChosen--;
 				}
+			} else if (whoIsWounded != 0) {
+				optionChosen = JOptionPane.showOptionDialog(Window.frame, label, title, JOptionPane.YES_NO_OPTION,
+						JOptionPane.QUESTION_MESSAGE, null, new String[] { "Use Luck", "Fight" }, "Fight");
 			} else {
 				optionChosen = 1;
 				JOptionPane.showMessageDialog(Window.frame, label, title, JOptionPane.PLAIN_MESSAGE);
@@ -163,16 +166,14 @@ public class Methods {
 			}
 
 			if (optionChosen == 0) {
-				// TODO luck variables aren't being reset. Check how dialog box works
 				String message = "";
 				boolean lucky = Deathtrap.character.getLuck() < rollDice(2);
 				if (lucky && whoIsWounded == 1) {
 					creature[creatureFought].changeStamina(-2);
-					creatureFought = -1;
 					message = "You were lucky! The " + creature[creatureFought].getName()
 							+ " loses 2 extra stamina points.";
 					for (int j = 0; j < creature.length; j++) {
-						allDead = allDead || creature[j].getStamina() > 0;
+						allDead = allDead && creature[j].getStamina() <= 0;
 					}
 				}
 				if (lucky && whoIsWounded == -1) {
@@ -181,10 +182,8 @@ public class Methods {
 				}
 				if (!lucky && whoIsWounded == 1) {
 					creature[creatureFought].changeStamina(-2);
-					creatureFought = -1;
 					message = "You were unlucky. The " + creature[creatureFought].getName()
-							+ "only lost 1 stamina point.";
-					// TODO ArrayIndexOutOfBoundsException
+							+ " only lost 1 stamina point.";
 				}
 				if (!lucky && whoIsWounded == -1) {
 					Deathtrap.character.changeStamina(-1);
@@ -195,7 +194,7 @@ public class Methods {
 						"You used luck on the wound", JOptionPane.PLAIN_MESSAGE);
 			}
 			numberOfRounds++;
-			System.out.println(Deathtrap.character.getStamina() + ", " + optionChosen);
+			System.out.println(Deathtrap.character.getStamina() + ", " + allDead);
 		} while (Deathtrap.character.getStamina() > 0 && !allDead);
 		choosePath(winPage, "You won.");
 	}
