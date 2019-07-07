@@ -97,8 +97,8 @@ public class Methods {
 
 		do {
 
-			// assumes all creatures are dead and checks later
-			allDead = true;
+			// assumes a creature is still alive and checks later
+			allDead = false;
 
 			// if you have the option to escape, it will be displayed. Special case for the
 			// rock grub, where the player may escape after 2 rounds.
@@ -139,18 +139,20 @@ public class Methods {
 					if (!hasDamaged) {
 						creature[i].changeStamina(-2);
 						hasDamaged = true;
-						label = "You successfully wounded the " + creature[i].getName() + "!\n" + label;
+						label = "You successfully wounded the " + creature[i].getName() + "!\n" + label(creature);
 						whoIsWounded = 1;
 						creatureFought = i;
 
 						// if all creatures are dead, you win.
+						boolean temp = true;
 						for (int j = 0; j < creature.length; j++) {
 							System.out.println(creature[j].getStamina());
-							allDead = allDead && creature[j].getStamina() <= 0;
+							temp = temp && creature[j].getStamina() <= 0;
 						}
+						allDead = temp;
 
 					} else {
-						label = "You defended yourself against the " + creature[i].getName() + "'s blow.\n" + label;
+						label = "You defended yourself against the " + creature[i].getName() + "'s blow.\n" + label(creature);
 					}
 
 					// cases for if you are wounded or if you both miss
@@ -172,9 +174,11 @@ public class Methods {
 					creature[creatureFought].changeStamina(-2);
 					message = "You were lucky! The " + creature[creatureFought].getName()
 							+ " loses 2 extra stamina points.";
+					boolean temp = true;
 					for (int j = 0; j < creature.length; j++) {
-						allDead = allDead && creature[j].getStamina() <= 0;
+						temp = temp && creature[j].getStamina() <= 0;
 					}
+					allDead = temp;
 				}
 				if (lucky && whoIsWounded == -1) {
 					Deathtrap.character.changeStamina(1);
