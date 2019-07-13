@@ -239,6 +239,7 @@ public class States {
 		case 215:
 			return Deathtrap.character.changeStamina(-2);
 		case 217:
+			// TODO check for shield here
 			return Deathtrap.character.changeSkill(-1);
 		case 220:
 			return Deathtrap.character.changeSkill(-2) + Deathtrap.character.changeStamina(-2);

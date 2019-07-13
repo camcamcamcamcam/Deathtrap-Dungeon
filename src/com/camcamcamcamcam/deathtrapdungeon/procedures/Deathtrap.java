@@ -936,6 +936,7 @@ public class Deathtrap {
 			Methods.choosePath(102, 344, "Open the door", "Keep walking north");
 			break;
 		case 240:
+			character.equipment.add("Emerald");
 			Methods.choosePath(34, 89, "Prise out the right eye", "Climb down the idol");
 			break;
 		case 241:
