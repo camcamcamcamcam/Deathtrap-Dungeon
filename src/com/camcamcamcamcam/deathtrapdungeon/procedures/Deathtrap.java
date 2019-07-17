@@ -302,7 +302,7 @@ public class Deathtrap {
 			}
 			break;
 		case 75:
-			if (character.states.isOpenedRedBook()) {
+			if (character.states.isBloodbeastKnowledge()) {
 				Methods.choosePath(369, "Continue north with Throm");
 			} else {
 				Methods.choosePath(52, 369, "Open the red book", "Continue north with Throm.");
@@ -540,7 +540,7 @@ public class Deathtrap {
 			break;
 		case 138:
 			character.states.setOpenedBlackBook(true);
-			if (character.states.isOpenedRedBook()) {
+			if (character.states.isBloodbeastKnowledge()) {
 				Methods.choosePath(397, 75, 369, "Drink the liquid", "Rub the liquid into your wounds",
 						"Leave the bottle and book and continue north with Throm");
 			} else {
@@ -930,13 +930,13 @@ public class Deathtrap {
 			break;
 		case 238:
 			character.equipment.add("Iron Helmet");
-			Methods.choosePath(291, "Continue");
+			Methods.choosePath(291, "Continue"); 
 			break;
 		case 239:
 			Methods.choosePath(102, 344, "Open the door", "Keep walking north");
 			break;
 		case 240:
-			character.equipment.add("Emerald");
+			character.gems.add("Emerald");
 			Methods.choosePath(34, 89, "Prise out the right eye", "Climb down the idol");
 			break;
 		case 241:
@@ -1537,7 +1537,7 @@ public class Deathtrap {
 			break;
 		case 397:
 			character.states.setDrunkPotionOfTrapDetection(true);
-			if (character.states.isOpenedRedBook()) {
+			if (character.states.isBloodbeastKnowledge()) {
 				Methods.choosePath(369, "Continue north with Throm");
 			} else {
 				Methods.choosePath(52, 369, "Open the red book", "Continue north with Throm");

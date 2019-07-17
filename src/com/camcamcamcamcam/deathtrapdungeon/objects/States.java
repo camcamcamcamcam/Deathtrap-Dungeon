@@ -7,7 +7,6 @@ public class States {
 	private boolean examinedBarbarian;
 	private boolean examinedAlcove;
 	private boolean openedBlackBook;
-	private boolean openedRedBook;
 	private boolean drunkFromFairyFountain;
 	private boolean drunkFromHagFountain;
 	private boolean eatenRice;
@@ -25,7 +24,6 @@ public class States {
 		examinedBarbarian = false;
 		examinedAlcove = false;
 		openedBlackBook = false;
-		openedRedBook = false;
 		drunkFromFairyFountain = false;
 		drunkFromHagFountain = false;
 		eatenRice = false;
@@ -100,14 +98,6 @@ public class States {
 
 	public void setBloodbeastKnowledge(boolean bloodbeastKnowledge) {
 		this.bloodbeastKnowledge = bloodbeastKnowledge;
-	}
-
-	public boolean isOpenedRedBook() {
-		return openedRedBook;
-	}
-
-	public void setOpenedRedBook(boolean openedRedBook) {
-		this.openedRedBook = openedRedBook;
 	}
 
 	public boolean isDrunkPotionOfTrapDetection() {

@@ -34,7 +34,7 @@ public class Character {
 		luckInitial = luck;
 		food = 10;
 		gold = 0;
-		page = 0;
+		page = 229;
 		hasEaten = false;
 		equipment = new Inventory("Equipment", 100);
 		gems = new Inventory("Gems", 7);
@@ -74,6 +74,7 @@ public class Character {
 		skill = skill + amount;
 		String temp = "";
 		if (skill > skillInitial) {
+			skill = skillInitial;
 			temp = "However, your skill level cannot go above its Initial level, so your new skill is " + skillInitial
 					+ ". ";
 		}
@@ -157,16 +158,21 @@ public class Character {
 		if (equipment.search("Potion of Skill", true) != -1) {
 			skill = skillInitial;
 			alter("Your skill has been restored to its Initial level of " + skillInitial + ".", "You drank a Potion");
+			Window.mntmSkill.setText("Skill: " + skill + "/" + skillInitial);
 		} else if (equipment.search("Potion of Strength", true) != -1) {
 			stamina = staminaInitial;
 			alter("Your stamina has been restored to its Initial level of " + staminaInitial + ".",
 					"You drank a Potion");
+			Window.mntmStamina.setText("Stamina: " + stamina + "/" + staminaInitial);
 		} else if (equipment.search("Potion of Fortune", true) != -1) {
 			luckInitial++;
 			luck = luckInitial;
 			alter("Your luck has been restored to its Initial level of " + luckInitial
 					+ ", with an extra luck point bonus.", "You drank a Potion");
+			Window.mntmLuck.setText("Luck: " + luck + "/" + luckInitial);
+
 		}
+		
 	}
 
 	public int getFood() {
