@@ -205,6 +205,6 @@ public class Window {
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
-		return text1 + "\n\n" + Deathtrap.character.states.setScores() + "\n\n" + text2;
+		return text1 + "\n\n" + Deathtrap.setScores() + "\n\n" + text2;
 	}
 }
