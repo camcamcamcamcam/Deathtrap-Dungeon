@@ -131,6 +131,7 @@ public class Methods {
 
 			// fight is initiated for each creature
 			for (int i = 0; i < creature.length; i++) {
+				if (creature[i].getStamina() <= 0) continue;
 				int[] rollDice = { Methods.rollDice(2), Methods.rollDice(2) };
 				if (Deathtrap.character.getSkill() + rollDice[0] - debuff > creature[i].getSkill() + rollDice[1]) {
 
@@ -156,7 +157,7 @@ public class Methods {
 					}
 
 					// cases for if you are wounded or if you both miss
-				} else if (Deathtrap.character.getSkill() + rollDice[0] - debuff > creature[i].getSkill()
+				} else if (Deathtrap.character.getSkill() + rollDice[0] - debuff < creature[i].getSkill()
 						+ rollDice[1]) {
 					Deathtrap.character.changeStamina(-2);
 					label = "The " + creature[i].getName() + " wounded you!\n" + label;

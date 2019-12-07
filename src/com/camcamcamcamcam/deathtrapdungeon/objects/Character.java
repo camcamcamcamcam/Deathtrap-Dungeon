@@ -34,7 +34,7 @@ public class Character {
 		luckInitial = luck;
 		food = 10;
 		gold = 0;
-		page = 0;
+		page = 124;
 		hasEaten = false;
 		equipment = new Inventory("Equipment", 100);
 		gems = new Inventory("Gems", 7);
