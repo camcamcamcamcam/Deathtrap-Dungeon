@@ -77,8 +77,9 @@ public class Methods {
 
 		// initialising values
 		boolean allDead; // whether all the creatures have been killed
-		int optionChosen; // whether the player has chosen to escape or fight
+		String optionChosen = "Fight"; // whether the player has chosen to escape or fight
 		int numberOfRounds = 0; // how many rounds of fighting the player has done
+		int numberOfRoundsWon = 0;
 		int whoIsWounded = 0; // whether the player is wounded or the creature is for that round
 		int debuff = 0; // if the player is fighting the dwarf, their attack strength is reduced by 2
 						// for the duration of the fight.
@@ -103,24 +104,42 @@ public class Methods {
 			// if you have the option to escape, it will be displayed. Special case for the
 			// rock grub, where the player may escape after 2 rounds.
 			if (escapePage != -1 && !(numberOfRounds < 2 && creature[0].getName().equals("ROCK GRUB"))) {
-				optionChosen = JOptionPane.showOptionDialog(Window.frame, label, title,
+				if (whoIsWounded == 0) {
+					switch( JOptionPane.showOptionDialog(Window.frame, label, title,
 						JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null,
-						new String[] { "Escape", "Fight" }, "Fight");
-				if (optionChosen == 0) {
+						new String[] { "Escape", "Fight" }, "Fight")) {
+					case 0: optionChosen = "Escape";
+					break;
+					case 1: optionChosen = "Fight";
+					}
+				} else {
+					switch(JOptionPane.showOptionDialog(Window.frame, label, title,
+							JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null,
+							new String[] { "Escape", "Use Luck", "Fight" }, "Fight")) {
+					case 0: optionChosen = "Escape";
+					break;
+					case 1: optionChosen = "Use Luck";
+					break;
+					case 2: optionChosen = "Fight";
+					}
+				}
+				
+				if (optionChosen.equals("Escape")) {
 					JOptionPane.showMessageDialog(Window.frame,
 							"The creature attacked you while you escaped" + Deathtrap.character.changeStamina(-2),
 							"You escaped from the battle", JOptionPane.PLAIN_MESSAGE);
 					choosePath(escapePage, "You escaped from the battle.");
 					return;
 
-				} else {
-					optionChosen--;
 				}
 			} else if (whoIsWounded != 0) {
-				optionChosen = JOptionPane.showOptionDialog(Window.frame, label, title, JOptionPane.YES_NO_OPTION,
-						JOptionPane.QUESTION_MESSAGE, null, new String[] { "Use Luck", "Fight" }, "Fight");
+				switch (JOptionPane.showOptionDialog(Window.frame, label, title, JOptionPane.YES_NO_OPTION,
+						JOptionPane.QUESTION_MESSAGE, null, new String[] { "Use Luck", "Fight" }, "Fight")) {
+				case 0: optionChosen = "Use Luck";
+				break;
+				case 1: optionChosen = "Fight";
+				}
 			} else {
-				optionChosen = 1;
 				JOptionPane.showMessageDialog(Window.frame, label, title, JOptionPane.PLAIN_MESSAGE);
 			}
 
@@ -134,7 +153,7 @@ public class Methods {
 				if (creature[i].getStamina() <= 0) continue;
 				int[] rollDice = { Methods.rollDice(2), Methods.rollDice(2) };
 				if (Deathtrap.character.getSkill() + rollDice[0] - debuff > creature[i].getSkill() + rollDice[1]) {
-
+					numberOfRoundsWon++;
 					// if you win rounds against more than one creature, you only inflict damage on
 					// the first.
 					if (!hasDamaged) {
@@ -155,7 +174,7 @@ public class Methods {
 					} else {
 						label = "You defended yourself against the " + creature[i].getName() + "'s blow.\n" + label(creature);
 					}
-
+					if (creature[i].getName().equals("IMITATOR") && numberOfRoundsWon >= 2) break;
 					// cases for if you are wounded or if you both miss
 				} else if (Deathtrap.character.getSkill() + rollDice[0] - debuff < creature[i].getSkill()
 						+ rollDice[1]) {
@@ -168,7 +187,7 @@ public class Methods {
 				}
 			}
 
-			if (optionChosen == 0) {
+			if (optionChosen.equals("Use Luck")) {
 				String message = "";
 				boolean lucky = Deathtrap.character.getLuck() < rollDice(2);
 				if (lucky && whoIsWounded == 1) {

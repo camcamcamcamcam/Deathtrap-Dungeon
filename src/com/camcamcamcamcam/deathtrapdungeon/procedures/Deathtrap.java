@@ -330,7 +330,7 @@ public class Deathtrap {
 			character.equipment.add("Opal Dagger");
 			break;
 		case 40:
-			Methods.fight(9, 9, "MINOTAUR", 163, 0);
+			Methods.fight(9, 9, "MINOTAUR", 163);
 			break;
 		case 41:
 			character.states.setExaminedAlcove(true);
@@ -1103,7 +1103,7 @@ public class Deathtrap {
 			Methods.choosePath(73, "Continue");
 			break;
 		case 236:
-			Methods.fight(9, 2, "IMITATOR", 314);
+			Methods.fight(9, 8, "IMITATOR", 314);
 			break;
 		case 237:
 			Methods.choosePath(12, 100, "Open the door", "Keep going north");
