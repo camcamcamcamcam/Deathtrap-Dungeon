@@ -62,8 +62,7 @@ public class Character {
 	}
 
 	public void die(String message) {
-		JOptionPane.showMessageDialog(Window.frame, message, "You died", JOptionPane.ERROR_MESSAGE);
-		System.exit(0);
+		Methods.choosePath(-1, "YOU DIED");
 	}
 
 	public void die() {

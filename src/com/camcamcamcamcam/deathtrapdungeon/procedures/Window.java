@@ -188,7 +188,7 @@ public class Window {
 					Deathtrap.character.die(Window.textArea.getText());
 				}
 				choiceGroup.clearSelection();
-
+				choices[0].setSelected(true);
 			}
 
 		});

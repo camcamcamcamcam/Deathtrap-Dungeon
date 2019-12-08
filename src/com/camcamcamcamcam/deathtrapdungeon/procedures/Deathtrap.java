@@ -12,6 +12,7 @@ public class Deathtrap {
 		switch (Deathtrap.character.getPage()) {
 		default:
 			return "";
+		case -1: System.exit(0);
 		case 0:
 			return "Your skill is " + Deathtrap.character.getSkill() + ". Your stamina is "
 					+ Deathtrap.character.getStamina() + ". Your luck is " + Deathtrap.character.getLuck() + ". ";
