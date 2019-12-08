@@ -1,5 +1,7 @@
 package com.camcamcamcamcam.deathtrapdungeon.objects;
 
+import java.awt.event.KeyEvent;
+
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 
@@ -17,6 +19,7 @@ public class Inventory {
 	
 	public Inventory(String name, int capacity) {
 		mnInventory = new JMenu(name);
+
 		Window.menuBar.add(mnInventory);
 		mntmInventory = new JMenuItem[capacity];
 		items = new String[capacity];

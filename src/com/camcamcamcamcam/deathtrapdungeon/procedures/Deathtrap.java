@@ -823,6 +823,7 @@ public class Deathtrap {
 			break;
 		case 162:
 			character.gems.add("Sapphire");
+			character.equipment.add("Iron Key");
 			Methods.choosePath(142, "Continue");
 			break;
 		case 163:

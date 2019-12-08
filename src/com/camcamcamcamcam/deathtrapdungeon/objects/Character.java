@@ -1,5 +1,7 @@
 package com.camcamcamcamcam.deathtrapdungeon.objects;
 
+import java.awt.event.KeyEvent;
+
 import javax.swing.JOptionPane;
 
 import com.camcamcamcamcam.deathtrapdungeon.procedures.Methods;
@@ -30,14 +32,16 @@ public class Character {
 		skillInitial = skill;
 		stamina = Methods.rollDice(2) + 12;
 		staminaInitial = stamina;
-		luck = Methods.rollDice(2) + 6;
+		luck = Methods.rollDice(1) + 6;
 		luckInitial = luck;
 		food = 10;
 		gold = 0;
-		page = 40;
+		page = 0;
 		hasEaten = false;
 		equipment = new Inventory("Equipment", 100);
+		equipment.mnInventory.setMnemonic(KeyEvent.VK_Q);
 		gems = new Inventory("Gems", 7);
+		gems.mnInventory.setMnemonic(KeyEvent.VK_W);
 		equipment.add("Sword");
 		equipment.add("Shield");
 		equipment.add("Leather Armour");
@@ -110,9 +114,9 @@ public class Character {
 			temp = "However, your stamina level cannot go above its Initial level, so your new stamina is " + stamina
 					+ ". ";
 		}
-		String s = "s";
+		String s = "";
 		if (amount != -1 || amount != 1) {
-			s = "";
+			s = "s";
 		}
 		Window.mntmStamina.setText("Stamina: " + stamina + "/" + staminaInitial);
 		if (amount < 0) {
@@ -181,6 +185,7 @@ public class Character {
 
 	public String setFood(int amount) {
 		food = amount;
+		if (food > 0) food = 0;
 		Window.mntmEatFood.setText("Eat food ( " + food + " left)");
 		return "";
 	}
