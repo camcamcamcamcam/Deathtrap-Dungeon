@@ -378,7 +378,7 @@ public class Deathtrap {
 			Methods.fight(6, 5, "HOBGOBLIN", 9);
 			break;
 		case 52:
-			character.states.setBloodbeastKnowledge(true);
+			character.knowledge.add("Bloodbeast");
 			if (character.states.isOpenedBlackBook()) {
 				Methods.choosePath(369, "Walk back to the last junction to continue north.");
 			} else {
@@ -436,7 +436,7 @@ public class Deathtrap {
 			Methods.testSkill(115, 190);
 			break;
 		case 65:
-			if (character.states.isDrunkPotionOfTrapDetection()) {
+			if (character.potions.search("Trap Detection", false) != -1) {
 				Methods.choosePath(345, "Continue");
 			} else {
 				Methods.choosePath(372, "Continue");
@@ -460,7 +460,7 @@ public class Deathtrap {
 			character.die();
 			break;
 		case 71:
-			character.states.setManticoreKnowledge(true);
+			character.knowledge.add("Manticore");
 			Methods.choosePath(128, "Continue");
 			break;
 		case 72:
@@ -483,7 +483,7 @@ public class Deathtrap {
 			}
 			break;
 		case 75:
-			if (character.states.isBloodbeastKnowledge()) {
+			if (character.knowledge.search("Bloodbeast", false) != -1) {
 				Methods.choosePath(369, "Continue north with Throm");
 			} else {
 				Methods.choosePath(52, 369, "Open the red book", "Continue north with Throm.");
@@ -536,7 +536,7 @@ public class Deathtrap {
 			Methods.testLuck(54, 261);
 			break;
 		case 90:
-			if (character.states.isBloodbeastKnowledge()) {
+			if (character.knowledge.search("Bloodbeast", false) != -1) {
 				Methods.choosePath(172, "Continue");
 			} else {
 				Methods.choosePath(357, "Continue");
@@ -704,7 +704,7 @@ public class Deathtrap {
 			Methods.testSkill(178, 17);
 			break;
 		case 134:
-			if (character.states.isManticoreKnowledge()) {
+			if (character.knowledge.search("Manticore", false) != -1) {
 				Methods.choosePath(222, "Continue");
 			} else {
 				Methods.choosePath(247, "Continue");
@@ -721,7 +721,7 @@ public class Deathtrap {
 			break;
 		case 138:
 			character.states.setOpenedBlackBook(true);
-			if (character.states.isBloodbeastKnowledge()) {
+			if (character.knowledge.search("Bloodbeast", false) != -1) {
 				Methods.choosePath(397, 75, 369, "Drink the liquid", "Rub the liquid into your wounds",
 						"Leave the bottle and book and continue north with Throm");
 			} else {
@@ -758,7 +758,7 @@ public class Deathtrap {
 			}
 			break;
 		case 147:
-			character.states.setDrunkPotionOfHeatResistance(true);
+			character.potions.add("Heat Resistance");
 			Methods.choosePath(182, "Continue");
 			break;
 		case 148:
@@ -851,7 +851,7 @@ public class Deathtrap {
 			Methods.choosePath(94, 267, "Reach for the dagger", "Back away in disgust and leave the cavern");
 			break;
 		case 169:
-			character.states.setDopplegangerPotionKnowledge(true);
+			character.knowledge.add("Doppleganger");
 			Methods.choosePath(109, "Continue");
 			break;
 		case 170:
@@ -898,7 +898,7 @@ public class Deathtrap {
 			Methods.testLuck(312, 45);
 			break;
 		case 182:
-			if (character.states.isDrunkPotionOfHeatResistance()) {
+			if (character.potions.search("Heat Resistance", false) != -1) {
 				Methods.choosePath(25, "Continue");
 			} else {
 				Methods.choosePath(242, "Continue");
@@ -922,7 +922,7 @@ public class Deathtrap {
 					"Walk past him down the tunnel");
 			break;
 		case 188:
-			if (character.states.isSpiritGirlKnowledge()) {
+			if (character.knowledge.search("Spirit Girl", false) != -1) {
 				Methods.choosePath(155, "Continue");
 			} else {
 				Methods.choosePath(224, "Continue");
@@ -1070,7 +1070,7 @@ public class Deathtrap {
 			Methods.testLuck(150, 33);
 			break;
 		case 229:
-			character.states.setSpiritGirlKnowledge(true);
+			character.knowledge.add("Spirit Girl");
 			Methods.choosePath(107, "Continue");
 			break;
 		case 230:
@@ -1131,7 +1131,7 @@ public class Deathtrap {
 			Methods.choosePath(400, "Continue");
 			break;
 		case 244:
-			character.states.setDopplegangerPotionKnowledge(true);
+			character.knowledge.add("Doppleganger");
 			Methods.choosePath(109, "Continue");
 			break;
 		case 245:
@@ -1272,7 +1272,7 @@ public class Deathtrap {
 			Methods.choosePath(109, "Continue");
 			break;
 		case 284:
-			if (character.states.isDrunkPotionOfTrapDetection()) {
+			if (character.potions.search("Trap Detection", false) != -1) {
 				Methods.choosePath(398, "Continue");
 			} else {
 				Methods.choosePath(57, "Continue");
@@ -1430,7 +1430,7 @@ public class Deathtrap {
 			Methods.choosePath(194, "Continue");
 			break;
 		case 324:
-			if (character.states.isDopplegangerPotionKnowledge()) {
+			if (character.knowledge.search("Doppleganger", false) != -1) {
 				Methods.choosePath(256, "Continue");
 			} else {
 				Methods.choosePath(79, "Continue");
@@ -1718,8 +1718,8 @@ public class Deathtrap {
 			Methods.choosePath(151, 34, "Prise out the left eye", "Prise out the right eye");
 			break;
 		case 397:
-			character.states.setDrunkPotionOfTrapDetection(true);
-			if (character.states.isBloodbeastKnowledge()) {
+			character.potions.add("Trap Detection");
+			if (character.knowledge.search("Bloodbeast", false) != -1) {
 				Methods.choosePath(369, "Continue north with Throm");
 			} else {
 				Methods.choosePath(52, 369, "Open the red book", "Continue north with Throm");

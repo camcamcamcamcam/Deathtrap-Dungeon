@@ -24,6 +24,8 @@ public class Character {
 
 	public Inventory equipment;
 	public Inventory gems;
+	public Inventory knowledge;
+	public Inventory potions;
 
 	public States states;
 
@@ -42,13 +44,21 @@ public class Character {
 		equipment.mnInventory.setMnemonic(KeyEvent.VK_Q);
 		gems = new Inventory("Gems", 7);
 		gems.mnInventory.setMnemonic(KeyEvent.VK_W);
+		knowledge = new Inventory("Knowledge", 4);
+		knowledge.mnInventory.setMnemonic(KeyEvent.VK_E);
+		potions = new Inventory("Potions", 2);
+		potions.mnInventory.setMnemonic(KeyEvent.VK_R);
 		equipment.add("Sword");
 		equipment.add("Shield");
 		equipment.add("Leather Armour");
 		
 		// done to make sure it refreshes
-		gems.add("Emerald");
-		gems.search("Emerald", true);
+		gems.add("Test");
+		gems.search("Test", true);
+		knowledge.add("Test");
+		knowledge.search("Test", true);
+		potions.add("Test");
+		potions.search("Test", true);
 		
 		states = new States();
 	}
