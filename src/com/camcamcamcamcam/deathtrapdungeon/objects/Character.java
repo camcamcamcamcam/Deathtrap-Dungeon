@@ -7,11 +7,9 @@ import javax.swing.JOptionPane;
 import com.camcamcamcamcam.deathtrapdungeon.procedures.Methods;
 import com.camcamcamcamcam.deathtrapdungeon.procedures.Window;
 
-public class Character {
+public class Character extends Creature {
 
-	private int skill;
 	private int skillInitial;
-	private int stamina;
 	private int staminaInitial;
 	private int luck;
 	private int luckInitial;
@@ -36,10 +34,12 @@ public class Character {
 		staminaInitial = stamina;
 		luck = Methods.rollDice(1) + 6;
 		luckInitial = luck;
+		
 		food = 10;
 		gold = 0;
 		page = 0;
 		hasEaten = false;
+		
 		equipment = new Inventory("Equipment", 100);
 		equipment.mnInventory.setMnemonic(KeyEvent.VK_Q);
 		gems = new Inventory("Gems", 7);
@@ -48,6 +48,7 @@ public class Character {
 		knowledge.mnInventory.setMnemonic(KeyEvent.VK_E);
 		potions = new Inventory("Potions", 2);
 		potions.mnInventory.setMnemonic(KeyEvent.VK_R);
+		
 		equipment.add("Sword");
 		equipment.add("Shield");
 		equipment.add("Leather Armour");
@@ -64,7 +65,7 @@ public class Character {
 	}
 
 	public void alter(String message, String title) {
-		if (stamina > 0) {
+		if (isAlive()) {
 			JOptionPane.showMessageDialog(Window.frame, message);
 		} else {
 			die(message);
@@ -192,9 +193,12 @@ public class Character {
 		return food;
 	}
 
-	public String setFood(int amount) {
-		food = amount;
-		if (food > 0) food = 0;
+	public String removeFood(int amount) {
+		if (amount == 0) {
+			food = 0;
+		} else {
+			food -= amount;
+		}
 		Window.mntmEatFood.setText("Eat food ( " + food + " left)");
 		return "";
 	}

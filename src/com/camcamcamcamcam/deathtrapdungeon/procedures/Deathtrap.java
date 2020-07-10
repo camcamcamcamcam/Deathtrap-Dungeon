@@ -3,6 +3,7 @@ package com.camcamcamcamcam.deathtrapdungeon.procedures;
 import javax.swing.JOptionPane;
 
 import com.camcamcamcamcam.deathtrapdungeon.objects.Character;
+import com.camcamcamcamcam.deathtrapdungeon.objects.States;
 
 public class Deathtrap {
 	
@@ -19,7 +20,7 @@ public class Deathtrap {
 		case 6:
 			return Deathtrap.character.changeStamina(-2);
 		case 10:
-			return Deathtrap.character.setFood(0);
+			return Deathtrap.character.removeFood(0);
 		case 16:
 			return Deathtrap.character.changeStamina(-(Methods.rollDice(1) + 1));
 		case 20:
@@ -47,7 +48,7 @@ public class Deathtrap {
 		case 103:
 			return Deathtrap.character.changeStamina(-3);
 		case 112:
-			return Deathtrap.character.setFood(Deathtrap.character.getFood() - 2);
+			return Deathtrap.character.removeFood(2);
 		case 115:
 			return Deathtrap.character.changeStamina(3);
 		case 123:
@@ -57,7 +58,7 @@ public class Deathtrap {
 		case 139:
 			return Deathtrap.character.changeStamina(-2);
 		case 146:
-			return Deathtrap.character.setFood(0);
+			return Deathtrap.character.removeFood(0);
 		case 147:
 			return Deathtrap.character.changeStamina(1);
 		case 150:
@@ -73,7 +74,7 @@ public class Deathtrap {
 		case 167:
 			return Deathtrap.character.changeStamina(-4);
 		case 169:
-			return Deathtrap.character.setFood(Deathtrap.character.getFood() - 1);
+			return Deathtrap.character.removeFood(1);
 		case 171:
 			return Deathtrap.character.changeStamina(-4);
 		case 173:
@@ -91,7 +92,7 @@ public class Deathtrap {
 		case 199:
 			return Deathtrap.character.changeStamina(-2 * Methods.rollDice(1)) + Deathtrap.character.changeLuck(-1);
 		case 206:
-			return Deathtrap.character.setFood(Deathtrap.character.getFood() - 2)
+			return Deathtrap.character.removeFood(2)
 					+ Deathtrap.character.changeStamina(4);
 		case 207:
 			return Deathtrap.character.changeStamina(-3);
@@ -222,7 +223,6 @@ public class Deathtrap {
 			Methods.choosePath(158, 375, "Drink it", "Dip a piece of cloth in it");
 			break;
 		case 10:
-			character.setFood(0);
 			if (character.equipment.search("Iron Key", false) != -1) {
 				Methods.choosePath(86, "Use your iron key to open the door.");
 			} else {
@@ -334,8 +334,8 @@ public class Deathtrap {
 			Methods.fight(9, 9, "MINOTAUR", 163);
 			break;
 		case 41:
-			character.states.setExaminedAlcove(true);
-			if (character.states.isExaminedBarbarian()) {
+			States.examinedAlcove = true;
+			if (States.examinedBarbarian) {
 				Methods.choosePath(98, 83, "Drink the liquid", "Leave the chamber to continue west");
 			} else {
 				Methods.choosePath(98, 126, 83, "Drink the red liquid",
@@ -379,7 +379,7 @@ public class Deathtrap {
 			break;
 		case 52:
 			character.knowledge.add("Bloodbeast");
-			if (character.states.isOpenedBlackBook()) {
+			if (States.openedBlackBook) {
 				Methods.choosePath(369, "Walk back to the last junction to continue north.");
 			} else {
 				Methods.choosePath(138, 369, "Open the black book", "Walk back to the last junction to head north.");
@@ -467,7 +467,7 @@ public class Deathtrap {
 			Methods.choosePath(122, "Continue");
 			break;
 		case 73:
-			if (character.states.isExaminedBarbarian()) {
+			if (States.examinedBarbarian) {
 				Methods.choosePath(83, "Leave the chamber to continue west.");
 			} else {
 				Methods.choosePath(126, 83, "Walk back to examine the Barbarian",
@@ -590,7 +590,7 @@ public class Deathtrap {
 			Methods.choosePath(134, "Continue");
 			break;
 		case 105:
-			if (character.states.isExaminedBarbarian()) {
+			if (States.examinedBarbarian) {
 				Methods.choosePath(83, "Leave the chamber to continue west");
 			} else {
 				Methods.choosePath(126, "Continue");
@@ -666,8 +666,8 @@ public class Deathtrap {
 			Methods.testLuck(69, 139);
 			break;
 		case 126:
-			character.states.setExaminedBarbarian(true);
-			if (character.states.isExaminedAlcove()) {
+			States.examinedBarbarian = true;
+			if (States.examinedAlcove) {
 				Methods.choosePath(226, 83, "Eat the dried meat", "Leave the chamber and head west");
 			} else {
 				Methods.choosePath(226, 41, 83, "Eat the dried meat", "Leave the meat and walk over to the alcove",
@@ -720,7 +720,7 @@ public class Deathtrap {
 			Methods.choosePath(220, 362, "Ring the bell", "Walk around it and continue west");
 			break;
 		case 138:
-			character.states.setOpenedBlackBook(true);
+			States.openedBlackBook = true;
 			if (character.knowledge.search("Bloodbeast", false) != -1) {
 				Methods.choosePath(397, 75, 369, "Drink the liquid", "Rub the liquid into your wounds",
 						"Leave the bottle and book and continue north with Throm");
@@ -866,7 +866,7 @@ public class Deathtrap {
 			Methods.fight(12, 4, "BLOODBEAST", 278);
 			break;
 		case 173:
-			if (character.states.isDrunkFromHagFountain()) {
+			if (States.drunkFromHagFountain) {
 				Methods.choosePath(368, "Continue north");
 			} else {
 				Methods.choosePath(368, 337, "Continue north", "Drink from the other fountain");
@@ -1057,7 +1057,7 @@ public class Deathtrap {
 			Methods.fight(12, 2, "BLOODBEAST", Methods.testLuck(97, 21));
 			break;
 		case 226:
-			if (character.states.isExaminedAlcove()) {
+			if (States.examinedAlcove) {
 				Methods.choosePath(83, "Leave the chamber to continue west");
 			} else {
 				Methods.choosePath(41, 83, "Walk over to the alcove", "Leave the chamber to continue west");
@@ -1215,7 +1215,7 @@ public class Deathtrap {
 			break;
 		case 269:
 			character.gems.add("Diamond");
-			if (character.states.isEatenRice()) {
+			if (States.eatenRice) {
 				Methods.choosePath(127, "Leave the the hall, taking just the diamond with you");
 			} else {
 				Methods.choosePath(127, 330, "Leave the the hall, taking just the diamond with you",
@@ -1330,7 +1330,7 @@ public class Deathtrap {
 			Methods.choosePath(304, 279, "Look inside the backpack", "Continue north");
 			break;
 		case 299:
-			if (character.states.isExaminedBarbarian()) {
+			if (States.examinedBarbarian) {
 				Methods.choosePath(41, 83, "Walk towards the alcove", "Close the door and continue west");
 			} else {
 				Methods.choosePath(126, 41, 83, "Walk over to search the Barbarian", "Walk towards the alcove",
@@ -1465,8 +1465,8 @@ public class Deathtrap {
 			character.die();
 			break;
 		case 330:
-			character.states.setEatenRice(true);
-			if (character.states.isRubbedOintment()) {
+			States.eatenRice = true;
+			if (States.rubbedOintment) {
 				Methods.choosePath(127, "Leave the hall, taking just the diamond with you.");
 			} else {
 				Methods.choosePath(269, 127, "Rub some of the ointment into your wounds",
@@ -1492,8 +1492,8 @@ public class Deathtrap {
 			Methods.choosePath(298, "Continue");
 			break;
 		case 337:
-			character.states.setDrunkFromHagFountain(true);
-			if (character.states.isDrunkFromFairyFountain()) {
+			States.drunkFromHagFountain = true;
+			if (States.drunkFromFairyFountain) {
 				Methods.choosePath(368, "Continue north");
 			} else {
 				Methods.choosePath(173, 368, "Drink from the other fountain", "Continue north");

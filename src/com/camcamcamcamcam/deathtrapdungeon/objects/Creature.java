@@ -2,21 +2,30 @@ package com.camcamcamcamcam.deathtrapdungeon.objects;
 
 public class Creature {
 	private String name;
-	private int skill;
-	private int stamina;
+	protected int skill;
+	protected int stamina;
 
 	public Creature(String name, int skill, int stamina) {
 		this.name = name;
 		this.skill = skill;
 		this.stamina = stamina;
 	}
+	
+	public Creature() {
+		
+	}
 
 	public int getStamina() {
 		return stamina;
 	}
+	
+	public boolean isAlive() {
+		return stamina > 0;
+	}
 
-	public void changeStamina(int amount) {
+	public String changeStamina(int amount) {
 		stamina = stamina + amount;
+		return null;
 	}
 
 	public int getSkill() {

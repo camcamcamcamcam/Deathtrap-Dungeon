@@ -1,7 +1,5 @@
 package com.camcamcamcamcam.deathtrapdungeon.objects;
 
-import java.awt.event.KeyEvent;
-
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 
