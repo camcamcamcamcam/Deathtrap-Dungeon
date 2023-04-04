@@ -5,193 +5,195 @@ import javax.swing.JOptionPane;
 import com.camcamcamcamcam.deathtrapdungeon.objects.Character;
 import com.camcamcamcamcam.deathtrapdungeon.objects.States;
 
+import static com.camcamcamcamcam.deathtrapdungeon.objects.Stats.*;
+
 public class Deathtrap {
 	
 	public static Character character;
 	
 	public static String setScores() {
-		switch (Deathtrap.character.getPage()) {
+		switch (Deathtrap.character.page) {
 		default:
 			return "";
 		case -1: System.exit(0);
 		case 0:
-			return "Your skill is " + Deathtrap.character.getSkill() + ". Your stamina is "
-					+ Deathtrap.character.getStamina() + ". Your luck is " + Deathtrap.character.getLuck() + ". ";
+			return "Your skill is " + Deathtrap.character.get(SKILL) + ". Your stamina is "
+					+ Deathtrap.character.get(STAMINA) + ". Your luck is " + Deathtrap.character.get(LUCK) + ". ";
 		case 6:
-			return Deathtrap.character.changeStamina(-2);
+			return Deathtrap.character.change(STAMINA, -2);
 		case 10:
 			return Deathtrap.character.removeFood(0);
 		case 16:
-			return Deathtrap.character.changeStamina(-(Methods.rollDice(1) + 1));
+			return Deathtrap.character.change(STAMINA, -(Methods.rollDice(1) + 1));
 		case 20:
-			return Deathtrap.character.changeGold(1) + Deathtrap.character.changeSkill(-1);
+			return Deathtrap.character.change(GOLD, 1) + Deathtrap.character.change(SKILL, -1);
 		case 26:
-			return Deathtrap.character.changeSkill(-2);
+			return Deathtrap.character.change(SKILL, -2);
 		case 28:
-			return Deathtrap.character.changeSkill(1);
+			return Deathtrap.character.change(SKILL, 1);
 		case 33:
-			return Deathtrap.character.changeSkill(-3);
+			return Deathtrap.character.change(SKILL, -3);
 		case 38:
-			return Deathtrap.character.changeStamina(-3);
+			return Deathtrap.character.change(STAMINA, -3);
 		case 42:
-			return Deathtrap.character.changeStamina(-5);
+			return Deathtrap.character.change(STAMINA, -5);
 		case 45:
-			return Deathtrap.character.changeStamina(-4) + Deathtrap.character.changeSkill(-1);
+			return Deathtrap.character.change(STAMINA, -4) + Deathtrap.character.change(SKILL, -1);
 		case 57:
-			return Deathtrap.character.changeStamina(-4);
+			return Deathtrap.character.change(STAMINA, -4);
 		case 72:
-			return Deathtrap.character.changeSkill(-2);
+			return Deathtrap.character.change(SKILL, -2);
 		case 91:
-			return Deathtrap.character.changeStamina(-4);
+			return Deathtrap.character.change(STAMINA, -4);
 		case 95:
-			return Deathtrap.character.changeSkill(1);
+			return Deathtrap.character.change(SKILL, 1);
 		case 103:
-			return Deathtrap.character.changeStamina(-3);
+			return Deathtrap.character.change(STAMINA, -3);
 		case 112:
 			return Deathtrap.character.removeFood(2);
 		case 115:
-			return Deathtrap.character.changeStamina(3);
+			return Deathtrap.character.change(STAMINA, 3);
 		case 123:
-			return Deathtrap.character.changeSkill(1) + Deathtrap.character.changeStamina(1);
+			return Deathtrap.character.change(SKILL, 1) + Deathtrap.character.change(STAMINA, 1);
 		case 132:
-			return Deathtrap.character.changeStamina(-(Methods.rollDice(1) + 1));
+			return Deathtrap.character.change(STAMINA, -(Methods.rollDice(1) + 1));
 		case 139:
-			return Deathtrap.character.changeStamina(-2);
+			return Deathtrap.character.change(STAMINA, -2);
 		case 146:
 			return Deathtrap.character.removeFood(0);
 		case 147:
-			return Deathtrap.character.changeStamina(1);
+			return Deathtrap.character.change(STAMINA, 1);
 		case 150:
-			return Deathtrap.character.changeSkill(-1);
+			return Deathtrap.character.change(SKILL, -1);
 		case 157:
-			return Deathtrap.character.changeLuck(1);
+			return Deathtrap.character.change(LUCK, 1);
 		case 158:
-			return Deathtrap.character.changeSkill(-1) + Deathtrap.character.changeStamina(-4);
+			return Deathtrap.character.change(SKILL, -1) + Deathtrap.character.change(STAMINA, -4);
 		case 162:
-			return Deathtrap.character.changeLuck(1);
+			return Deathtrap.character.change(LUCK, 1);
 		case 165:
-			return Deathtrap.character.changeGold(-1);
+			return Deathtrap.character.change(GOLD, -1);
 		case 167:
-			return Deathtrap.character.changeStamina(-4);
+			return Deathtrap.character.change(STAMINA, -4);
 		case 169:
 			return Deathtrap.character.removeFood(1);
 		case 171:
-			return Deathtrap.character.changeStamina(-4);
+			return Deathtrap.character.change(STAMINA, -4);
 		case 173:
-			return Deathtrap.character.changeStamina(1) + Deathtrap.character.changeSkill(2);
+			return Deathtrap.character.change(STAMINA, 1) + Deathtrap.character.change(SKILL, 2);
 		case 175:
-			return Deathtrap.character.changeLuck(2);
+			return Deathtrap.character.change(LUCK, 2);
 		case 179:
-			return Deathtrap.character.changeStamina(-2);
+			return Deathtrap.character.change(STAMINA, -2);
 		case 189:
-			return Deathtrap.character.changeStamina(-3);
+			return Deathtrap.character.change(STAMINA, -3);
 		case 190:
-			return Deathtrap.character.changeStamina(-3);
+			return Deathtrap.character.change(STAMINA, -3);
 		case 195:
-			return Deathtrap.character.changeStamina(-1);
+			return Deathtrap.character.change(STAMINA, -1);
 		case 199:
-			return Deathtrap.character.changeStamina(-2 * Methods.rollDice(1)) + Deathtrap.character.changeLuck(-1);
+			return Deathtrap.character.change(STAMINA, -2 * Methods.rollDice(1)) + Deathtrap.character.change(LUCK, -1);
 		case 206:
 			return Deathtrap.character.removeFood(2)
-					+ Deathtrap.character.changeStamina(4);
+					+ Deathtrap.character.change(STAMINA, 4);
 		case 207:
-			return Deathtrap.character.changeStamina(-3);
+			return Deathtrap.character.change(STAMINA, -3);
 		case 215:
-			return Deathtrap.character.changeStamina(-2);
+			return Deathtrap.character.change(STAMINA, -2);
 		case 217:
 			// TODO check for shield here
-			return Deathtrap.character.changeSkill(-1);
+			return Deathtrap.character.change(SKILL, -1);
 		case 220:
-			return Deathtrap.character.changeSkill(-2) + Deathtrap.character.changeStamina(-2);
+			return Deathtrap.character.change(SKILL, -2) + Deathtrap.character.change(STAMINA, -2);
 		case 223:
-			return Deathtrap.character.changeLuck(-2) + Deathtrap.character.changeStamina(-(Methods.rollDice(2)));
+			return Deathtrap.character.change(LUCK, -2) + Deathtrap.character.change(STAMINA, -(Methods.rollDice(2)));
 		case 226:
-			return Deathtrap.character.changeStamina(3);
+			return Deathtrap.character.change(STAMINA, 3);
 		case 235:
-			return Deathtrap.character.changeStamina(-2);
+			return Deathtrap.character.change(STAMINA, -2);
 		case 238:
-			return Deathtrap.character.changeSkill(1);
+			return Deathtrap.character.change(SKILL, 1);
 		case 244:
-			return Deathtrap.character.changeGold(-1);
+			return Deathtrap.character.change(GOLD, -1);
 		case 246:
-			return Deathtrap.character.changeLuck(-2) + Deathtrap.character.changeStamina(-(Methods.rollDice(2)));
+			return Deathtrap.character.change(LUCK, -2) + Deathtrap.character.change(STAMINA, -(Methods.rollDice(2)));
 		case 247:
-			return Deathtrap.character.changeStamina(-2 * (Methods.rollDice(1)));
+			return Deathtrap.character.change(STAMINA, -2 * (Methods.rollDice(1)));
 		case 249:
-			return Deathtrap.character.changeStamina(-(Methods.rollDice(1) + 1));
+			return Deathtrap.character.change(STAMINA, -(Methods.rollDice(1) + 1));
 		case 257:
-			return Deathtrap.character.changeGold(1);
+			return Deathtrap.character.change(GOLD, 1);
 		case 269:
-			return Deathtrap.character.changeStamina(3);
+			return Deathtrap.character.change(STAMINA, 3);
 		case 270:
-			return Deathtrap.character.changeGold(2);
+			return Deathtrap.character.change(GOLD, 2);
 		case 271:
-			return Deathtrap.character.changeSkill(-1);
+			return Deathtrap.character.change(SKILL, -1);
 		case 285:
-			return Deathtrap.character.changeSkill(-1) + Deathtrap.character.changeStamina(-2);
+			return Deathtrap.character.change(SKILL, -1) + Deathtrap.character.change(STAMINA, -2);
 		case 286:
-			return Deathtrap.character.changeSkill(4);
+			return Deathtrap.character.change(SKILL, 4);
 		case 287:
-			return Deathtrap.character.changeStamina(-(Methods.rollDice(1) + 1));
+			return Deathtrap.character.change(STAMINA, -(Methods.rollDice(1) + 1));
 		case 294:
-			return Deathtrap.character.changeSkill(-2);
+			return Deathtrap.character.change(SKILL, -2);
 		case 295:
-			return Deathtrap.character.changeStamina(-5);
+			return Deathtrap.character.change(STAMINA, -5);
 		case 297:
-			return Deathtrap.character.changeLuck(-1);
+			return Deathtrap.character.change(LUCK, -1);
 		case 304:
-			return Deathtrap.character.changeStamina(-6);
+			return Deathtrap.character.change(STAMINA, -6);
 		case 306:
-			return Deathtrap.character.changeLuck(-2);
+			return Deathtrap.character.change(LUCK, -2);
 		case 309:
-			return Deathtrap.character.changeStamina(-3);
+			return Deathtrap.character.change(STAMINA, -3);
 		case 330:
-			return Deathtrap.character.changeStamina(1);
+			return Deathtrap.character.change(STAMINA, 1);
 		case 336:
-			return Deathtrap.character.changeSkill(-4);
+			return Deathtrap.character.change(SKILL, -4);
 		case 337:
-			return Deathtrap.character.changeStamina(1) + Deathtrap.character.changeLuck(-2);
+			return Deathtrap.character.change(STAMINA, 1) + Deathtrap.character.change(LUCK, -2);
 		case 339:
-			return Deathtrap.character.changeStamina(-1);
+			return Deathtrap.character.change(STAMINA, -1);
 		case 343:
-			return Deathtrap.character.changeStamina(-1);
+			return Deathtrap.character.change(STAMINA, -1);
 		case 350:
-			return Deathtrap.character.changeStamina(-(Methods.rollDice(1)));
+			return Deathtrap.character.change(STAMINA, -(Methods.rollDice(1)));
 		case 353:
-			return Deathtrap.character.changeSkill(-1) + Deathtrap.character.changeStamina(-4);
+			return Deathtrap.character.change(SKILL, -1) + Deathtrap.character.change(STAMINA, -4);
 		case 354:
-			return Deathtrap.character.changeLuck(-2);
+			return Deathtrap.character.change(LUCK, -2);
 		case 358:
-			return Deathtrap.character.changeStamina(-2);
+			return Deathtrap.character.change(STAMINA, -2);
 		case 363:
-			return Deathtrap.character.changeStamina(2);
+			return Deathtrap.character.change(STAMINA, 2);
 		case 377:
-			return Deathtrap.character.changeStamina(-5);
+			return Deathtrap.character.change(STAMINA, -5);
 		case 384:
-			return Deathtrap.character.changeStamina(-2);
+			return Deathtrap.character.change(STAMINA, -2);
 		case 386:
-			return Deathtrap.character.changeStamina(-1);
+			return Deathtrap.character.change(STAMINA, -1);
 		case 389:
-			return Deathtrap.character.changeSkill(-4);
+			return Deathtrap.character.change(SKILL, -4);
 		case 390:
-			return Deathtrap.character.changeLuck(1);
+			return Deathtrap.character.change(LUCK, 1);
 		case 391:
-			return Deathtrap.character.changeSkill(1) + Deathtrap.character.changeStamina(1)
-					+ Deathtrap.character.changeLuck(1);
+			return Deathtrap.character.change(SKILL, 1) + Deathtrap.character.change(STAMINA, 1)
+					+ Deathtrap.character.change(LUCK, 1);
 		case 394:
-			return Deathtrap.character.changeStamina(-(Methods.rollDice(1) + 2));
+			return Deathtrap.character.change(STAMINA, -(Methods.rollDice(1) + 2));
 		case 395:
-			return Deathtrap.character.changeStamina(-3);
+			return Deathtrap.character.change(STAMINA, -3);
 		case 397:
-			return Deathtrap.character.changeLuck(2);
+			return Deathtrap.character.change(LUCK, 2);
 		case 399:
-			return Deathtrap.character.changeStamina(3);
+			return Deathtrap.character.change(STAMINA, 3);
 		}
 	}
 
 	
 	public static void pageMethods() {
-		switch (character.getPage()) {
+		switch (character.page) {
 		case 0:
 			Methods.choosePath(1, "Enter Deathtrap Dungeon");
 			break;
@@ -394,17 +396,12 @@ public class Deathtrap {
 			Methods.choosePath(239, "Continue");
 			break;
 		case 55:
-			String test = ((String) JOptionPane.showInputDialog(Window.frame,
-					"Type your answer in the text box below.")).toUpperCase();
+			String test = JOptionPane.showInputDialog(Window.frame,
+					"Type your answer in the text box below.").toUpperCase();
 			switch (test) {
-			default:
-				Methods.choosePath(347, "Continue");
-				break;
-			case "SCORPION":
-				Methods.choosePath(143, "Continue");
-				break;
-			case "MINOTAUR":
-				Methods.choosePath(40, "Continue");
+				default -> Methods.choosePath(347, "Continue");
+				case "SCORPION" -> Methods.choosePath(143, "Continue");
+				case "MINOTAUR" -> Methods.choosePath(40, "Continue");
 			}
 			break;
 		case 56:
@@ -545,7 +542,7 @@ public class Deathtrap {
 		case 91:
 			Methods.fight(5, 5, "FIRST ORC", 257);
 			Methods.fight(6, 4, "SECOND ORC", 257);
-			character.changeSkill(4);
+			character.change(SKILL, 4);
 			Methods.choosePath(257, "Continue");
 			break;
 		case 92:
@@ -775,10 +772,10 @@ public class Deathtrap {
 			Methods.choosePath(292, "Continue");
 			break;
 		case 151:
-			character.changeSkill(-2);
+			character.change(SKILL, -2);
 			Methods.fight(7, 8, "First FLYING GUARDIAN", 240);
 			Methods.fight(8, 8, "Second FLYING GUARDIAN", 240);
-			character.changeSkill(2);
+			character.change(SKILL, 2);
 			Methods.choosePath(240, "Continue");
 			break;
 		case 152:
@@ -838,10 +835,10 @@ public class Deathtrap {
 			Methods.choosePath(234, "Continue");
 			break;
 		case 166:
-			character.changeSkill(-3);
+			character.change(SKILL, -3);
 			Methods.fight(7, 8, "First FLYING GUARDIAN", 11);
 			Methods.fight(8, 8, "Second FLYING GUARDIAN", 11);
-			character.changeSkill(3);
+			character.change(SKILL, 3);
 			Methods.choosePath(11, "Continue");
 			break;
 		case 167:
@@ -1441,17 +1438,9 @@ public class Deathtrap {
 			break;
 		case 326:
 			switch (Methods.rollDice(1)) {
-			case 1:
-			case 2:
-				Methods.choosePath(91, "Continue");
-				break;
-			case 3:
-			case 4:
-				Methods.choosePath(189, "Continue");
-				break;
-			case 5:
-			case 6:
-				Methods.choosePath(380, "Continue");
+				case 1, 2 -> Methods.choosePath(91, "Continue");
+				case 3, 4 -> Methods.choosePath(189, "Continue");
+				case 5, 6 -> Methods.choosePath(380, "Continue");
 			}
 			break;
 		case 327:
@@ -1513,7 +1502,7 @@ public class Deathtrap {
 			Methods.choosePath(381, "Continue");
 			break;
 		case 341:
-			if (character.getFood() > 0) {
+			if (character.get(FOOD) > 0) {
 				Methods.choosePath(367, 38, 169, "Talk to him", "Take the bread and water off his tray",
 						"Offer him some of your provisions");
 			} else {

@@ -9,7 +9,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 import javax.swing.ButtonGroup;
@@ -19,10 +18,11 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JRadioButton;
 import javax.swing.JTextArea;
-import javax.swing.KeyStroke;
 
 import com.camcamcamcamcam.deathtrapdungeon.objects.Character;
-import com.camcamcamcamcam.deathtrapdungeon.objects.States;
+import com.camcamcamcamcam.deathtrapdungeon.objects.Stats;
+
+import static com.camcamcamcamcam.deathtrapdungeon.objects.Stats.*;
 
 public class Window {
 
@@ -75,39 +75,25 @@ public class Window {
 		Deathtrap.character = new Character();
 
 		mntmSkill = new JMenuItem(
-				"Skill: " + Deathtrap.character.getSkill() + "/" + Deathtrap.character.getSkillInitial());
+				"Skill: " + Deathtrap.character.get(SKILL) + "/" + Deathtrap.character.get(SKILL_INITIAL));
 		menuBar.add(mntmSkill);
 
 		mntmStamina = new JMenuItem(
-				"Stamina: " + Deathtrap.character.getStamina() + "/" + Deathtrap.character.getStaminaInitial());
+				"Stamina: " + Deathtrap.character.get(STAMINA) + "/" + Deathtrap.character.get(STAMINA_INITIAL));
 		menuBar.add(mntmStamina);
 
-		mntmLuck = new JMenuItem("Luck: " + Deathtrap.character.getLuck() + "/" + Deathtrap.character.getLuckInitial());
+		mntmLuck = new JMenuItem("Luck: " + Deathtrap.character.get(LUCK) + "/" + Deathtrap.character.get(LUCK_INITIAL));
 		menuBar.add(mntmLuck);
 
-		mntmGold = new JMenuItem("Gold: " + Deathtrap.character.getGold());
+		mntmGold = new JMenuItem("Gold: " + Deathtrap.character.get(GOLD));
 		menuBar.add(mntmGold);
 
-		mntmEatFood = new JMenuItem("Eat food ( " + Deathtrap.character.getFood() + " left)");
-		mntmEatFood.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				Deathtrap.character.eat();
-			}
-
-		});
+		mntmEatFood = new JMenuItem("Eat food ( " + Deathtrap.character.get(FOOD) + " left)");
+		mntmEatFood.addActionListener(arg0 -> Deathtrap.character.eat());
 		menuBar.add(mntmEatFood);
 
 		mntmDrinkPotion = new JMenuItem();
-		mntmDrinkPotion.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				Deathtrap.character.drinkPotion();
-			}
-
-		});
+		mntmDrinkPotion.addActionListener(e -> Deathtrap.character.drinkPotion());
 
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[] { 0, 0, 0, 0, 0, 0 };
@@ -161,36 +147,31 @@ public class Window {
 		gbc_btnConfirm.gridy = 1;
 		frame.getContentPane().add(btnConfirm, gbc_btnConfirm);
 
-		btnConfirm.addActionListener(new ActionListener() {
+		btnConfirm.addActionListener(e -> {
 
-			@Override
-			public void actionPerformed(ActionEvent e) {
+			for (int i = 0; i < choices.length; i++) {
+				if (choices[i].isSelected()) {
+					if (!started) {
+						Deathtrap.character.potion = Stats.values()[i];
+						mntmDrinkPotion.setText("Drink the " + choices[i].getText());
+						menuBar.add(mntmDrinkPotion);
 
-				for (int i = 0; i < choices.length; i++) {
-					if (choices[i].isSelected()) {
-						if (!started) {
-							Deathtrap.character.equipment.add(choices[i].getText());
-							mntmDrinkPotion.setText("Drink the " + choices[i].getText());
-							menuBar.add(mntmDrinkPotion);
+					} else {
+						Deathtrap.character.page = Methods.pages[i];
 
-						} else {
-							Deathtrap.character.setPage(Methods.pages[i]);
-
-							Deathtrap.character.hungry();
-							break;
-						}
+						Deathtrap.character.hungry();
+						break;
 					}
 				}
-				started = true;
-				textArea.setText(text());
-				Deathtrap.pageMethods();
-				if (Deathtrap.character.getStamina() <= 0) {
-					Deathtrap.character.die(Window.textArea.getText());
-				}
-				choiceGroup.clearSelection();
-				choices[0].setSelected(true);
 			}
-
+			started = true;
+			textArea.setText(text());
+			Deathtrap.pageMethods();
+			if (Deathtrap.character.get(STAMINA) <= 0) {
+				Deathtrap.character.die();
+			}
+			choiceGroup.clearSelection();
+			choices[0].setSelected(true);
 		});
 		textArea.setText(text());
 		Methods.choosePath(0, 0, 0, "Potion of Skill", "Potion of Strength", "Potion of Fortune");
@@ -203,7 +184,7 @@ public class Window {
 		try {
 			File file = new File("Text.txt");
 			Scanner input = new Scanner(file);
-			for (int i = 0; i <= Deathtrap.character.getPage(); i++) {
+			for (int i = 0; i <= Deathtrap.character.page; i++) {
 				text1 = input.nextLine();
 				text2 = input.nextLine();
 			}

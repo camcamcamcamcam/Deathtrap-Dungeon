@@ -6,6 +6,8 @@ import javax.swing.JOptionPane;
 
 import com.camcamcamcamcam.deathtrapdungeon.objects.Creature;
 
+import static com.camcamcamcamcam.deathtrapdungeon.objects.Stats.*;
+
 public class Methods {
 
 	public static void listEquipment() {
@@ -48,12 +50,12 @@ public class Methods {
 	}
 
 	public static String label(Creature[] creature) {
-		String label = creature[0].getName() + ": SKILL " + creature[0].getSkill() + ", STAMINA "
-				+ creature[0].getStamina();
+		String label = creature[0].getName() + ": SKILL " + creature[0].get(SKILL) + ", STAMINA "
+				+ creature[0].get(STAMINA);
 		if (creature.length > 1) {
 			for (int i = 1; i < creature.length; i++) {
-				label = label + "\n" + creature[i].getName() + ": SKILL " + creature[i].getSkill() + ", STAMINA "
-						+ creature[i].getStamina();
+				label = label + "\n" + creature[i].getName() + ": SKILL " + creature[i].get(SKILL) + ", STAMINA "
+						+ creature[i].get(STAMINA);
 			}
 		}
 		return label;
@@ -126,7 +128,7 @@ public class Methods {
 				
 				if (optionChosen.equals("Escape")) {
 					JOptionPane.showMessageDialog(Window.frame,
-							"The creature attacked you while you escaped" + Deathtrap.character.changeStamina(-2),
+							"The creature attacked you while you escaped! " + Deathtrap.character.change(STAMINA, -2),
 							"You escaped from the battle", JOptionPane.PLAIN_MESSAGE);
 					choosePath(escapePage, "You escaped from the battle.");
 					return;
@@ -150,14 +152,14 @@ public class Methods {
 
 			// fight is initiated for each creature
 			for (int i = 0; i < creature.length; i++) {
-				if (creature[i].getStamina() <= 0) continue;
+				if (creature[i].get(STAMINA) <= 0) continue;
 				int[] rollDice = { Methods.rollDice(2), Methods.rollDice(2) };
-				if (Deathtrap.character.getSkill() + rollDice[0] - debuff > creature[i].getSkill() + rollDice[1]) {
+				if (Deathtrap.character.get(SKILL) + rollDice[0] - debuff > creature[i].get(SKILL) + rollDice[1]) {
 					numberOfRoundsWon++;
 					// if you win rounds against more than one creature, you only inflict damage on
 					// the first.
 					if (!hasDamaged) {
-						creature[i].changeStamina(-2);
+						creature[i].change(STAMINA, -2);
 						hasDamaged = true;
 						label = "You successfully wounded the " + creature[i].getName() + "!\n" + label(creature);
 						whoIsWounded = 1;
@@ -166,8 +168,8 @@ public class Methods {
 						// if all creatures are dead, you win.
 						boolean temp = true;
 						for (int j = 0; j < creature.length; j++) {
-							System.out.println(creature[j].getStamina());
-							temp = temp && creature[j].getStamina() <= 0;
+							System.out.println(creature[j].get(STAMINA));
+							temp = temp && creature[j].get(STAMINA) <= 0;
 						}
 						allDead = temp;
 
@@ -176,9 +178,9 @@ public class Methods {
 					}
 					if (creature[i].getName().equals("IMITATOR") && numberOfRoundsWon >= 2) break;
 					// cases for if you are wounded or if you both miss
-				} else if (Deathtrap.character.getSkill() + rollDice[0] - debuff < creature[i].getSkill()
+				} else if (Deathtrap.character.get(SKILL) + rollDice[0] - debuff < creature[i].get(SKILL)
 						+ rollDice[1]) {
-					Deathtrap.character.changeStamina(-2);
+					Deathtrap.character.change(STAMINA, -2);
 					label = "The " + creature[i].getName() + " wounded you!\n" + label;
 					whoIsWounded = -1;
 				} else {
@@ -189,37 +191,37 @@ public class Methods {
 
 			if (optionChosen.equals("Use Luck")) {
 				String message = "";
-				boolean lucky = Deathtrap.character.getLuck() < rollDice(2);
+				boolean lucky = Deathtrap.character.get(LUCK) < rollDice(2);
 				if (lucky && whoIsWounded == 1) {
-					creature[creatureFought].changeStamina(-2);
+					creature[creatureFought].change(STAMINA, -2);
 					message = "You were lucky! The " + creature[creatureFought].getName()
 							+ " loses 2 extra stamina points.";
 					boolean temp = true;
 					for (int j = 0; j < creature.length; j++) {
-						temp = temp && creature[j].getStamina() <= 0;
+						temp = temp && creature[j].get(STAMINA) <= 0;
 					}
 					allDead = temp;
 				}
 				if (lucky && whoIsWounded == -1) {
-					Deathtrap.character.changeStamina(1);
+					Deathtrap.character.change(STAMINA, 1);
 					message = "You were lucky! You only lose 1 stamina point.";
 				}
 				if (!lucky && whoIsWounded == 1) {
-					creature[creatureFought].changeStamina(-2);
+					creature[creatureFought].change(STAMINA, -2);
 					message = "You were unlucky. The " + creature[creatureFought].getName()
 							+ " only lost 1 stamina point.";
 				}
 				if (!lucky && whoIsWounded == -1) {
-					Deathtrap.character.changeStamina(-1);
+					Deathtrap.character.change(STAMINA, -1);
 					message = "You were unlucky! You lose 1 extra stamina point.";
 				}
-				Deathtrap.character.changeLuck(-1);
+				Deathtrap.character.change(LUCK, -1);
 				JOptionPane.showMessageDialog(Window.frame, message + "\nYou lost 1 luck point due to using your luck",
 						"You used luck on the wound", JOptionPane.PLAIN_MESSAGE);
 			}
 			numberOfRounds++;
-			System.out.println(Deathtrap.character.getStamina() + ", " + allDead);
-		} while (Deathtrap.character.getStamina() > 0 && !allDead);
+			System.out.println(Deathtrap.character.get(STAMINA) + ", " + allDead);
+		} while (Deathtrap.character.get(STAMINA) > 0 && !allDead);
 		choosePath(winPage, "You won.");
 	}
 
@@ -258,7 +260,7 @@ public class Methods {
 
 	public static int testSkill(int skillful, int unskillful) {
 		int page;
-		if (Deathtrap.character.getLuck() < rollDice(2)) {
+		if (Deathtrap.character.get(LUCK) < rollDice(2)) {
 			choosePath(unskillful, "You were not skilled enough. Click confirm to find out the consequences.");
 			page = unskillful;
 		} else {
@@ -270,14 +272,14 @@ public class Methods {
 
 	public static int testLuck(int lucky, int unlucky) {
 		int page;
-		if (Deathtrap.character.getLuck() < rollDice(2)) {
+		if (Deathtrap.character.get(LUCK) < rollDice(2)) {
 			choosePath(unlucky, "You were unlucky. Click confirm to find out the consequences.");
 			page = unlucky;
 		} else {
 			choosePath(lucky, "You were lucky. Click confirm to continue.");
 			page = lucky;
 		}
-		Deathtrap.character.alter(Deathtrap.character.changeLuck(-1), "You tested your luck");
+		Deathtrap.character.alter(Deathtrap.character.change(LUCK, -1), "You tested your luck");
 		return page;
 	}
 

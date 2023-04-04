@@ -2,34 +2,29 @@ package com.camcamcamcamcam.deathtrapdungeon.objects;
 
 public class Creature {
 	private String name;
-	protected int skill;
-	protected int stamina;
+
+	protected int[] stats;
 
 	public Creature(String name, int skill, int stamina) {
+		this.stats = new int[]{skill, stamina};
 		this.name = name;
-		this.skill = skill;
-		this.stamina = stamina;
-	}
-	
-	public Creature() {
-		
 	}
 
-	public int getStamina() {
-		return stamina;
+	public Creature() {
+		this.stats = new int[]{0, 0};
+	}
+
+	public int get(Stats stat) {
+		return this.stats[stat.ordinal()];
+	}
+
+	public String change(Stats stat, int amount) {
+		this.stats[stat.ordinal()] += amount;
+		return null;
 	}
 	
 	public boolean isAlive() {
-		return stamina > 0;
-	}
-
-	public String changeStamina(int amount) {
-		stamina = stamina + amount;
-		return null;
-	}
-
-	public int getSkill() {
-		return skill;
+		return this.stats[Stats.STAMINA.ordinal()] > 0;
 	}
 
 	public String getName() {
